@@ -46,3 +46,4 @@ on_attach = function(client, bufnr)
     client.request("textDocument/formatting", params, handler, bufnr)
   end, { buffer = bufnr })
 end
+vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>", { silent = true })

@@ -49,7 +49,7 @@ return {
     "williamboman/mason.nvim",
     event = "BufRead",
     config = function()
-      require "configs.mason"
+      require("configs.mason")
     end,
     opts = {
       ensure_installed = {
@@ -66,13 +66,13 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = "BufRead",
     config = function()
-      require "configs.mason-lspconfig"
+      require("configs.mason-lspconfig")
     end,
   },
   {
     "rcarriga/nvim-dap-ui",
     lazy = "VeryLazy",
-    event = "BufRead",
+    -- event = "BufRead",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
       require("configs.dapui")
@@ -81,7 +81,7 @@ return {
   {
     "jay-babu/mason-nvim-dap.nvim",
     lazy = "VeryLazy",
-    event = "BufRead",
+    -- event = "BufRead",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     config = function()
       require("configs.mason_dap")
@@ -132,8 +132,8 @@ return {
 
     {
       "stevearc/dressing.nvim",
-      lazy = true,
-      event = { "BufRead", "BufnewFile" },
+      lazy = "VeryLazy",
+      -- event = { "BufRead", "BufnewFile" },
       init = function()
         ---@diagnostic disable-next-line: duplicate-set-field
         vim.ui.select = function(...)
@@ -150,7 +150,7 @@ return {
   },
   {
     "max397574/better-escape.nvim",
-    lazy = true,
+    lazy = "VeryLazy",
     event = "InsertEnter",
     config = function()
       require("configs.better-escape")
@@ -234,18 +234,26 @@ return {
   },
   {
     "akinsho/toggleterm.nvim",
-    cmd = "ToggleTerm",
+    -- cmd = "ToggleTerm",
     event = "BufRead",
     config = function()
       require("configs.toggleterm")
     end,
   },
   {
-    "ggandor/leap.nvim",
+    "folke/flash.nvim",
+    lazy = true,
     event = "BufRead",
-    config = function()
-      require("leap").add_default_mappings()
-    end,
+    opts = {},
+    -- stylua: ignore
+    keys =
+    {
+      { "A",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
   },
   {
     "Exafunction/codeium.vim",
@@ -391,7 +399,7 @@ return {
       event = "InsertEnter",
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path",   -- source for file system paths
+        "hrsh7th/cmp-path", -- source for file system paths
         {
           "L3MON4D3/LuaSnip",
           -- follow latest release.
@@ -399,9 +407,9 @@ return {
           -- install jsregexp (optional!).
           build = "make install_jsregexp",
         },
-        "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+        "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim",         -- vs-code like pictograms
+        "onsails/lspkind.nvim",     -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()
@@ -416,10 +424,10 @@ return {
     config = true,
   },
   {
-    'windwp/nvim-autopairs',
+    "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      require "nvim-autopairs".setup {}
+      require("nvim-autopairs").setup({})
     end,
   },
   {
@@ -429,5 +437,14 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     event = { "BufReadPre", "BufNewFile" },
+  },
+
+  {
+    "echasnovski/mini.animate",
+    lazy = "VeryLazy",
+    event = "BufRead",
+    config = function()
+      require("mini.animate").setup()
+    end,
   },
 }
