@@ -1,11 +1,11 @@
 -- Neovim configuration for mason-lspconfig
 
-local mason_lspconfig = require("mason-lspconfig")
-local lspconfig = require("lspconfig")
+local mason_lspconfig = require "mason-lspconfig"
+local lspconfig = require "lspconfig"
 
 -- List of servers to automatically install and configure
 local servers = {
-  "jdtls",
+  -- "jdtls",
   "lua_ls",
 }
 

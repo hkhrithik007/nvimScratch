@@ -1,4 +1,4 @@
-local lazy = require("lazy")
+local lazy = require "lazy"
 return {
   {
     "folke/which-key.nvim",
@@ -9,14 +9,14 @@ return {
       vim.o.timeoutlen = 300
     end,
     config = function()
-      require("configs.whichkey")
+      require "configs.whichkey"
     end,
   },
   {
     "nvim-tree/nvim-tree.lua",
     event = "BufRead",
     config = function()
-      require("configs.nvimtree")
+      require "configs.nvimtree"
     end,
   },
   {
@@ -24,7 +24,7 @@ return {
     event = "BufRead",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require("configs.telescope")
+      require "configs.telescope"
     end,
   },
   {
@@ -49,7 +49,7 @@ return {
     "williamboman/mason.nvim",
     event = "BufRead",
     config = function()
-      require("configs.mason")
+      require "configs.mason"
     end,
     opts = {
       ensure_installed = {
@@ -66,7 +66,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     event = "BufRead",
     config = function()
-      require("configs.mason-lspconfig")
+      require "configs.mason-lspconfig"
     end,
   },
   {
@@ -75,7 +75,7 @@ return {
     -- event = "BufRead",
     dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
     config = function()
-      require("configs.dapui")
+      require "configs.dapui"
     end,
   },
   {
@@ -84,7 +84,7 @@ return {
     -- event = "BufRead",
     dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
     config = function()
-      require("configs.mason_dap")
+      require "configs.mason_dap"
     end,
   },
   {
@@ -99,12 +99,12 @@ return {
         event = { "BufRead" },
       },
       config = function()
-        require("configs.null_ls")
+        require "configs.null_ls"
       end,
     },
     event = { "InsertEnter", "BufRead", "BufnewFile" },
     opts = function()
-      require("configs.mason_null_ls")
+      require "configs.mason_null_ls"
     end,
   },
   {
@@ -118,7 +118,7 @@ return {
     },
     event = { "BufRead", "BufnewFile" },
     config = function()
-      require("configs.lspconfig")
+      require "configs.lspconfig"
     end,
   },
   {
@@ -137,24 +137,16 @@ return {
       init = function()
         ---@diagnostic disable-next-line: duplicate-set-field
         vim.ui.select = function(...)
-          require("lazy").load({ plugins = { "dressing.nvim" } })
+          require("lazy").load { plugins = { "dressing.nvim" } }
           return vim.ui.select(...)
         end
         ---@diagnostic disable-next-line: duplicate-set-field
         vim.ui.input = function(...)
-          require("lazy").load({ plugins = { "dressing.nvim" } })
+          require("lazy").load { plugins = { "dressing.nvim" } }
           return vim.ui.input(...)
         end
       end,
     },
-  },
-  {
-    "max397574/better-escape.nvim",
-    lazy = "VeryLazy",
-    event = "InsertEnter",
-    config = function()
-      require("configs.better-escape")
-    end,
   },
   {
     "nvimdev/dashboard-nvim",
@@ -162,7 +154,7 @@ return {
     event = "VimEnter",
     config = function()
       -- config
-      require("configs.dashboard")
+      require "configs.dashboard"
     end,
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
@@ -173,7 +165,7 @@ return {
     event = { "BufRead", "BufnewFile", "InsertEnter" },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
-      require("configs.lualine")
+      require "configs.lualine"
     end,
   },
   {
@@ -211,7 +203,7 @@ return {
     event = "BufRead",
     -- lazy = "VeryLazy",
     config = function()
-      require("configs.split")
+      require "configs.split"
     end,
   },
   {
@@ -220,7 +212,7 @@ return {
     -- event = "BufReadPre",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
-      require("configs.bufferline")
+      require "configs.bufferline"
     end,
   },
   {
@@ -229,7 +221,7 @@ return {
     dependencies = "nvim-lua/plenary.nvim",
     cmd = { "RunCode", "RunFile", "RunProject", "RunClose" },
     config = function()
-      require("configs.coderunner")
+      require "configs.coderunner"
     end,
   },
   {
@@ -237,7 +229,7 @@ return {
     -- cmd = "ToggleTerm",
     event = "BufRead",
     config = function()
-      require("configs.toggleterm")
+      require "configs.toggleterm"
     end,
   },
   {
@@ -293,12 +285,7 @@ return {
     event = { "BufRead", "BufNewFile" },
     lazy = "VeryLazy",
     config = function()
-      vim.keymap.set(
-        "n",
-        "<leader>sm",
-        ":lua require('gen').select_model()<cr>",
-        { noremap = true, silent = true }
-      )
+      vim.keymap.set("n", "<leader>sm", ":lua require('gen').select_model()<cr>", { noremap = true, silent = true })
     end,
   },
   {
@@ -342,21 +329,21 @@ return {
       {
         "<leader>snl",
         function()
-          require("noice").cmd("last")
+          require("noice").cmd "last"
         end,
         desc = "Noice Last Message",
       },
       {
         "<leader>snh",
         function()
-          require("noice").cmd("history")
+          require("noice").cmd "history"
         end,
         desc = "Noice History",
       },
       {
         "<leader>sna",
         function()
-          require("noice").cmd("all")
+          require("noice").cmd "all"
         end,
         desc = "Noice All",
       },
@@ -390,7 +377,7 @@ return {
     "seandewar/killersheep.nvim",
     event = "BufRead",
     config = function()
-      require("configs.killersheep")
+      require "configs.killersheep"
     end,
   },
   {
@@ -399,7 +386,7 @@ return {
       event = "InsertEnter",
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path", -- source for file system paths
+        "hrsh7th/cmp-path",   -- source for file system paths
         {
           "L3MON4D3/LuaSnip",
           -- follow latest release.
@@ -407,13 +394,13 @@ return {
           -- install jsregexp (optional!).
           build = "make install_jsregexp",
         },
-        "saadparwaiz1/cmp_luasnip", -- for autocompletion
+        "saadparwaiz1/cmp_luasnip",     -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim",     -- vs-code like pictograms
+        "onsails/lspkind.nvim",         -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()
-        require("configs.cmp")
+        require "configs.cmp"
       end,
     },
   },
@@ -427,7 +414,7 @@ return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      require("nvim-autopairs").setup({})
+      require("nvim-autopairs").setup {}
     end,
   },
   {
