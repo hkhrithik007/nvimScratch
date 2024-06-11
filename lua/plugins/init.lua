@@ -22,7 +22,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     event = "BufRead",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
     config = function()
       require "configs.telescope"
     end,
@@ -44,6 +44,29 @@ return {
         },
       },
     },
+  },
+  -- {
+  --   "Exafunction/codeium.nvim",
+  --   event = "InsertEnter",
+  --   dependencies = {
+  --     "nvim-lua/plenary.nvim",
+  --     "hrsh7th/nvim-cmp",
+  --   },
+  --   config = function()
+  --     require("codeium").setup({
+  --     })
+  --   end
+  -- },
+  {
+    "mfussenegger/nvim-jdtls",
+    event = { "BufReadPre", "BufNewFile" },
+  },
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufRead" },
+    config = function()
+      require "configs.conform"
+    end,
   },
   {
     "williamboman/mason.nvim",
@@ -87,26 +110,26 @@ return {
       require "configs.mason_dap"
     end,
   },
-  {
-    "jayp0521/mason-null-ls.nvim",
-    lazy = "VeryLazy",
-    enabled = true,
-    dependencies = {
-      "nvimtools/none-ls.nvim",
-      dependencies = {
-        "nvimtools/none-ls-extras.nvim",
-        lazy = true,
-        event = { "BufRead" },
-      },
-      config = function()
-        require "configs.null_ls"
-      end,
-    },
-    event = { "InsertEnter", "BufRead", "BufnewFile" },
-    opts = function()
-      require "configs.mason_null_ls"
-    end,
-  },
+  -- {
+  --   "jayp0521/mason-null-ls.nvim",
+  --   lazy = "VeryLazy",
+  --   enabled = true,
+  --   dependencies = {
+  --     "nvimtools/none-ls.nvim",
+  --     dependencies = {
+  --       "nvimtools/none-ls-extras.nvim",
+  --       lazy = true,
+  --       event = { "BufRead" },
+  --     },
+  --     config = function()
+  --       require "configs.null_ls"
+  --     end,
+  --   },
+  --   event = { "InsertEnter", "BufRead", "BufnewFile" },
+  --   opts = function()
+  --     require "configs.mason_null_ls"
+  --   end,
+  -- },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -121,11 +144,34 @@ return {
       require "configs.lspconfig"
     end,
   },
+
+  {
+    "mfussenegger/nvim-lint",
+    lazy = "VeryLazy",
+    enabled = true,
+    config = function()
+      require "configs.lint"
+    end,
+  },
   {
     "folke/tokyonight.nvim",
     lazy = true,
     config = function()
       require("tokyonight").setup()
+    end,
+    -- opts = {
+    --   transparent = true,
+    --   styles = {
+    --     sidebars = "transparent",
+    --     floats = "transparent",
+    --   },
+    -- },
+  },
+  {
+    "dgox16/oldworld.nvim",
+    lazy = "VeryLazy",
+    config = function()
+      require("oldworld").setup()
     end,
   },
   {
@@ -250,16 +296,8 @@ return {
   {
     "Exafunction/codeium.vim",
     enabled = true,
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
-    },
-    -- event = "BufEnter",
     event = { "InsertEnter" },
-    -- config = function()
-    -- require("codeium").setup()
-    -- end,
-
+    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
     config = function()
       -- Change '<C-g>' here to any keycode you like.
       vim.keymap.set("i", "<C-g>", function()
@@ -276,6 +314,9 @@ return {
       end, { expr = true, silent = true })
       vim.keymap.set({ "i", "n" }, "<C-h", function()
         return vim.fn["codeium#Chat"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-space>", function()
+        return vim.fn["codeium#Complete"]()
       end, { expr = true, silent = true })
     end,
   },
@@ -386,7 +427,7 @@ return {
       event = "InsertEnter",
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
-        "hrsh7th/cmp-path",   -- source for file system paths
+        "hrsh7th/cmp-path", -- source for file system paths
         {
           "L3MON4D3/LuaSnip",
           -- follow latest release.
@@ -394,9 +435,9 @@ return {
           -- install jsregexp (optional!).
           build = "make install_jsregexp",
         },
-        "saadparwaiz1/cmp_luasnip",     -- for autocompletion
+        "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim",         -- vs-code like pictograms
+        "onsails/lspkind.nvim", -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()
@@ -421,17 +462,12 @@ return {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
   },
-  {
-    "mfussenegger/nvim-jdtls",
-    event = { "BufReadPre", "BufNewFile" },
-  },
-
-  {
-    "echasnovski/mini.animate",
-    lazy = "VeryLazy",
-    event = "BufRead",
-    config = function()
-      require("mini.animate").setup()
-    end,
-  },
+  -- {
+  --   "echasnovski/mini.animate",
+  --   lazy = "VeryLazy",
+  --   event = "BufRead",
+  --   config = function()
+  --     require("mini.animate").setup()
+  --   end,
+  -- },
 }
