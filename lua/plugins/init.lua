@@ -59,8 +59,11 @@ return {
   -- },
   {
     "mfussenegger/nvim-jdtls",
-    event = { "BufReadPre", "BufNewFile" },
+    lazy = "VeryLazy",
+    -- event = { "BufReadPre", "BufNewFile" },
+    ft = "java",
   },
+
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufRead" },
@@ -93,10 +96,18 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-dap",
+    lazy = "VeryLazy",
+    -- event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "configs.dap"
+    end,
+  },
+  {
     "rcarriga/nvim-dap-ui",
     lazy = "VeryLazy",
     -- event = "BufRead",
-    dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
+    dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
       require "configs.dapui"
     end,
@@ -105,7 +116,12 @@ return {
     "jay-babu/mason-nvim-dap.nvim",
     lazy = "VeryLazy",
     -- event = "BufRead",
-    dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
+    dependencies = {
+      "williamboman/mason.nvim",
+      "mfussenegger/nvim-dap",
+      "nvim-neotest/nvim-nio",
+      "rcarriga/nvim-dap-ui",
+    },
     config = function()
       require "configs.mason_dap"
     end,
@@ -272,8 +288,9 @@ return {
   },
   {
     "akinsho/toggleterm.nvim",
-    -- cmd = "ToggleTerm",
-    event = "BufRead",
+    lazy = "VeryLazy",
+    cmd = "ToggleTerm",
+    -- event = "BufRead",
     config = function()
       require "configs.toggleterm"
     end,
@@ -430,9 +447,6 @@ return {
         "hrsh7th/cmp-path", -- source for file system paths
         {
           "L3MON4D3/LuaSnip",
-          -- follow latest release.
-          version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-          -- install jsregexp (optional!).
           build = "make install_jsregexp",
         },
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
@@ -461,6 +475,9 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require "configs.gitsigns"
+    end,
   },
   -- {
   --   "echasnovski/mini.animate",

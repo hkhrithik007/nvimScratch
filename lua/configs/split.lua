@@ -1,6 +1,6 @@
-local split = require("smart-splits")
+local split = require "smart-splits"
 
-split.setup({
+split.setup {
   ignored_filetypes = {
     "nofile",
     "quickfix",
@@ -22,12 +22,11 @@ split.setup({
     ["nerdtree"] = "nerdtree",
   },
   skip_prompt_for_additional_buffers = true,
-})
+}
 -- recommended mappings
 -- resizing splits
 -- these keymaps will also accept a range,
 -- for example `10<C-h>` will `resize_left` by `(10 * config.default_amount)`
-
 vim.keymap.set("n", "<C-a>", require("smart-splits").resize_left)
 vim.keymap.set("n", "<C-s>", require("smart-splits").resize_down)
 vim.keymap.set("n", "<C-w>", require("smart-splits").resize_right)

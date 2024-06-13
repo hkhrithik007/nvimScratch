@@ -1,7 +1,11 @@
 -- more space in the neovim command line for displaying messages
 -- use this function notation to build some variables
-vim.opt_local.shiftwidth = 2
-vim.opt_local.tabstop = 2
+vim.opt_local.shiftwidth = 4
+vim.opt_local.tabstop = 4
+vim.opt_local.softtabstop = 4
+vim.opt_local.ts = 4
+vim.opt_local.expandtab = true
+
 local status, jdtls = pcall(require, "jdtls")
 if not status then
   return
@@ -13,9 +17,9 @@ local function capabilities()
     return cmp_nvim_lsp.default_capabilities()
   end
 
-  local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
+  local CAPABILITIES = vim.lsp.protocol.make_client_capabilities()
+  CAPABILITIES.textDocument.completion.completionItem.snippetSupport = true
+  CAPABILITIES.textDocument.completion.completionItem.resolveSupport = {
     properties = {
       "documentation",
       "detail",
@@ -23,7 +27,7 @@ local function capabilities()
     },
   }
 
-  return capabilities
+  return CAPABILITIES
 end
 
 local function directory_exists(path)
@@ -49,9 +53,7 @@ else
 end
 -- get the mason install path
 local install_path = require("mason-registry").get_package("jdtls"):get_install_path()
-local bundles = {}
-local extendedClientCapabilities = jdtls.extendedClientCapabilities
-extendedClientCapabilities.resolveAdditionalTextEditsSupport = true
+
 -- get the current OS
 local os
 if vim.fn.has "macunix" then
@@ -61,6 +63,17 @@ elseif vim.fn.has "win32" then
 else
   os = "linux"
 end
+
+local bundles = {}
+local mason_path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/")
+vim.list_extend(bundles, vim.split(vim.fn.glob(mason_path .. "packages/java-test/extension/server/*.jar"), "\n"))
+vim.list_extend(
+  bundles,
+  vim.split(
+    vim.fn.glob(mason_path .. "packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar"),
+    "\n"
+  )
+)
 
 local config = {
   cmd = {
@@ -88,63 +101,30 @@ local config = {
   root_dir = root_dir,
   settings = {
     java = {},
-    signatureHelp = { enabled = true },
-    completion = {
-      favoriteStaticMembers = {
-        "org.hamcrest.MatcherAssert.assertThat",
-        "org.hamcrest.Matchers.*",
-        "org.hamcrest.CoreMatchers.*",
-        "org.junit.jupiter.api.Assertions.*",
-        "java.util.Objects.requireNonNull",
-        "java.util.Objects.requireNonNullElse",
-        "org.mockito.Mockito.*",
-      },
-    },
-    contentProvider = { preferred = "fernflower" },
-    extendedClientCapabilities = extendedClientCapabilities,
-    sources = {
-      organizeImports = {
-        starThreshold = 9999,
-        staticStarThreshold = 9999,
-      },
-    },
-    codeGeneration = {
-      toString = {
-        template = "${object.className}{${member.name()}=${member.value}, ${otherMembers}}",
-      },
-      useBlocks = true,
-    },
-  },
-
-  flags = {
-    allow_incremental_sync = true,
   },
 
   init_options = {
-    -- bundles = {},
-    bundles = bundles,
+    bundles = {
+      vim.fn.glob(
+        mason_path .. "packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
+        "\n"
+      ),
+    },
   },
 }
 
 config["on_attach"] = function(client, bufnr)
   local _, _ = pcall(vim.lsp.codelens.refresh)
-  require("lvim.lsp").common_on_attach(client, bufnr)
-  local map = function(mode, lhs, rhs, desc)
-    if desc then
-      desc = desc
-    end
 
-    vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc, buffer = bufnr, noremap = true })
+  -- valdation if DAP not installed
+  local dap_status, _ = pcall(require, "nvim-dap")
+  if not dap_status then
+    return
   end
-  map("n", "<leader>Co", jdtls.organize_imports, "Organize Imports")
-  map("n", "<leader>Cv", jdtls.extract_variable, "Extract Variable")
-  map("n", "<leader>Cc", jdtls.extract_constant, "Extract Constant")
-  map("n", "<leader>Ct", jdtls.test_nearest_method, "Test Method")
-  map("n", "<leader>CT", jdtls.test_class, "Test Class")
-  map("n", "<leader>Cu", "<Cmd>JdtUpdateConfig<CR>", "Update Config")
-  map("v", "<leader>Cv", "<Esc><Cmd>lua require('jdtls').extract_variable(true)<CR>", "Extract Variable")
-  map("v", "<leader>Cc", "<Esc><Cmd>lua require('jdtls').extract_constant(true)<CR>", "Extract Constant")
-  map("v", "<leader>Cm", "<Esc><Cmd>lua require('jdtls').extract_method(true)<CR>", "Extract Method")
+
+  require("jdtls.dap").setup_dap_main_class_configs()
+  jdtls.setup_dap { hotcodereplace = "auto" }
+  require("user.lsp.handlers").on_attach(client, bufnr)
 end
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {

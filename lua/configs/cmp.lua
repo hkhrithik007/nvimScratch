@@ -127,14 +127,7 @@ cmp.event:on(
             cmp.lsp.CompletionItemKind.Function,
             cmp.lsp.CompletionItemKind.Method,
           },
-          ---@param char string
-          ---@param item table item completion
-          ---@param bufnr number buffer number
-          ---@param rules table
-          ---@param commit_character table<string>
-          handler = function(char, item, bufnr, rules, commit_character)
-            -- Your handler function. Inspect with print(vim.inspect{char, item, bufnr, rules, commit_character})
-          end,
+          handler = function(char, item, bufnr, rules, commit_character) end,
         },
       },
       -- Disable for tex
