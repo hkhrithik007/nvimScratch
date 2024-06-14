@@ -19,7 +19,7 @@ local opts = {
     lazy = true,
   },
   install = {
-    colorscheme = { "tokyonight-night" },
+    colorscheme = { "cyberdream" },
   },
   rtp = {
     disabled_plugins = {

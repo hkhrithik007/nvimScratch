@@ -171,17 +171,24 @@ return {
   },
   {
     "folke/tokyonight.nvim",
+    enabled = false,
     lazy = true,
     config = function()
       require("tokyonight").setup()
     end,
-    -- opts = {
-    --   transparent = true,
-    --   styles = {
-    --     sidebars = "transparent",
-    --     floats = "transparent",
-    --   },
-    -- },
+    opts = {
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
+    },
+  },
+  {
+    "scottmckendry/cyberdream.nvim",
+    config = function()
+      require "configs.cyberdream"
+    end,
   },
   {
     "dgox16/oldworld.nvim",
@@ -270,8 +277,8 @@ return {
   },
   {
     "akinsho/bufferline.nvim",
-    -- lazy = false,
-    -- event = "BufReadPre",
+    lazy = false,
+    event = "BufReadPre",
     dependencies = "nvim-tree/nvim-web-devicons",
     config = function()
       require "configs.bufferline"

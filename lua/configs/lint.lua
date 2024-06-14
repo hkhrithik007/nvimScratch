@@ -2,7 +2,6 @@ local lint = require "lint"
 
 lint.linters_by_ft = {
   java = { "trivy" },
-  kotlin = { "ktfmt" },
   lua = { "luacheck" },
 }
 

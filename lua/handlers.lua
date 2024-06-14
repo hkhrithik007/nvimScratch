@@ -5,7 +5,7 @@ if not status_cmp_ok then
   return
 end
 
-local icons = require("icons")
+local icons = require "icons"
 
 M.capabilities = vim.lsp.protocol.make_client_capabilities()
 M.capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -19,9 +19,9 @@ M.setup = function()
     -- { name = "DiagnosticSignHint", text = "" },
     -- { name = "DiagnosticSignInfo", text = "" },
     { name = "DiagnosticSignError", text = icons.diagnostics.Error },
-    { name = "DiagnosticSignWarn",  text = icons.diagnostics.Warning },
-    { name = "DiagnosticSignHint",  text = icons.diagnostics.Hint },
-    { name = "DiagnosticSignInfo",  text = icons.diagnostics.Info },
+    { name = "DiagnosticSignWarn", text = icons.diagnostics.Warning },
+    { name = "DiagnosticSignHint", text = icons.diagnostics.Hint },
+    { name = "DiagnosticSignInfo", text = icons.diagnostics.Info },
   }
 
   for _, sign in ipairs(signs) do
@@ -31,7 +31,7 @@ M.setup = function()
   local config = {
     virtual_text = false, -- disable virtual text
     signs = {
-      active = signs,     -- show signs
+      active = signs, -- show signs
     },
     update_in_insert = true,
     underline = true,
@@ -87,14 +87,16 @@ local function lsp_keymaps(bufnr)
 end
 M.on_attach = function(client, bufnr)
   attach_navic(client, bufnr)
-  if client.name == "tsserver" then
+
+  if client.name == "stylua" then
     client.server_capabilities.documentFormattingProvider = false
   end
-
-  if client.name == "sumneko_lua" then
+  if client.name == "google-java-format" then
     client.server_capabilities.documentFormattingProvider = false
   end
-
+  if client.name == "ktfmt" then
+    client.server_capabilities.documentFormattingProvider = false
+  end
   lsp_keymaps(bufnr)
   local status_ok, illuminate = pcall(require, "illuminate")
   if not status_ok then

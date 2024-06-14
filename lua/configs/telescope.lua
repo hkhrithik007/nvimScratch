@@ -2,7 +2,7 @@ local telescope = require "telescope"
 
 telescope.setup {
   defaults = {
-    -- ...
+    theme = "cyberdream",
   },
   pickers = {
     find_files = {
@@ -19,3 +19,4 @@ telescope.setup {
   },
 }
 vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
+vim.keymap.set("n", "<leader>fb", ":lua require('telescope.builtin').buffers()<CR>")
