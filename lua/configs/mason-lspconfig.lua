@@ -11,7 +11,9 @@ local servers = {
 
 -- Automatically install language servers
 mason_lspconfig.setup {
-  ensure_installed = servers,
+  ensure_installed = lua_ls,
+  jdtls,
+  kotlin_language_server,
 }
 
 -- Automatically configure language servers
