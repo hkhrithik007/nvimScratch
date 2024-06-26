@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: unused-local
 local lazy = require "lazy"
 return {
   {
@@ -74,25 +75,9 @@ return {
   {
     "williamboman/mason.nvim",
     event = "BufRead",
+    dependencies = { "williamboman/mason-lspconfig.nvim", "WhoIsSethDaniel/mason-tool-installer.nvim" },
     config = function()
       require "configs.mason"
-    end,
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "kotlin-language-server",
-        "jdtls",
-        -- "html-lsp",
-        -- "css-lsp",
-        -- "prettier",
-      },
-    },
-  },
-  {
-    "williamboman/mason-lspconfig.nvim",
-    event = "BufRead",
-    config = function()
-      require "configs.mason-lspconfig"
     end,
   },
   {
