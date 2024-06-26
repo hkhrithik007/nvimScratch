@@ -1,11 +1,11 @@
-local nvimtree = require("nvim-tree")
+local nvimtree = require "nvim-tree"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwplugin = 1
 
-nvimtree.setup({
+nvimtree.setup {
   -- view = {
   --   width = 35,
-  -- relativenumber = true,
+  --   relativenumber = true,
   -- },
   -- change folder arrow icons
   renderer = {
@@ -34,4 +34,4 @@ nvimtree.setup({
   git = {
     ignore = true,
   },
-})
+}

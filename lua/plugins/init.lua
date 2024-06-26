@@ -160,7 +160,14 @@ return {
       require "configs.lspconfig"
     end,
   },
-
+  -- {
+  --   "kkharji/lspsaga.nvim",
+  --   event = "Lspattach",
+  --   dev = true,
+  --   config = function()
+  --     require("lspsaga").setup()
+  --   end,
+  -- },
   {
     "mfussenegger/nvim-lint",
     lazy = "VeryLazy",
@@ -185,12 +192,21 @@ return {
     },
   },
   {
-    "scottmckendry/cyberdream.nvim",
+    "zootedb0t/citruszest.nvim",
     enabled = false,
+    lazy = false,
+    priority = 1000,
     config = function()
-      require "configs.cyberdream"
+      require "configs.citruszest"
     end,
   },
+  -- {
+  --   "scottmckendry/cyberdream.nvim",
+  --   enabled = false,
+  --   config = function()
+  --     require "configs.cyberdream"
+  --   end,
+  -- },
   {
     "dgox16/oldworld.nvim",
     lazy = "VeryLazy",
@@ -363,9 +379,8 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    event = { "BufRead", "BufnewFile", "BufReadPre" },
+    -- event = { "BufRead", "BufnewFile", "BufReadPre" },
     opts = {
-      presets = { "inc_rename" },
       messages = {
         enabled = false,
       },
@@ -384,61 +399,61 @@ return {
         },
       },
     },
-    keys = {
-      {
-        "<S-Enter>",
-        function()
-          require("noice").redirect(vim.fn.getcmdline())
-        end,
-        mode = "c",
-        desc = "Redirect Cmdline",
-      },
-      {
-        "<leader>snl",
-        function()
-          require("noice").cmd "last"
-        end,
-        desc = "Noice Last Message",
-      },
-      {
-        "<leader>snh",
-        function()
-          require("noice").cmd "history"
-        end,
-        desc = "Noice History",
-      },
-      {
-        "<leader>sna",
-        function()
-          require("noice").cmd "all"
-        end,
-        desc = "Noice All",
-      },
-      {
-        "<c-f>",
-        function()
-          if not require("noice.lsp").scroll(4) then
-            return "<c-f>"
-          end
-        end,
-        silent = true,
-        expr = true,
-        desc = "Scroll forward",
-        mode = { "i", "n", "s" },
-      },
-      {
-        "<c-b>",
-        function()
-          if not require("noice.lsp").scroll(-4) then
-            return "<c-b>"
-          end
-        end,
-        silent = true,
-        expr = true,
-        desc = "Scroll backward",
-        mode = { "i", "n", "s" },
-      },
-    },
+    -- keys = {
+    --   {
+    --     "<S-Enter>",
+    --     function()
+    --       require("noice").redirect(vim.fn.getcmdline())
+    --     end,
+    --     mode = "c",
+    --     desc = "Redirect Cmdline",
+    --   },
+    --   {
+    --     "<leader>snl",
+    --     function()
+    --       require("noice").cmd "last"
+    --     end,
+    --     desc = "Noice Last Message",
+    --   },
+    --   {
+    --     "<leader>snh",
+    --     function()
+    --       require("noice").cmd "history"
+    --     end,
+    --     desc = "Noice History",
+    --   },
+    --   {
+    --     "<leader>sna",
+    --     function()
+    --       require("noice").cmd "all"
+    --     end,
+    --     desc = "Noice All",
+    --   },
+    --   {
+    --     "<c-f>",
+    --     function()
+    --       if not require("noice.lsp").scroll(4) then
+    --         return "<c-f>"
+    --       end
+    --     end,
+    --     silent = true,
+    --     expr = true,
+    --     desc = "Scroll forward",
+    --     mode = { "i", "n", "s" },
+    --   },
+    --   {
+    --     "<c-b>",
+    --     function()
+    --       if not require("noice.lsp").scroll(-4) then
+    --         return "<c-b>"
+    --       end
+    --     end,
+    --     silent = true,
+    --     expr = true,
+    --     desc = "Scroll backward",
+    --     mode = { "i", "n", "s" },
+    --   },
+    -- },
   },
   {
     "seandewar/killersheep.nvim",
@@ -494,11 +509,10 @@ return {
   },
   {
     "willothy/nvim-cokeline",
-    event = { "BufReadPre", "BufNewFile" },
+    event = { "BufRead", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim", -- Required for v0.4.0+
       "nvim-tree/nvim-web-devicons", -- If you want devicons
-      "stevearc/resession.nvim", -- Optional, for persistent history
     },
     config = function()
       require "configs.cokeline"

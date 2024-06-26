@@ -2,11 +2,11 @@ local is_picking_focus = require("cokeline/mappings").is_picking_focus
 local is_picking_close = require("cokeline/mappings").is_picking_close
 
 -- Define some colors (you can adjust these to match your colorscheme)
-local normal_fg = "#abb2bf"
-local normal_bg = "#282c34"
-local comment_fg = "#5c6370"
-local yellow = "#e5c07b"
-local red = "#e06c75"
+local normal_fg = "#c0caf5" -- Soft blue-white for main text
+local normal_bg = "#1a1b26" -- Dark blue-black for background
+local comment_fg = "#565f89" -- Muted blue-gray for comments
+local yellow = "#e0af68" -- Muted gold for highlights
+local red = "#f7768e" -- Soft pink-red for accents
 
 require("cokeline").setup {
   show_if_buffers_are_at_least = 2,
@@ -77,7 +77,7 @@ require("cokeline").setup {
       end,
     },
     {
-      text = "│",
+      text = "│ ",
       fg = comment_fg,
     },
   },
@@ -91,9 +91,6 @@ local opts = { noremap = true, silent = true }
 map("n", "<S-Tab>", "<Plug>(cokeline-focus-prev)", opts)
 map("n", "<Tab>", "<Plug>(cokeline-focus-next)", opts)
 map("n", "<Leader>b", "<Plug>(cokeline-pick-focus)", opts)
-
--- Close buffers
-map("n", "<Leader>q", "<Plug>(cokeline-pick-close)", opts)
 
 -- Toggle NvimTree (if you're using NvimTree)
 map("n", "<C-n>", ":NvimTreeToggle<CR>", opts)

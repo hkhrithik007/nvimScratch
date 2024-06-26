@@ -1,15 +1,15 @@
-local dap, dapui = require("dap").init, require("dapui")
+local dap, dapui = require("dap").init, require "dapui"
 
 local dap_status_ok, dap = pcall(require, "dap")
 if not dap_status_ok then
   return
 end
 
-local dap_status_ok, _ = pcall(loadfile,"plugins/dap.nvim")
+local dap_status_ok, _ = pcall(loadfile, "plugins/dap.nvim")
 if not dap_status_ok then
   return
 end
-local dapui_status_ok, _ = pcall(loadfile,"plugins/dapui.nvim")
+local dapui_status_ok, _ = pcall(loadfile, "plugins/dapui.nvim")
 if not dapui_status_ok then
   return
 end
@@ -45,7 +45,7 @@ dapui.setup {
         -- "watches",
       },
       size = 40, -- 40 columns
-      position = "right",
+      position = "left",
     },
     {
       elements = {
@@ -82,4 +82,3 @@ dap.listeners.before.event_exited["dapui_config"] = function()
 end
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 vim.fn.sign_define("DapStopped", { text = "▶️", texthl = "", linehl = "", numhl = "" })
-
