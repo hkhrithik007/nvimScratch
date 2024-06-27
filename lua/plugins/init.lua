@@ -111,26 +111,6 @@ return {
       require "configs.mason_dap"
     end,
   },
-  -- {
-  --   "jayp0521/mason-null-ls.nvim",
-  --   lazy = "VeryLazy",
-  --   enabled = true,
-  --   dependencies = {
-  --     "nvimtools/none-ls.nvim",
-  --     dependencies = {
-  --       "nvimtools/none-ls-extras.nvim",
-  --       lazy = true,
-  --       event = { "BufRead" },
-  --     },
-  --     config = function()
-  --       require "configs.null_ls"
-  --     end,
-  --   },
-  --   event = { "InsertEnter", "BufRead", "BufnewFile" },
-  --   opts = function()
-  --     require "configs.mason_null_ls"
-  --   end,
-  -- },
   {
     "neovim/nvim-lspconfig",
     dependencies = {
@@ -145,14 +125,6 @@ return {
       require "configs.lspconfig"
     end,
   },
-  -- {
-  --   "kkharji/lspsaga.nvim",
-  --   event = "Lspattach",
-  --   dev = true,
-  --   config = function()
-  --     require("lspsaga").setup()
-  --   end,
-  -- },
   {
     "mfussenegger/nvim-lint",
     lazy = "VeryLazy",
@@ -277,16 +249,6 @@ return {
       require "configs.split"
     end,
   },
-  -- {
-  --   "akinsho/bufferline.nvim",
-  --   enabled = false,
-  --   lazy = false,
-  --   event = "BufReadPre",
-  --   dependencies = "nvim-tree/nvim-web-devicons",
-  --   config = function()
-  --     require "configs.bufferline"
-  --   end,
-  -- },
   {
     "CRAG666/code_runner.nvim",
     event = { "BufRead", "BufReadPre" },
@@ -384,61 +346,6 @@ return {
         },
       },
     },
-    -- keys = {
-    --   {
-    --     "<S-Enter>",
-    --     function()
-    --       require("noice").redirect(vim.fn.getcmdline())
-    --     end,
-    --     mode = "c",
-    --     desc = "Redirect Cmdline",
-    --   },
-    --   {
-    --     "<leader>snl",
-    --     function()
-    --       require("noice").cmd "last"
-    --     end,
-    --     desc = "Noice Last Message",
-    --   },
-    --   {
-    --     "<leader>snh",
-    --     function()
-    --       require("noice").cmd "history"
-    --     end,
-    --     desc = "Noice History",
-    --   },
-    --   {
-    --     "<leader>sna",
-    --     function()
-    --       require("noice").cmd "all"
-    --     end,
-    --     desc = "Noice All",
-    --   },
-    --   {
-    --     "<c-f>",
-    --     function()
-    --       if not require("noice.lsp").scroll(4) then
-    --         return "<c-f>"
-    --       end
-    --     end,
-    --     silent = true,
-    --     expr = true,
-    --     desc = "Scroll forward",
-    --     mode = { "i", "n", "s" },
-    --   },
-    --   {
-    --     "<c-b>",
-    --     function()
-    --       if not require("noice.lsp").scroll(-4) then
-    --         return "<c-b>"
-    --       end
-    --     end,
-    --     silent = true,
-    --     expr = true,
-    --     desc = "Scroll backward",
-    --     mode = { "i", "n", "s" },
-    --   },
-    -- },
   },
   {
     "seandewar/killersheep.nvim",
@@ -503,12 +410,4 @@ return {
       require "configs.cokeline"
     end,
   },
-  -- {
-  --   "echasnovski/mini.animate",
-  --   lazy = "VeryLazy",
-  --   event = "BufRead",
-  --   config = function()
-  --     require("mini.animate").setup()
-  --   end,
-  -- },
 }
