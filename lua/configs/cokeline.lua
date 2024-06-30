@@ -90,7 +90,7 @@ local opts = { noremap = true, silent = true }
 -- Switch between buffers
 map("n", "<S-Tab>", "<Plug>(cokeline-focus-prev)", opts)
 map("n", "<Tab>", "<Plug>(cokeline-focus-next)", opts)
-map("n", "<Leader>b", "<Plug>(cokeline-pick-focus)", opts)
+-- map("n", "<Leader>b", "<Plug>(cokeline-pick-focus)", opts)
 
 -- Toggle NvimTree (if you're using NvimTree)
 map("n", "<C-n>", ":NvimTreeToggle<CR>", opts)

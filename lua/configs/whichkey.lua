@@ -93,22 +93,15 @@ local mappings2 = {
   ["/"] = { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", "Commet Block" },
 }
 local mappings = {
-  ["a"] = { "<cmd>Dashboard<cr>", "Dashboard" },
-  ["b"] = {
-    "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
-    "Buffers",
-  },
   --["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["k"] = { "<cmd>KillKillKill<cr>", "SheepGame" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  ["h"] = { "<cmd>nohlsearch<CR>", "No Highlight" },
-  ["ff"] = {
-    "<cmd>Telescope find_files <CR>",
-    "Find files",
-  },
+  -- ["ff"] = {
+  --   "<cmd>Telescope find_files <CR>",
+  --   "Find files",
+  -- },
   -- ["fg"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   -- ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   -- ["z"] = { "<cmd>Lazy<cr>", "Lazy" },
@@ -119,20 +112,13 @@ local mappings = {
     end,
     "Coment line",
   },
-  -- ["m"] = {
-  -- 	name = "Markdown",
-  -- 	p = { "<cmd>MarkdownPreview<cr>", "Preview" },
-  -- 	s = { "<cmd>MarkdownPreviewStop<cr>", "Stop Preview" },
-  -- },
-  -- p = {
-  -- 	name = "Packer",
-  -- 	c = { "<cmd>PackerCompile<cr>", "Compile" },
-  -- 	i = { "<cmd>PackerInstall<cr>", "Install" },
-  -- 	s = { "<cmd>PackerSync<cr>", "Sync" },
-  -- 	S = { "<cmd>PackerStatus<cr>", "Status" },
-  -- 	u = { "<cmd>PackerUpdate<cr>", "Update" },
-  -- },
-
+  f = {
+    name = "find_files",
+    f = { "<cmd>Telescope find_files<cr>", "Find files" },
+    g = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<cr>", "Find Text" },
+    b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    h = { "<cmd>Telescope help_tags<cr>", "Help" },
+  },
   g = {
     name = "Git",
     g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
@@ -198,20 +184,6 @@ local mappings = {
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
   },
-
-  -- x = {
-  --   name = "Terminal",
-  --   l = { "<cmd>lua _LIVE_SERVER()<cr>", "Live Server" },
-  --   P = { "<cmd>lua _NEWTAB_TOGGLE()<cr>", "Power Shell" },
-  --   n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
-  --   u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
-  --   t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
-  --   p = { "<cmd>lua _PYTHON_TOGGLE()<cr>", "Python" },
-  --   f = { "<cmd>ToggleTerm direction=float<cr>", "Float" },
-  --   h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
-  --   v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
-  --   s = { "<cmd>ToggleTerm direction=tab<cr>", "New Tab" },
-  -- },
   r = {
     name = "Run",
     s = {
@@ -227,136 +199,6 @@ local mappings = {
       "Run MVN",
     },
   },
-  -- D = {
-  -- 	name = "Debug",
-  -- 	b = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").toggle_breakpoint()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Toggle Breakpoint",
-  -- 	},
-  -- 	B = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").clear_breakpoints()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Clear Breakpoints",
-  -- 	},
-  -- 	c = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").continue()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Start/Continue",
-  -- 	},
-  -- 	i = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").step_into()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Step Into (F11)",
-  -- 	},
-  -- 	o = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").step_over()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Step Over (F10)",
-  -- 	},
-  -- 	O = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").step_out()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Step Out (S-F11)",
-  -- 	},
-  -- 	q = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").close()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Close Session",
-  -- 	},
-  -- 	Q = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").terminate()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Terminate Session (S-F5)",
-  -- 	},
-  -- 	p = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").pause()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Pause (F6)",
-  -- 	},
-  -- 	r = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").restart_frame()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Restart (C-F5)",
-  -- 	},
-  -- 	R = {
-  -- 		function()
-  -- 			if is_dap then
-  -- 				require("dap").repl.toggle()
-  -- 			else
-  -- 				vim.notify("DAP Not Support", "info")
-  -- 			end
-  -- 		end,
-  -- 		"Toggle REPL",
-  -- 	},
-  -- },
-  -- d = {
-  -- 	name = "Debug",
-  -- 	t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-  -- 	b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-  -- 	c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-  -- 	C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
-  -- 	d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-  -- 	g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-  -- 	i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-  -- 	o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-  -- 	u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-  -- 	p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
-  -- 	r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-  -- 	s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-  -- 	q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-  -- 	U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
-  -- },
   d = debug_key,
   p = {
     name = "Plugins(Lazy)",

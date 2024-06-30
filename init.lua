@@ -18,6 +18,7 @@ local opts = {
   defaults = {
     lazy = true,
   },
+
   install = {
     colorscheme = { "tokyonight" },
   },
@@ -54,6 +55,9 @@ local opts = {
   change_detection = {
     notify = true,
   },
+  rocks = {
+    hererocks = true, -- Add this line
+  },
 }
 -- function Transparent(color)
 --   color = color or "tokyonight"
@@ -64,3 +68,4 @@ local opts = {
 
 require "mappings"
 require "options"
+require "configs.lazy"

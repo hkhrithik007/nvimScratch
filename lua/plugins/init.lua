@@ -15,7 +15,7 @@ return {
   },
   {
     "nvim-tree/nvim-tree.lua",
-    event = "BufRead",
+    event = "bufread",
     config = function()
       require "configs.nvimtree"
     end,
@@ -147,6 +147,15 @@ return {
         floats = "transparent",
       },
     },
+  },
+  {
+    "pineapplegiant/spaceduck",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd "colorscheme spaceduck"
+    end,
   },
   {
     "zootedb0t/citruszest.nvim",
@@ -408,6 +417,13 @@ return {
     },
     config = function()
       require "configs.cokeline"
+    end,
+  },
+  {
+    "norcalli/nvim-colorizer.lua",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      require "configs.colorizer"
     end,
   },
 }

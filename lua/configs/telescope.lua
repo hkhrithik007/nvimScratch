@@ -46,5 +46,5 @@ telescope.setup {
 telescope.load_extension "live_grep_args"
 
 -- Keymaps
-vim.keymap.set("n", "<leader>fg", require("telescope").extensions.live_grep_args.live_grep_args, {})
-vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, {})
+-- vim.keymap.set("n", "<leader>fg", require("telescope").extensions.live_grep_args.live_grep_args, {})
+-- vim.keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, {})

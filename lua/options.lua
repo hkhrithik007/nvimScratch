@@ -1,6 +1,6 @@
 -- add yours here!
 vim.cmd "colorscheme tokyonight-night"
--- local o = vim.o
+local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 vim.opt.cursorline = true
 -- vim.opt.cursorcolumn = true
@@ -26,7 +26,7 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 vim.opt.wrap = false
 
--- vim.opt.igonorecase=true
+-- vim.opt.igonorecase = true
 vim.opt.smartcase = true
 -- vim.opt.hlsearch = false
 --
