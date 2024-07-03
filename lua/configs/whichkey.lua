@@ -93,15 +93,11 @@ local mappings2 = {
   ["/"] = { "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", "Commet Block" },
 }
 local mappings = {
-  --["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
+  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
   ["k"] = { "<cmd>KillKillKill<cr>", "SheepGame" },
   ["w"] = { "<cmd>w!<CR>", "Save" },
   ["q"] = { "<cmd>q!<CR>", "Quit" },
   -- ["c"] = { "<cmd>Bdelete!<CR>", "Close Buffer" },
-  -- ["ff"] = {
-  --   "<cmd>Telescope find_files <CR>",
-  --   "Find files",
-  -- },
   -- ["fg"] = { "<cmd>Telescope live_grep theme=ivy<cr>", "Find Text" },
   -- ["P"] = { "<cmd>lua require('telescope').extensions.projects.projects()<cr>", "Projects" },
   -- ["z"] = { "<cmd>Lazy<cr>", "Lazy" },

@@ -30,7 +30,7 @@ mason_tool_installer.setup {
     "stylua", -- lua formatter
     "google-java-format", -- java formattero
     "ktfmt", -- kotlin formatter
-    "trivy",
-    "java-debug-adapter",
+    "trivy", --java linter
+    "java-debug-adapter", --java debugger
   },
 }
