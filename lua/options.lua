@@ -33,3 +33,4 @@ vim.opt.smartcase = true
 vim.opt.number = true
 -- vim.opt.colorcolumn = "true"
 vim.opt.signcolumn = "yes"
+-- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())

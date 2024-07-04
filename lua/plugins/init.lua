@@ -13,6 +13,7 @@ return {
       require "configs.whichkey"
     end,
   },
+
   {
     "nvim-tree/nvim-tree.lua",
     event = "bufread",
@@ -124,6 +125,12 @@ return {
     config = function()
       require "configs.lspconfig"
     end,
+  },
+
+  { -- display type hints at eol, not in the middle of a line
+    "chrisgrieser/nvim-lsp-endhints",
+    event = "LspAttach",
+    opts = {},
   },
   {
     "mfussenegger/nvim-lint",
@@ -394,8 +401,11 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    config = function()
-      require "configs.gitsigns"
+    opts = function()
+      return require "configs.gitsigns"
+    end,
+    config = function(_, opts)
+      require("gitsigns").setup(opts)
     end,
   },
   {

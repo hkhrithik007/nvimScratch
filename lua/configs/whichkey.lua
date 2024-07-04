@@ -190,10 +190,6 @@ local mappings = {
     f = { "<cmd>RunFile<CR>", "Run File" },
     p = { "<cmd>RunProject<CR>", "Run Project" },
     g = { "<cmd>ToggleTerm size=70 direction=float<cr>clear<cr>gradle run<cr>", "Run Gradle" },
-    m = {
-      "<cmd>ToggleTerm size=70 direction=float<cr>mvn exec:java -Dexec.mainClass=com.pojokcode.App<cr>",
-      "Run MVN",
-    },
   },
   d = debug_key,
   p = {

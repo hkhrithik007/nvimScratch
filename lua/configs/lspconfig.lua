@@ -66,7 +66,6 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
-
 mason_lspconfig.setup_handlers {
   -- default handler for installed servers
   function(server_name)
@@ -80,13 +79,25 @@ mason_lspconfig.setup_handlers {
       capabilities = capabilities,
       settings = {
         Lua = {
-          -- make the language server recognize "vim" global
-          diagnostics = {
-            globals = { "vim" },
-          },
           completion = {
             callSnippet = "Replace",
+            keywordSnippet = "Replace",
+            showWord = "Disable", -- don't suggest common words as fallback
+            workspaceWord = false, -- already done by cmp-buffer
+            postfix = ".", -- useful for `table.insert` and the like
           },
+          diagnostics = {
+            globals = { "vim" }, -- when contributing to nvim plugins missing a `.luarc.json`
+            disable = { "trailing-space" }, -- formatter already handles that
+          },
+          hint = { -- inlay hints
+            enable = true,
+            setType = true,
+            arrayIndex = "Disable", -- too noisy
+            semicolon = "Disable", -- mostly wrong on invalid code
+          },
+          -- FIX https://github.com/sumneko/lua-language-server/issues/679#issuecomment-925524834
+          workspace = { checkThirdParty = "Disable" },
         },
       },
     }
@@ -95,12 +106,47 @@ mason_lspconfig.setup_handlers {
     -- configure lua server (with special settings)
     lspconfig["jdtls"].setup {
       capabilities = capabilities,
+      settings = {
+        java = {
+          hint = { -- inlay hints
+            enable = true,
+            setType = true,
+            arrayIndex = "Enable", -- too noisy
+            semicolon = "Disable", -- mostly wrong on invalid code
+          },
+          signatureHelp = { enabled = true },
+          contentProvider = { preferred = "fernflower" },
+          sources = {
+            organizeImports = true,
+          },
+        },
+      },
     }
   end,
   ["kotlin_language_server"] = function()
     -- configure lua server (with special settings)
     lspconfig["kotlin_language_server"].setup {
       capabilities = capabilities,
+      settings = {
+        kotlin = {
+          inlayHints = {
+            includeInlayEnumMemberValueHints = true,
+            includeInlayFunctionLikeReturnTypeHints = true,
+            includeInlayFunctionParameterTypeHints = true,
+            includeInlayParameterNameHints = "all",
+            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+            includeInlayPropertyDeclarationTypeHints = true,
+            includeInlayVariableTypeHints = true,
+            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+          },
+          hint = { -- inlay hints
+            enable = true,
+            setType = true,
+            arrayIndex = "Disable", -- too noisy
+            semicolon = "Disable", -- mostly wrong on invalid code
+          },
+        },
+      },
     }
   end,
 }

@@ -1,37 +1,76 @@
-local nvimtree = require "nvim-tree"
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwplugin = 1
-
-nvimtree.setup {
-  -- view = {
-  --   width = 35,
-  --   relativenumber = true,
-  -- },
-  -- change folder arrow icons
+local options = {
+  filters = {
+    dotfiles = false,
+  },
+  disable_netrw = true,
+  hijack_netrw = true,
+  hijack_cursor = true,
+  hijack_unnamed_buffer_when_opening = false,
+  sync_root_with_cwd = true,
+  update_focused_file = {
+    enable = true,
+    update_root = false,
+  },
+  view = {
+    adaptive_size = false,
+    side = "left",
+    width = 30,
+    preserve_window_proportions = true,
+  },
+  git = {
+    enable = true,
+    ignore = true,
+  },
+  filesystem_watchers = {
+    enable = true,
+  },
+  actions = {
+    open_file = {
+      resize_window = true,
+    },
+  },
   renderer = {
-    -- indent_markers = {
-    --   enable = true,
-    -- },
+    root_folder_label = false,
+    highlight_git = true,
+    highlight_opened_files = "none",
+
+    indent_markers = {
+      enable = false,
+    },
+
     icons = {
+      show = {
+        file = true,
+        folder = true,
+        folder_arrow = true,
+        git = true,
+      },
+
       glyphs = {
+        default = "󰈚",
+        symlink = "",
         folder = {
-          arrow_closed = "", -- arrow when folder is closed
-          arrow_open = "", -- arrow when folder is open
+          default = "",
+          empty = "",
+          empty_open = "",
+          open = "",
+          symlink = "",
+          symlink_open = "",
+          arrow_open = "",
+          arrow_closed = "",
+        },
+        git = {
+          unstaged = "✗",
+          staged = "✓",
+          unmerged = "",
+          renamed = "➜",
+          untracked = "★",
+          deleted = "",
+          ignored = "◌",
         },
       },
     },
   },
-  actions = {
-    open_file = {
-      window_picker = {
-        enable = true,
-      },
-    },
-  },
-  filters = {
-    custom = { ".ds_store" },
-  },
-  git = {
-    ignore = true,
-  },
 }
+
+require("nvim-tree").setup(options)
