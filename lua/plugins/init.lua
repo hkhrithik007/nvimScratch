@@ -286,6 +286,7 @@ return {
   {
     "folke/flash.nvim",
     lazy = true,
+    vscode = true,
     event = "BufRead",
     opts = {},
         -- stylua: ignore

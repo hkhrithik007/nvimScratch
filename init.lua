@@ -69,3 +69,4 @@ local opts = {
 require "mappings"
 require "options"
 require "configs.lazy"
+require "scroll"
