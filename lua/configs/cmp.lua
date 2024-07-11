@@ -20,7 +20,6 @@ require("luasnip.loaders.from_vscode").lazy_load()
 -- vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
 -- vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
 -- vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
-
 local kind_icons = {
   Text = "  ",
   Method = "  ",
@@ -86,10 +85,11 @@ cmp.setup {
       winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
     },
   },
+
   formatting = {
     fields = { "abbr", "menu", "kind" },
     format = function(entry, vim_item)
-      -- Source
+      -- -- Source
       vim_item.menu = ({
         nvim_lsp = "LSP",
         luasnip = "Snippet",
@@ -98,7 +98,7 @@ cmp.setup {
       })[entry.source.name]
 
       -- Kind icons
-      vim_item.kind = string.format("%s %s", vim_item.kind, kind_icons[vim_item.kind])
+      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 
       return vim_item
     end,

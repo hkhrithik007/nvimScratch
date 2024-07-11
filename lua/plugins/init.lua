@@ -179,15 +179,15 @@ return {
   --     require "configs.cyberdream"
   --   end,
   -- },
-  {
-    "catppuccin/nvim",
-    enabled = false,
-    name = "catppuccin",
-    priority = 1000,
-    config = function()
-      require("catppuccin").setup()
-    end,
-  },
+  -- {
+  --   "catppuccin/nvim",
+  --   enabled = false,
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   config = function()
+  --     require("catppuccin").setup()
+  --   end,
+  -- },
   {
     "dgox16/oldworld.nvim",
     lazy = "VeryLazy",
@@ -269,9 +269,9 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "BufRead",
-    config = function()
-      require "configs.indent-blankline"
-    end,
+    -- config = function()
+    --   require("ibl").setup()
+    -- end,
   },
   {
     "mrjones2014/smart-splits.nvim",
@@ -400,7 +400,7 @@ return {
         },
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        -- "onsails/lspkind.nvim", -- vs-code like pictograms
+        "onsails/lspkind.nvim", -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()
