@@ -26,3 +26,4 @@ end
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>", { silent = true })
 vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
 vim.keymap.set("n", "<leader>ss", "<cmd>source %<cr>", { desc = "Source file" })
+vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })

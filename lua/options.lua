@@ -34,3 +34,12 @@ vim.opt.number = true
 -- vim.opt.colorcolumn = "true"
 vim.opt.signcolumn = "yes"
 -- vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+-- For Lua configuration
+vim.opt.termguicolors = true
+
+-- If you're using Vimscript, use this instead:
+-- set termguicolors
+
+-- You may also want to set the following for better color support
+vim.opt.syntax = "on"
+vim.opt.background = "dark" -- or "light" if you prefer a light background

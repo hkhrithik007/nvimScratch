@@ -13,7 +13,6 @@ return {
       require "configs.whichkey"
     end,
   },
-
   {
     "nvim-tree/nvim-tree.lua",
     event = "bufread",
@@ -155,24 +154,24 @@ return {
       },
     },
   },
-  {
-    "pineapplegiant/spaceduck",
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      vim.cmd "colorscheme spaceduck"
-    end,
-  },
-  {
-    "zootedb0t/citruszest.nvim",
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require "configs.citruszest"
-    end,
-  },
+  -- {
+  --   "pineapplegiant/spaceduck",
+  --   enabled = false,
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd "colorscheme spaceduck"
+  --   end,
+  -- },
+  -- {
+  --   "zootedb0t/citruszest.nvim",
+  --   enabled = false,
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require "configs.citruszest"
+  --   end,
+  -- },
   -- {
   --   "scottmckendry/cyberdream.nvim",
   --   enabled = false,
@@ -180,6 +179,15 @@ return {
   --     require "configs.cyberdream"
   --   end,
   -- },
+  {
+    "catppuccin/nvim",
+    enabled = false,
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require("catppuccin").setup()
+    end,
+  },
   {
     "dgox16/oldworld.nvim",
     lazy = "VeryLazy",
@@ -255,6 +263,14 @@ return {
           vim.b.miniindentscope_disable = true
         end,
       })
+    end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    event = "BufRead",
+    config = function()
+      require "configs.indent-blankline"
     end,
   },
   {
@@ -384,7 +400,7 @@ return {
         },
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim", -- vs-code like pictograms
+        -- "onsails/lspkind.nvim", -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()
