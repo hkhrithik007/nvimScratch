@@ -2,6 +2,7 @@ local status_ok, code_runner = pcall(require, "code_runner")
 if not status_ok then
   return
 end
+require "toggleterm"
 
 local rfile = {
   java = "cd $dir && javac $fileName && java $fileNameWithoutExt",
@@ -12,8 +13,7 @@ local rfile = {
   cpp = "g++ $fileName -o $fileNameWithoutExt && $dir/$fileNameWithoutExt",
   scss = "sass $dir/$fileName $dir/$fileNameWithoutExt.css",
   javascript = "bun $dir/$fileName",
-  kotlin =
-  "cd $dir && kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar && cd $dir && java -jar $fileNameWithoutExt.jar",
+  kotlin = "cd $dir && kotlinc $fileName -include-runtime -d $fileNameWithoutExt.jar && cd $dir && java -jar $fileNameWithoutExt.jar",
   lua = "lua $dir/$fileName",
 }
 

@@ -74,3 +74,4 @@ local options = {
 }
 
 require("nvim-tree").setup(options)
+vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "Toggle NvimTree" })
