@@ -1,4 +1,5 @@
 local wk = require "which-key"
+---@diagnostic disable-next-line: unused-local
 local telescope = require "telescope"
 
 function _LAZYGIT_TOGGLE()
@@ -8,8 +9,8 @@ function _LAZYGIT_TOGGLE()
 end
 wk.add {
   {
-    { "<leader>f", group = "file" }, -- group
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n" },
+    { "<leader>f", group = "file", icon = "󰭎" }, -- group
+    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n", icon = "󰈞" },
     {
       "<leader>fg",
       function()
@@ -17,12 +18,14 @@ wk.add {
       end,
       desc = "Find Text",
       mode = "n",
+      icon = "󰺮",
     },
     {
       "<leader>fb",
       "<cmd>Telescope buffers<cr>",
       desc = "Buffers",
       mode = "n",
+      icon = "",
     },
   },
   {
@@ -35,6 +38,7 @@ wk.add {
       end,
       desc = "Next Hunk",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gk",
@@ -43,6 +47,7 @@ wk.add {
       end,
       desc = "Prev Hunk",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gl",
@@ -51,6 +56,7 @@ wk.add {
       end,
       desc = "Blame",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gp",
@@ -59,6 +65,7 @@ wk.add {
       end,
       desc = "Preview Hunk",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gr",
@@ -67,6 +74,7 @@ wk.add {
       end,
       desc = "Reset Hunk",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gR",
@@ -75,6 +83,7 @@ wk.add {
       end,
       desc = "Reset Buffer",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gs",
@@ -83,6 +92,7 @@ wk.add {
       end,
       desc = "Stage Hunk",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>gu",
@@ -91,14 +101,15 @@ wk.add {
       end,
       desc = "Undo Stage Hunk",
       mode = "n",
+      icon = "",
     },
-    { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", mode = "n" },
-    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", mode = "n" },
-    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", mode = "n" },
-    { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Diff", mode = "n" },
+    { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", mode = "n", icon = "" },
+    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", mode = "n", icon = "" },
+    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", mode = "n", icon = "" },
+    { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Diff", mode = "n", icon = "" },
   },
   {
-    { "<leader>l", group = "Lsp" },
+    { "<leader>l", group = "Lsp", icon = "" },
     {
       "<leader>la",
       function()
@@ -124,9 +135,10 @@ wk.add {
       end,
       desc = "Format",
       mode = "n",
+      icon = "󰉠",
     },
-    { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info", mode = "n" },
-    { "<leader>lI", "<cmd>Mason<cr>", desc = "Installer Info", mode = "n" },
+    { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info", mode = "n", icon = "" },
+    { "<leader>lI", "<cmd>Mason<cr>", desc = "Installer Info", mode = "n", icon = "" },
     {
       "<leader>lj",
       function()
@@ -150,6 +162,7 @@ wk.add {
       end,
       desc = "CodeLens Action",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>lq",
@@ -166,20 +179,19 @@ wk.add {
       end,
       desc = "Rename",
       mode = "n",
+      icon = "󰑕",
     },
     { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols", mode = "n" },
     { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols", mode = "n" },
   },
   {
-    { "<leader>s", group = "search" },
-    { "<leader>sb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", mode = "n" },
-    { "<leader>sc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme", mode = "n" },
-    { "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Find Help", mode = "n" },
-    { "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages", mode = "n" },
-    { "<leader>sr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File", mode = "n" },
-    { "<leader>sR", "<cmd>Telescope registers<cr>", desc = "Registers", mode = "n" },
-    { "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps", mode = "n" },
-    { "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands", mode = "n" },
+    { "<leader>S", group = "search", icon = "󱙓" },
+    { "<leader>Sb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", mode = "n", icon = "" },
+    { "<leader>Sc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme", mode = "n" },
+    { "<leader>Sr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File", mode = "n" },
+    { "<leader>SR", "<cmd>Telescope registers<cr>", desc = "Registers", mode = "n" },
+    { "<leader>Sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps", mode = "n" },
+    { "<leader>SC", "<cmd>Telescope commands<cr>", desc = "Commands", mode = "n" },
   },
   {
     { "<leader>t", group = "terminal" },
@@ -195,19 +207,19 @@ wk.add {
   },
 
   {
-    { "<leader>p", group = "lazy" },
-    { "<leader>pi", "<cmd>Lazy install<cr>", desc = "Install", mode = "n" },
-    { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", mode = "n" },
-    { "<leader>pS", "<cmd>Lazy clear<cr>", desc = "Status", mode = "n" },
-    { "<leader>pc", "<cmd>Lazy clean<cr>", desc = "Clean", mode = "n" },
-    { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", mode = "n" },
-    { "<leader>pp", "<cmd>Lazy profile<cr>", desc = "Profile", mode = "n" },
-    { "<leader>pl", "<cmd>Lazy log<cr>", desc = "Log", mode = "n" },
-    { "<leader>pd", "<cmd>Lazy debug<cr>", desc = "Debug", mode = "n" },
+    { "<leader>p", group = "lazy", icon = "" },
+    { "<leader>pi", "<cmd>Lazy install<cr>", desc = "Install", mode = "n", icon = "" },
+    { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", mode = "n", icon = "" },
+    { "<leader>pS", "<cmd>Lazy clear<cr>", desc = "Status", mode = "n", icon = "󱖫" },
+    { "<leader>pc", "<cmd>Lazy clean<cr>", desc = "Clean", mode = "n", icon = "󰿞" },
+    { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", mode = "n", icon = "󰚰" },
+    { "<leader>pp", "<cmd>Lazy profile<cr>", desc = "Profile", mode = "n", icon = "󰙄" },
+    { "<leader>pl", "<cmd>Lazy log<cr>", desc = "Log", mode = "n", icon = "󱂅" },
+    { "<leader>pd", "<cmd>Lazy debug<cr>", desc = "Debug", mode = "n", icon = "" },
   },
 
   {
-    { "<leader>d", group = "debug" },
+    { "<leader>d", group = "debug", icon = "" },
     {
       "<leader>dt",
       function()
@@ -215,6 +227,7 @@ wk.add {
       end,
       desc = "Toggle Breakpoint",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>db",
@@ -223,6 +236,7 @@ wk.add {
       end,
       desc = "Step Back",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>dc",
@@ -231,6 +245,7 @@ wk.add {
       end,
       desc = "Continue",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>dC",
@@ -239,6 +254,7 @@ wk.add {
       end,
       desc = "Run To Cursor",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>dd",
@@ -247,6 +263,7 @@ wk.add {
       end,
       desc = "Disconnect",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>dg",
@@ -255,6 +272,7 @@ wk.add {
       end,
       desc = "Get Session",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>di",
@@ -271,6 +289,7 @@ wk.add {
       end,
       desc = "Step Over",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>du",
@@ -279,6 +298,7 @@ wk.add {
       end,
       desc = "Step Out",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>dp",
@@ -287,6 +307,7 @@ wk.add {
       end,
       desc = "Pause",
       mode = "n",
+      icon = "󰏤",
     },
     {
       "<leader>dr",
@@ -295,6 +316,7 @@ wk.add {
       end,
       desc = "Toggle Repl",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>ds",
@@ -303,6 +325,7 @@ wk.add {
       end,
       desc = "Start",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>dq",
@@ -311,6 +334,7 @@ wk.add {
       end,
       desc = "Quit",
       mode = "n",
+      icon = "󰅛",
     },
     {
       "<leader>dU",
@@ -319,31 +343,48 @@ wk.add {
       end,
       desc = "Toggle UI",
       mode = "n",
+      icon = "",
     },
   },
 
   {
-    { "<leader>r", group = "run" },
+    { "<leader>r", group = "run", icon = "" },
     {
       "<leader>rs",
       '<cmd>autocmd bufwritepost [^_]*.sass,[^_]*.scss silent exec "!sass %:p %:r.css"<CR>',
       desc = "Auto Compile Sass",
       mode = "n",
     },
-    { "<leader>rr", "<cmd>RunCode<CR>", desc = "Run Code", mode = "n" },
-    { "<leader>rf", "<cmd>RunFile<CR>", desc = "Run File", mode = "n" },
-    { "<leader>rp", "<cmd>RunProject<CR>", desc = "Run Project", mode = "n" },
+    { "<leader>rr", "<cmd>RunCode<CR>", desc = "Run Code", mode = "n", icon = "" },
+    { "<leader>rf", "<cmd>RunFile<CR>", desc = "Run File", mode = "n", icon = "" },
+    { "<leader>rp", "<cmd>RunProject<CR>", desc = "Run Project", mode = "n", icon = "" },
     {
       "<leader>rg",
       "<cmd>ToggleTerm size=70 direction=float<cr>clear<cr>gradle run<cr>",
       desc = "Run Gradle",
       mode = "n",
+      icon = "",
     },
     {
       "<leader>rm",
       "<cmd>ToggleTerm size=70 direction=float<cr>clear<cr>mvn clean package<cr>",
       desc = "Run Maven",
       mode = "n",
+      icon = "",
+    },
+  },
+  {
+    {
+      { "<leader>s", group = "Split buffer", icon = "󱓝" }, -- group for evil resizing
+      {
+        "<leader>ss",
+        require("smart-splits").swap_buf_left,
+        desc = "buffer Swap Buffer Left",
+        mode = "n",
+        icon = "󱐪",
+      },
+      { "<leader>sv", "<cmd>vsplit<cr>", desc = "buffer Vertical Split", mode = "n", icon = "" },
+      { "<leader>sh", "<cmd>split<cr>", desc = "buffer Horizontal Split", mode = "n", icon = "" },
     },
   },
   {
@@ -351,8 +392,10 @@ wk.add {
     -- Most attributes can be inherited or overridden on any level
     -- There's no limit to the depth of nesting
     mode = { "n", "v" }, -- NORMAL and VISUAL mode
-    { "<leader>k", "<cmd>KillKillKill<cr>", desc = "Killersheep", mode = "n" },
-    { "<leader>q", "<cmd>q!<cr>", desc = "Quit" }, -- no need to specify mode since it's inherited
-    { "<leader>w", "<cmd>w!<cr>", desc = "Write" },
+    { "<leader>k", "<cmd>KillKillKill<cr>", desc = "Killersheep", mode = "n", icon = "󰳆" },
+    { "<leader>q", "<cmd>q!<cr>", desc = "Quit", icon = "󰈆" }, -- no need to specify mode since it's inherited
+    { "<leader>w", "<cmd>w!<cr>", desc = "Write", icon = "󱣪" },
+    { "<leader>e", "<cmd>:NvimTreeToggle<cr>", desc = "NvimTree Focus", icon = "" },
+    { "<leader>x", "<cmd>bw<cr>", desc = "buffer close", icon = "󰱞", mode = "n" },
   },
 }

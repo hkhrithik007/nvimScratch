@@ -3,7 +3,6 @@ local lazy = require "lazy"
 return {
   {
     "folke/which-key.nvim",
-    -- lazy = "VeryLazy",
     event = "BufRead",
     dependencies = {
       "echasnovski/mini.icons",
@@ -26,7 +25,11 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     event = "BufRead",
-    dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-live-grep-args.nvim" },
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim",
+      "jemag/telescope-diff.nvim",
+    },
     config = function()
       require "configs.telescope"
     end,
@@ -146,16 +149,31 @@ return {
     "folke/tokyonight.nvim",
     enabled = true,
     lazy = true,
-    config = function()
-      require("tokyonight").setup()
+    opts = function()
+      return {
+        style = "day",
+        light_style = "moon",
+        -- transparent = false,
+        -- styles = {
+        --   sidebars = "transparent",
+        --   floats = "transparent",
+        -- },
+        on_highlights = function(hl, c)
+          -- hl.Normal = "Foo"
+          do
+            return
+          end
+          local prompt = "#2d3149"
+          hl.TelescopeNormal = { bg = c.bg_dark, fg = c.fg }
+          hl.TelescopeBorder = { bg = c.bg_dark, fg = c.bg_dark }
+          hl.TelescopePromptNormal = { bg = prompt }
+          hl.TelescopePromptBorder = { bg = prompt, fg = prompt }
+          hl.TelescopePromptTitle = { bg = c.fg_gutter, fg = c.orange }
+          hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
+          hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
+        end,
+      }
     end,
-    opts = {
-      transparent = true,
-      styles = {
-        sidebars = "transparent",
-        floats = "transparent",
-      },
-    },
   },
   -- {
   --   "pineapplegiant/spaceduck",
@@ -272,9 +290,9 @@ return {
     "lukas-reineke/indent-blankline.nvim",
     main = "ibl",
     event = "BufRead",
-    -- config = function()
-    --   require("ibl").setup()
-    -- end,
+    config = function()
+      require("ibl").setup()
+    end,
   },
   {
     "mrjones2014/smart-splits.nvim",
@@ -313,7 +331,7 @@ return {
         keys =
         {
             { "A",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-           { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+           { "T",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
             { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
             { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
@@ -352,7 +370,12 @@ return {
     event = { "BufRead", "BufNewFile" },
     lazy = "VeryLazy",
     config = function()
-      vim.keymap.set("n", "<leader>sm", ":lua require('gen').select_model()<cr>", { noremap = true, silent = true })
+      vim.keymap.set(
+        "n",
+        "<leader>sm",
+        ":lua require('gen').select_model()<CR>",
+        { desc = "Select LLM Model", noremap = true, silent = true }
+      )
     end,
   },
   {

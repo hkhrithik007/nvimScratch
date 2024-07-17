@@ -2,6 +2,7 @@
     "diagnostics.globals": [
         "vim",
         "on_attach",
-        "capabilities"
+        "capabilities",
+        "desc"
     ]
 }

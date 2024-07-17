@@ -6,7 +6,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 -- map("n", "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", { desc = "Lazygit" })
 
 -- vim.keymap.set("n", "<leader>w", "<cmd>w<CR>", { desc = "save file" })
-vim.keymap.set("n", "<leader>x", "<cmd>bw<CR>", { desc = "close buffer" })
+-- vim.keymap.set("n", "<leader>x", "<cmd>bw<CR>", { desc = "Buffer close" })
 
 on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>w", function()
@@ -26,4 +26,4 @@ end
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>", { silent = true })
 -- vim.keymap.set("n", "<leader>t", "<cmd>ToggleTerm<cr>", { desc = "Toggle terminal" })
 vim.keymap.set("n", "<leader>ss", "<cmd>source %<cr>", { desc = "Source file" })
-vim.keymap.set("n", "<C-a>", "ggVG", { desc = "Select all" })
+vim.keymap.set("n", "<c-a>", "ggVG", { desc = "Select all" })
