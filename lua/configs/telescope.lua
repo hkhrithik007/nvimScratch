@@ -12,4 +12,22 @@ telescope.setup {
       height = 0.80,
     },
   },
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+    live_grep = {
+      additional_args = function(opts)
+        return { "--hidden" }
+      end,
+    },
+  },
+  extensions = {
+    live_grep_args = {
+      auto_quoting = true,
+    },
+    diffview = {
+      use_diffview = true,
+    },
+  },
 }

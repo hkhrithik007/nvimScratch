@@ -147,7 +147,7 @@ return {
   },
   {
     "folke/tokyonight.nvim",
-    enabled = true,
+    enabled = false,
     lazy = true,
     opts = function()
       return {
@@ -200,15 +200,15 @@ return {
   --     require "configs.cyberdream"
   --   end,
   -- },
-  -- {
-  --   "catppuccin/nvim",
-  --   enabled = false,
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     require("catppuccin").setup()
-  --   end,
-  -- },
+  {
+    "catppuccin/nvim",
+    enabled = true,
+    name = "catppuccin",
+    priority = 1000,
+    config = function()
+      require "configs.catppuccin"
+    end,
+  },
   {
     "dgox16/oldworld.nvim",
     lazy = "VeryLazy",

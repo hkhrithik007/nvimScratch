@@ -1,5 +1,5 @@
 -- add yours here!
-vim.cmd "colorscheme tokyonight-night"
+-- vim.cmd "colorscheme catppuccin-mocha"
 local o = vim.o
 -- o.cursorlineopt ='both' -- to enable cursorline!
 vim.opt.cursorline = true
