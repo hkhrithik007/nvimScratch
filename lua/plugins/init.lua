@@ -29,6 +29,7 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
       "jemag/telescope-diff.nvim",
+      "debugloop/telescope-undo.nvim",
     },
     config = function()
       require "configs.telescope"
@@ -88,7 +89,13 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    lazy = "VeryLazy",
+    -- lazy = "VeryLazy",
+    ft = { "java", "kotlin" },
+    dependencies = {
+      -- "williamboman/mason.nvim",
+      "jay-babu/mason-nvim-dap.nvim",
+      "rcarriga/nvim-dap-ui",
+    },
     -- event = { "BufReadPre", "BufNewFile" },
     config = function()
       require "configs.dap"
@@ -96,7 +103,8 @@ return {
   },
   {
     "rcarriga/nvim-dap-ui",
-    lazy = "VeryLazy",
+    -- lazy = "VeryLazy",
+    ft = { "java", "kotlin" },
     -- event = "BufRead",
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
@@ -105,10 +113,11 @@ return {
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
-    lazy = "VeryLazy",
+    -- lazy = "VeryLazy",
+    ft = { "java", "kotlin" },
     -- event = "BufRead",
     dependencies = {
-      "williamboman/mason.nvim",
+      -- "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
       "nvim-neotest/nvim-nio",
       "rcarriga/nvim-dap-ui",
@@ -145,36 +154,36 @@ return {
       require "configs.lint"
     end,
   },
-  {
-    "folke/tokyonight.nvim",
-    enabled = false,
-    lazy = true,
-    opts = function()
-      return {
-        style = "day",
-        light_style = "moon",
-        -- transparent = false,
-        -- styles = {
-        --   sidebars = "transparent",
-        --   floats = "transparent",
-        -- },
-        on_highlights = function(hl, c)
-          -- hl.Normal = "Foo"
-          do
-            return
-          end
-          local prompt = "#2d3149"
-          hl.TelescopeNormal = { bg = c.bg_dark, fg = c.fg }
-          hl.TelescopeBorder = { bg = c.bg_dark, fg = c.bg_dark }
-          hl.TelescopePromptNormal = { bg = prompt }
-          hl.TelescopePromptBorder = { bg = prompt, fg = prompt }
-          hl.TelescopePromptTitle = { bg = c.fg_gutter, fg = c.orange }
-          hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
-          hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
-        end,
-      }
-    end,
-  },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   enabled = true,
+  --   -- lazy = true,
+  --   opts = function()
+  --     return {
+  --       style = "day",
+  --       light_style = "moon",
+  --       -- transparent = false,
+  --       -- styles = {
+  --       --   sidebars = "transparent",
+  --       --   floats = "transparent",
+  --       -- },
+  --       on_highlights = function(hl, c)
+  --         -- hl.Normal = "Foo"
+  --         do
+  --           return
+  --         end
+  --         local prompt = "#2d3149"
+  --         hl.TelescopeNormal = { bg = c.bg_dark, fg = c.fg }
+  --         hl.TelescopeBorder = { bg = c.bg_dark, fg = c.bg_dark }
+  --         hl.TelescopePromptNormal = { bg = prompt }
+  --         hl.TelescopePromptBorder = { bg = prompt, fg = prompt }
+  --         hl.TelescopePromptTitle = { bg = c.fg_gutter, fg = c.orange }
+  --         hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
+  --         hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
+  --       end,
+  --     }
+  --   end,
+  -- },
   -- {
   --   "pineapplegiant/spaceduck",
   --   enabled = false,
@@ -200,13 +209,30 @@ return {
   --     require "configs.cyberdream"
   --   end,
   -- },
+  -- {
+  --   "catppuccin/nvim",
+  --   enabled = true,
+  --   name = "catppuccin",
+  --   priority = 1000,
+  --   config = function()
+  --     require "configs.catppuccin"
+  --   end,
+  -- },
+
+  -- {
+  --   "0xstepit/flow.nvim",
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require "configs.flow"
+  --   end,
+  -- },
   {
-    "catppuccin/nvim",
-    enabled = true,
-    name = "catppuccin",
+    "EdenEast/nightfox.nvim",
+    lazy = false,
     priority = 1000,
     config = function()
-      require "configs.catppuccin"
+      require "configs.nightfox"
     end,
   },
   {
@@ -427,7 +453,7 @@ return {
         },
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        "onsails/lspkind.nvim", -- vs-code like pictograms
+        -- "onsails/lspkind.nvim", -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()

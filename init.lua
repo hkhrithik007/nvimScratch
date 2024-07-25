@@ -19,9 +19,9 @@ local opts = {
     lazy = true,
   },
 
-  install = {
-    colorscheme = { "tokyonight" },
-  },
+  -- install = {
+  --   colorscheme = { "tokyonight" },
+  -- },
   rtp = {
     disabled_plugins = {
       "2html_plugin",

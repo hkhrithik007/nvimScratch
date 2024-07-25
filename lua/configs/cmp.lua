@@ -25,7 +25,6 @@ local kind_icons = {
   Method = "  ",
   Function = "  ",
   Constructor = "  ",
-  Field = "  ",
   Variable = "  ",
   Class = "  ",
   Interface = "  ",
@@ -35,7 +34,7 @@ local kind_icons = {
   Value = "  ",
   Enum = "  ",
   Keyword = "  ",
-  Snippet = "  ",
+  Snippet = "  ",
   Color = "  ",
   File = "  ",
   Reference = "  ",
@@ -103,6 +102,7 @@ cmp.setup {
       return vim_item
     end,
   },
+
   mapping = cmp.mapping.preset.insert {
     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
     ["<C-f>"] = cmp.mapping.scroll_docs(4),

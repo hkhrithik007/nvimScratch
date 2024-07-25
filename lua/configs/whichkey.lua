@@ -21,6 +21,15 @@ wk.add {
       icon = "󰺮",
     },
     {
+      "<leader>fu",
+      function()
+        require("telescope").extensions.undo.undo()
+      end,
+      desc = "find undo history",
+      mode = "n",
+      icon = "",
+    },
+    {
       "<leader>fb",
       "<cmd>Telescope buffers<cr>",
       desc = "Buffers",
@@ -385,6 +394,27 @@ wk.add {
       },
       { "<leader>sv", "<cmd>vsplit<cr>", desc = "buffer Vertical Split", mode = "n", icon = "" },
       { "<leader>sh", "<cmd>split<cr>", desc = "buffer Horizontal Split", mode = "n", icon = "" },
+    },
+  },
+  {
+    { "<leader>L", group = "LSP Extra", icon = "" }, -- group for LSP commands
+
+    { "<leader>LR", "<cmd>Telescope lsp_references<CR>", desc = "Show LSP references", mode = "n", icon = "" },
+    { "<leader>LD", vim.lsp.buf.declaration, desc = "Go to declaration", mode = "n", icon = "󱂢" },
+    { "<leader>Ld", "<cmd>Telescope lsp_definitions<CR>", desc = "Show LSP definitions", mode = "n", icon = "" },
+    {
+      "<leader>Li",
+      "<cmd>Telescope lsp_implementations<CR>",
+      desc = "Show LSP implementations",
+      mode = "n",
+      icon = "󰙳",
+    },
+    {
+      "<leader>Lt",
+      "<cmd>Telescope lsp_type_definitions<CR>",
+      desc = "Show LSP type definitions",
+      mode = "n",
+      icon = "󰙳",
     },
   },
   {
