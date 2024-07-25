@@ -185,24 +185,6 @@ return {
   --   end,
   -- },
   -- {
-  --   "pineapplegiant/spaceduck",
-  --   enabled = false,
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd "colorscheme spaceduck"
-  --   end,
-  -- },
-  -- {
-  --   "zootedb0t/citruszest.nvim",
-  --   enabled = false,
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require "configs.citruszest"
-  --   end,
-  -- },
-  -- {
   --   "scottmckendry/cyberdream.nvim",
   --   enabled = false,
   --   config = function()
@@ -219,14 +201,6 @@ return {
   --   end,
   -- },
 
-  -- {
-  --   "0xstepit/flow.nvim",
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require "configs.flow"
-  --   end,
-  -- },
   {
     "EdenEast/nightfox.nvim",
     lazy = false,
