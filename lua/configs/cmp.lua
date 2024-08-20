@@ -20,6 +20,7 @@ require("luasnip.loaders.from_vscode").lazy_load()
 -- vim.api.nvim_set_hl(0, "CmpItemKindKeyword", { bg = "NONE", fg = "#D4D4D4" })
 -- vim.api.nvim_set_hl(0, "CmpItemKindProperty", { link = "CmpItemKindKeyword" })
 -- vim.api.nvim_set_hl(0, "CmpItemKindUnit", { link = "CmpItemKindKeyword" })
+
 local kind_icons = {
   Text = "󰷾  ",
   Method = "  ",

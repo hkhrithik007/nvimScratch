@@ -144,7 +144,9 @@ return {
   { -- display type hints at eol, not in the middle of a line
     "chrisgrieser/nvim-lsp-endhints",
     event = "LspAttach",
-    opts = {},
+    config = function()
+      require "configs.end_hints"
+    end,
   },
   {
     "mfussenegger/nvim-lint",
@@ -200,13 +202,21 @@ return {
   --     require "configs.catppuccin"
   --   end,
   -- },
-
   {
     "EdenEast/nightfox.nvim",
     lazy = false,
     priority = 1000,
     config = function()
       require "configs.nightfox"
+    end,
+  },
+  {
+    "nyoom-engineering/oxocarbon.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd "colorscheme oxocarbon"
     end,
   },
   {
@@ -399,7 +409,7 @@ return {
           enabled = true,
         },
         hover = {
-          enabled = false,
+          enabled = true,
         },
         signature = {
           enabled = false,

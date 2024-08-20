@@ -1,6 +1,4 @@
 local mason = require "mason"
-
--- import mason-lspconfig
 local mason_lspconfig = require "mason-lspconfig"
 
 local mason_tool_installer = require "mason-tool-installer"
@@ -28,7 +26,7 @@ mason_lspconfig.setup {
 mason_tool_installer.setup {
   ensure_installed = {
     "stylua", -- lua formatter
-    "google-java-format", -- java formattero
+    "google-java-format", -- java formatter
     "ktfmt", -- kotlin formatter
     "trivy", --java linter
     "java-debug-adapter", --java debugger
