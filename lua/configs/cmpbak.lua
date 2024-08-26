@@ -1,112 +1,125 @@
-local cmp = require "cmp"
-local luasnip = require "luasnip"
-local lspkind = require "lspkind"
-local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+local M = {}
 
--- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-require("luasnip.loaders.from_vscode").lazy_load()
+M.setup = function()
+  local cmp = require "cmp"
+  local luasnip = require "luasnip"
+  local lspkind = require "lspkind"
 
--- Custom highlight groups for nvim-cmp
-local custom_highlights = function(C)
-  return {
-    CmpItemKindSnippet = { fg = C.base, bg = C.mauve },
-    CmpItemKindKeyword = { fg = C.base, bg = C.red },
-    CmpItemKindText = { fg = C.base, bg = C.teal },
-    CmpItemKindMethod = { fg = C.base, bg = C.blue },
-    CmpItemKindConstructor = { fg = C.base, bg = C.blue },
-    CmpItemKindFunction = { fg = C.base, bg = C.blue },
-    CmpItemKindFolder = { fg = C.base, bg = C.blue },
-    CmpItemKindModule = { fg = C.base, bg = C.blue },
-    CmpItemKindConstant = { fg = C.base, bg = C.peach },
-    CmpItemKindField = { fg = C.base, bg = C.green },
-    CmpItemKindProperty = { fg = C.base, bg = C.green },
-    CmpItemKindEnum = { fg = C.base, bg = C.green },
-    CmpItemKindUnit = { fg = C.base, bg = C.green },
-    CmpItemKindClass = { fg = C.base, bg = C.yellow },
-    CmpItemKindVariable = { fg = C.base, bg = C.flamingo },
-    CmpItemKindFile = { fg = C.base, bg = C.blue },
-    CmpItemKindInterface = { fg = C.base, bg = C.yellow },
-    CmpItemKindColor = { fg = C.base, bg = C.red },
-    CmpItemKindReference = { fg = C.base, bg = C.red },
-    CmpItemKindEnumMember = { fg = C.base, bg = C.red },
-    CmpItemKindStruct = { fg = C.base, bg = C.blue },
-    CmpItemKindValue = { fg = C.base, bg = C.peach },
-    CmpItemKindEvent = { fg = C.base, bg = C.blue },
-    CmpItemKindOperator = { fg = C.base, bg = C.blue },
-    CmpItemKindTypeParameter = { fg = C.base, bg = C.blue },
-    CmpItemKindCopilot = { fg = C.base, bg = C.teal },
+  -- LuaSnip setup
+  luasnip.config.setup {}
+
+  -- Load snippets
+  require("luasnip.loaders.from_vscode").lazy_load()
+  require("luasnip.loaders.from_snipmate").lazy_load()
+  require("luasnip.loaders.from_lua").lazy_load()
+
+  -- Extend filetypes for documentation snippets
+  local doc_filetypes = {
+    typescript = "tsdoc",
+    javascript = "jsdoc",
+    lua = "luadoc",
+    python = "pydoc",
+    rust = "rustdoc",
+    cs = "csharpdoc",
+    java = "javadoc",
+    c = "cdoc",
+    cpp = "cppdoc",
+    php = "phpdoc",
+    kotlin = "kdoc",
+    ruby = "rdoc",
+    sh = "shelldoc",
+  }
+
+  for filetype, doctype in pairs(doc_filetypes) do
+    luasnip.filetype_extend(filetype, { doctype })
+  end
+
+  -- Icons for completion items
+  local kind_icons = {
+    Text = "󰉿",
+    Method = "󰆧",
+    Function = "󰊕",
+    Constructor = "",
+    Field = "󰜢",
+    Variable = "󰀫",
+    Class = "󰠱",
+    Interface = "",
+    Module = "",
+    Property = "󰜢",
+    Unit = "󰑭",
+    Value = "󰎠",
+    Enum = "",
+    Keyword = "󰌋",
+    Snippet = "",
+    Color = "󰏘",
+    File = "󰈙",
+    Reference = "󰈇",
+    Folder = "󰉋",
+    EnumMember = "",
+    Constant = "󰏿",
+    Struct = "󰙅",
+    Event = "",
+    Operator = "󰆕",
+    TypeParameter = "",
+  }
+
+  -- Border style for completion window
+  local borderstyle = {
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
+  }
+
+  cmp.setup {
+    snippet = {
+      expand = function(args)
+        luasnip.lsp_expand(args.body)
+      end,
+    },
+    completion = { completeopt = "menu,menuone,noinsert" },
+    mapping = cmp.mapping.preset.insert {
+      ["<C-n>"] = cmp.mapping.select_next_item(),
+      ["<C-p>"] = cmp.mapping.select_prev_item(),
+      ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+      ["<C-f>"] = cmp.mapping.scroll_docs(4),
+      ["<C-y>"] = cmp.mapping.confirm { select = true },
+      ["<C-Space>"] = cmp.mapping.complete {},
+      ["<C-l>"] = cmp.mapping(function()
+        if luasnip.expand_or_locally_jumpable() then
+          luasnip.expand_or_jump()
+        end
+      end, { "i", "s" }),
+      ["<C-h>"] = cmp.mapping(function()
+        if luasnip.locally_jumpable(-1) then
+          luasnip.jump(-1)
+        end
+      end, { "i", "s" }),
+    },
+    window = {
+      completion = borderstyle,
+      documentation = borderstyle,
+    },
+    sources = {
+      { name = "nvim_lsp" },
+      { name = "luasnip" },
+      { name = "nvim_lsp_signature_help" },
+      { name = "buffer" },
+      { name = "path" },
+      { name = "nvlime" },
+      { name = "conjure" },
+      { name = "neorg" },
+      { name = "lazydev" },
+    },
+    formatting = {
+      fields = { "abbr", "kind", "menu" },
+      format = function(entry, vim_item)
+        local kind = lspkind.cmp_format { mode = "symbol_text", maxwidth = 50 }(entry, vim_item)
+        local strings = vim.split(kind.kind, "%s", { trimempty = true })
+        kind.kind = string.format("%s %s", kind_icons[strings[1]] or "", strings[1] or "")
+        kind.menu = strings[2] or ""
+        return kind
+      end,
+    },
   }
 end
 
--- Apply custom highlights
--- local C = require("catppuccin.palettes").get_palette()
--- for group, colors in pairs(custom_highlights(C)) do
---   vim.api.nvim_set_hl(0, group, colors)
--- end
-
-cmp.setup.cmdline("/", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = {
-    { name = "buffer" },
-  },
-})
-
--- `:` cmdline setup.
-cmp.setup.cmdline(":", {
-  mapping = cmp.mapping.preset.cmdline(),
-  sources = cmp.config.sources({
-    { name = "path" },
-  }, {
-    {
-      name = "cmdline",
-      option = {
-        ignore_cmds = { "Man", "!" },
-      },
-    },
-  }),
-})
--- Rest of the nvim-cmp configuration
-cmp.setup {
-  completion = {
-    completeopt = "menu,menuone,preview,noselect",
-  },
-  snippet = {
-    expand = function(args)
-      luasnip.lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert {
-    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-    ["<Tab>"] = cmp.mapping.select_next_item(),
-    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-    ["<C-f>"] = cmp.mapping.scroll_docs(4),
-    ["<C-Space>"] = cmp.mapping.complete(),
-    ["<C-e>"] = cmp.mapping.abort(),
-    ["<CR>"] = cmp.mapping.confirm { select = false },
-  },
-  sources = cmp.config.sources {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "buffer" },
-    { name = "path" },
-  },
-  window = {
-    completion = {
-      winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
-      col_offset = -3,
-      side_padding = 0,
-    },
-  },
-  formatting = {
-    fields = { "kind", "abbr", "menu" },
-    format = function(entry, vim_item)
-      local kind = require("lspkind").cmp_format { mode = "symbol_text", maxwidth = 50 }(entry, vim_item)
-      local strings = vim.split(kind.kind, "%s", { trimempty = true })
-      kind.kind = " " .. (strings[1] or "") .. " "
-      kind.menu = "    (" .. (strings[2] or "") .. ")"
-      return kind
-    end,
-  },
-}
-
--- The rest of your nvim-cmp configuration (cmdline setup, autopairs, etc.) remains unchanged
+return M

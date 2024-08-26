@@ -48,6 +48,10 @@ local kind_icons = {
   TypeParameter = "  ",
 }
 
+local borderstyle = {
+  border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+  winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:None",
+}
 cmp.setup.cmdline("/", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = {
@@ -87,7 +91,7 @@ cmp.setup {
   },
 
   formatting = {
-    fields = { "abbr", "menu", "kind" },
+    fields = { "abbr", "kind", "menu" },
     format = function(entry, vim_item)
       -- -- Source
       vim_item.menu = ({
@@ -128,6 +132,11 @@ cmp.setup {
         fallback()
       end
     end, { "i", "s" }),
+  },
+
+  window = {
+    completion = borderstyle,
+    documentation = borderstyle,
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },

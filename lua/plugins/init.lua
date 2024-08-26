@@ -7,6 +7,7 @@ return {
     dependencies = {
       "echasnovski/mini.icons",
     },
+
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -132,8 +133,11 @@ return {
       "windwp/nvim-autopairs",
       "williamboman/mason.nvim",
       "hrsh7th/nvim-cmp",
+      "L3MON4D3/LuaSnip",
+      "onsails/lspkind.nvim",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
+      "saadparwaiz1/cmp_luasnip",
     },
     event = { "BufRead", "BufnewFile" },
     config = function()
@@ -374,6 +378,7 @@ return {
       end, { expr = true, silent = true })
     end,
   },
+
   {
     "David-Kunz/gen.nvim",
     enabled = true,
@@ -430,6 +435,7 @@ return {
       event = "InsertEnter",
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
+        "onsails/lspkind.nvim",
         "hrsh7th/cmp-path", -- source for file system paths
         {
           "L3MON4D3/LuaSnip",
