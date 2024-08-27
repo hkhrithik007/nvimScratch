@@ -353,7 +353,7 @@ return {
   },
   {
     "Exafunction/codeium.vim",
-    enabled = true,
+    enabled = false,
     event = { "InsertEnter" },
     commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
     config = function()
@@ -378,7 +378,15 @@ return {
       end, { expr = true, silent = true })
     end,
   },
-
+  {
+    "huggingface/llm.nvim",
+    enabled = true,
+    event = { "BufRead", "BufnewFile" },
+    lazy = "VeryLazy",
+    config = function()
+      require "configs.llm"
+    end,
+  },
   {
     "David-Kunz/gen.nvim",
     enabled = true,
