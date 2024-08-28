@@ -351,9 +351,10 @@ return {
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
   },
+  {},
   {
     "Exafunction/codeium.vim",
-    enabled = false,
+    enabled = true,
     event = { "InsertEnter" },
     commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
     config = function()
@@ -376,15 +377,6 @@ return {
       vim.keymap.set("i", "<C-space>", function()
         return vim.fn["codeium#Complete"]()
       end, { expr = true, silent = true })
-    end,
-  },
-  {
-    "huggingface/llm.nvim",
-    enabled = true,
-    event = { "BufRead", "BufnewFile" },
-    lazy = "VeryLazy",
-    config = function()
-      require "configs.llm"
     end,
   },
   {

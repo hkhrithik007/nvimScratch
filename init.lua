@@ -18,7 +18,6 @@ local opts = {
   defaults = {
     lazy = true,
   },
-
   -- install = {
   --   colorscheme = { "tokyonight" },
   -- },
@@ -59,12 +58,6 @@ local opts = {
     hererocks = true, -- Add this line
   },
 }
--- function Transparent(color)
---   color = color or "tokyonight"
---   vim.cmd.colorscheme(color)
---   vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
---   vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
--- end
 
 require "mappings"
 require "options"
