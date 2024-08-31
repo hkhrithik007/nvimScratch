@@ -351,7 +351,7 @@ return {
             { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
         },
   },
-  {},
+
   {
     "Exafunction/codeium.vim",
     enabled = true,
@@ -455,7 +455,7 @@ return {
     "windwp/nvim-autopairs",
     event = "InsertEnter",
     config = function()
-      require("nvim-autopairs").setup {}
+      require("nvim-autopairs").setup()
     end,
   },
   {
