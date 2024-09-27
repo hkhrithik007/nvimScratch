@@ -9,7 +9,7 @@ function _LAZYGIT_TOGGLE()
 end
 wk.add {
   {
-    { "<leader>f", group = "file", icon = "󰭎" }, -- group
+    { "<leader>f", group = "file", icon = "" },
     { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n", icon = "󰈞" },
     {
       "<leader>fg",
@@ -35,6 +35,30 @@ wk.add {
       desc = "Buffers",
       mode = "n",
       icon = "",
+    },
+    {
+      "<leader>fp",
+      function()
+        require("apple-music").select_playlist_telescope()
+      end,
+      desc = "[F]ind [P]laylists",
+      icon = "󰀶",
+    },
+    {
+      "<leader>fa",
+      function()
+        require("apple-music").select_album_telescope()
+      end,
+      desc = "[F]ind [A]lbum",
+      icon = "󰀶",
+    },
+    {
+      "<leader>fs",
+      function()
+        require("apple-music").select_track_telescope()
+      end,
+      desc = "[F]ind [S]ong",
+      icon = "󰀶",
     },
   },
   {
@@ -415,6 +439,32 @@ wk.add {
       desc = "Show LSP type definitions",
       mode = "n",
       icon = "󰙳",
+    },
+  },
+  {
+    { "<leader>a", group = "Apple-music", icon = "" },
+
+    {
+      "<leader>ap",
+      function()
+        require("apple-music").toggle_play()
+      end,
+      desc = "Toggle [P]layback",
+    },
+    {
+      "<leader>as",
+      function()
+        require("apple-music").toggle_shuffle()
+      end,
+      desc = "Toggle [S]huffle",
+    },
+
+    {
+      "<leader>ax",
+      function()
+        require("apple-music").cleanup_all()
+      end,
+      desc = "Cleanup Temp Playlists",
     },
   },
   {

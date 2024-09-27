@@ -7,7 +7,6 @@ return {
     dependencies = {
       "echasnovski/mini.icons",
     },
-
     init = function()
       vim.o.timeout = true
       vim.o.timeoutlen = 300
@@ -208,6 +207,7 @@ return {
   -- },
   {
     "EdenEast/nightfox.nvim",
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
@@ -215,14 +215,18 @@ return {
     end,
   },
   {
-    "nyoom-engineering/oxocarbon.nvim",
-    enabled = false,
-    lazy = false,
+    "danwlker/primeppuccin",
     priority = 1000,
-    config = function()
-      vim.cmd "colorscheme oxocarbon"
-    end,
   },
+  -- {
+  --   "nyoom-engineering/oxocarbon.nvim",
+  --   enabled = false,
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd "colorscheme oxocarbon"
+  --   end,
+  -- },
   {
     "dgox16/oldworld.nvim",
     lazy = "VeryLazy",
@@ -495,5 +499,26 @@ return {
     config = function()
       require "configs.colorizer"
     end,
+  },
+  {
+    "karb94/neoscroll.nvim",
+    event = { "BufRead", "BufNewFile" },
+    config = function()
+      require "configs.neoscroll"
+    end,
+  },
+  {
+    "zeioth/garbage-day.nvim",
+    dependencies = "neovim/nvim-lspconfig",
+    event = "VeryLazy",
+    opts = {
+      aggressive_mode = true,
+    },
+  },
+  {
+    "p5quared/apple-music.nvim",
+    lazy = "VeryLazy",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = true,
   },
 }
