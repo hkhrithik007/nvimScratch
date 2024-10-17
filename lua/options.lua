@@ -1,6 +1,6 @@
 -- add yours here!
 -- vim.cmd "colorscheme tokyonight-night"
-vim.cmd.colorscheme "catppuccin"
+-- vim.cmd.colorscheme "catppuccin"
 local o = vim.o
 -- o.cursorlineo ='both' -- to enable cursorline!
 vim.o.cursorline = true
@@ -31,7 +31,6 @@ o.wrap = false
 -- vim.o.igonorecase = true
 o.smartcase = true
 -- vim.o.hlsearch = false
---
 o.number = true
 -- vim.o.colorcolumn = "true"
 o.signcolumn = "yes"

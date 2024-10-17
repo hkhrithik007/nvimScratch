@@ -207,17 +207,17 @@ return {
   -- },
   {
     "EdenEast/nightfox.nvim",
-    enabled = false,
+    enabled = true,
     lazy = false,
     priority = 1000,
     config = function()
       require "configs.nightfox"
     end,
   },
-  {
-    "danwlker/primeppuccin",
-    priority = 1000,
-  },
+  -- {
+  --   "danwlker/primeppuccin",
+  --   priority = 1000,
+  -- },
   -- {
   --   "nyoom-engineering/oxocarbon.nvim",
   --   enabled = false,
@@ -503,6 +503,7 @@ return {
   {
     "karb94/neoscroll.nvim",
     event = { "BufRead", "BufNewFile" },
+    lazy = true,
     config = function()
       require "configs.neoscroll"
     end,
@@ -510,7 +511,7 @@ return {
   {
     "zeioth/garbage-day.nvim",
     dependencies = "neovim/nvim-lspconfig",
-    event = "VeryLazy",
+    lazy = true,
     opts = {
       aggressive_mode = true,
     },
