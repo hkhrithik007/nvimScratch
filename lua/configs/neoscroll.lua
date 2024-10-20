@@ -3,7 +3,7 @@ local keymap = {
   ["<C-u>"] = function()
     neoscroll.ctrl_u { duration = 250 }
   end,
-  ["<C-j>"] = function()
+  ["<C-i>"] = function()
     neoscroll.ctrl_d { duration = 250 }
   end,
   ["<C-b>"] = function()

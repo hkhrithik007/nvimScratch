@@ -17,17 +17,24 @@ mason_lspconfig.setup {
   -- list of servers for mason to install
   ensure_installed = {
     "lua_ls",
-    "jdtls",
-    "kotlin_language_server",
+    -- "jdtls",
+    -- "kotlin_language_server",
   },
 }
 
 mason_tool_installer.setup {
   ensure_installed = {
     "stylua", -- lua formatter
-    "google-java-format", -- java formatter
-    "ktfmt", -- kotlin formatter
-    "trivy", --java linter
-    "java-debug-adapter", --java debugger
+    -- "google-java-format", -- java formatter
+    -- "ktfmt", -- kotlin formatter
+    -- "trivy", --java linter
+    -- "java-debug-adapter", --java debugger
   },
 }
+--- EXAMPLE: Run mason after lazy finishes updating.
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyInstall",
+  callback = function()
+    vim.cmd ":MasonUpdateAll"
+  end,
+})

@@ -82,10 +82,23 @@ return {
   {
     "williamboman/mason.nvim",
     event = "BufRead",
-    dependencies = { "williamboman/mason-lspconfig.nvim", "WhoIsSethDaniel/mason-tool-installer.nvim" },
+    dependencies = {
+      "williamboman/mason-lspconfig.nvim",
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      "Zeioth/mason-extra-cmds",
+    },
     config = function()
       require "configs.mason"
     end,
+    cmd = {
+      "Mason",
+      "MasonInstall",
+      "MasonUninstall",
+      "MasonUninstallAll",
+      "MasonLog",
+      "MasonUpdate",
+      "MasonUpdateAll",
+    },
   },
   {
     "mfussenegger/nvim-dap",
