@@ -28,7 +28,6 @@ return {
     dependencies = {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
-      "jemag/telescope-diff.nvim",
       "debugloop/telescope-undo.nvim",
     },
     config = function()
@@ -47,28 +46,15 @@ return {
           "vimdoc",
           "html",
           "css",
-          "java",
-          "kotlin",
+          -- "java",
+          -- "kotlin",
         },
       },
     },
   },
-  -- {
-  --   "Exafunction/codeium.nvim",
-  --   event = "InsertEnter",
-  --   dependencies = {
-  --     "nvim-lua/plenary.nvim",
-  --     "hrsh7th/nvim-cmp",
-  --   },
-  --   config = function()
-  --     require("codeium").setup({
-  --     })
-  --   end
-  -- },
   {
     "mfussenegger/nvim-jdtls",
     lazy = "VeryLazy",
-    -- event = { "BufReadPre", "BufNewFile" },
     ft = "java",
   },
 
@@ -102,23 +88,18 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    -- lazy = "VeryLazy",
     ft = { "java", "kotlin" },
     dependencies = {
-      -- "williamboman/mason.nvim",
       "jay-babu/mason-nvim-dap.nvim",
       "rcarriga/nvim-dap-ui",
     },
-    -- event = { "BufReadPre", "BufNewFile" },
     config = function()
       require "configs.dap"
     end,
   },
   {
     "rcarriga/nvim-dap-ui",
-    -- lazy = "VeryLazy",
     ft = { "java", "kotlin" },
-    -- event = "BufRead",
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
       require "configs.dapui"
@@ -126,11 +107,8 @@ return {
   },
   {
     "jay-babu/mason-nvim-dap.nvim",
-    -- lazy = "VeryLazy",
     ft = { "java", "kotlin" },
-    -- event = "BufRead",
     dependencies = {
-      -- "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
       "nvim-neotest/nvim-nio",
       "rcarriga/nvim-dap-ui",
@@ -172,52 +150,6 @@ return {
       require "configs.lint"
     end,
   },
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   enabled = true,
-  --   -- lazy = true,
-  --   opts = function()
-  --     return {
-  --       style = "day",
-  --       light_style = "moon",
-  --       -- transparent = false,
-  --       -- styles = {
-  --       --   sidebars = "transparent",
-  --       --   floats = "transparent",
-  --       -- },
-  --       on_highlights = function(hl, c)
-  --         -- hl.Normal = "Foo"
-  --         do
-  --           return
-  --         end
-  --         local prompt = "#2d3149"
-  --         hl.TelescopeNormal = { bg = c.bg_dark, fg = c.fg }
-  --         hl.TelescopeBorder = { bg = c.bg_dark, fg = c.bg_dark }
-  --         hl.TelescopePromptNormal = { bg = prompt }
-  --         hl.TelescopePromptBorder = { bg = prompt, fg = prompt }
-  --         hl.TelescopePromptTitle = { bg = c.fg_gutter, fg = c.orange }
-  --         hl.TelescopePreviewTitle = { bg = c.bg_dark, fg = c.bg_dark }
-  --         hl.TelescopeResultsTitle = { bg = c.bg_dark, fg = c.bg_dark }
-  --       end,
-  --     }
-  --   end,
-  -- },
-  -- {
-  --   "scottmckendry/cyberdream.nvim",
-  --   enabled = false,
-  --   config = function()
-  --     require "configs.cyberdream"
-  --   end,
-  -- },
-  -- {
-  --   "catppuccin/nvim",
-  --   enabled = true,
-  --   name = "catppuccin",
-  --   priority = 1000,
-  --   config = function()
-  --     require "configs.catppuccin"
-  --   end,
-  -- },
   {
     "EdenEast/nightfox.nvim",
     enabled = true,
@@ -227,19 +159,6 @@ return {
       require "configs.nightfox"
     end,
   },
-  -- {
-  --   "danwlker/primeppuccin",
-  --   priority = 1000,
-  -- },
-  -- {
-  --   "nyoom-engineering/oxocarbon.nvim",
-  --   enabled = false,
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     vim.cmd "colorscheme oxocarbon"
-  --   end,
-  -- },
   {
     "dgox16/oldworld.nvim",
     lazy = "VeryLazy",
@@ -252,7 +171,6 @@ return {
     {
       "stevearc/dressing.nvim",
       lazy = "VeryLazy",
-      -- event = { "BufRead", "BufnewFile" },
       init = function()
         ---@diagnostic disable-next-line: duplicate-set-field
         vim.ui.select = function(...)
@@ -272,7 +190,6 @@ return {
     enabled = true,
     event = "VimEnter",
     config = function()
-      -- config
       require "configs.dashboard"
     end,
     dependencies = { { "nvim-tree/nvim-web-devicons" } },
@@ -292,7 +209,6 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     lazy = true,
     opts = {
-      -- symbol = "▏",
       symbol = "│",
       options = { try_as_border = true },
     },
@@ -346,7 +262,6 @@ return {
     "akinsho/toggleterm.nvim",
     lazy = "VeryLazy",
     cmd = "ToggleTerm",
-    -- event = "BufRead",
     config = function()
       require "configs.toggleterm"
     end,
@@ -375,7 +290,6 @@ return {
     event = { "InsertEnter" },
     commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
     config = function()
-      -- Change '<C-g>' here to any keycode you like.
       vim.keymap.set("i", "<C-g>", function()
         return vim.fn["codeium#Accept"]()
       end, { expr = true, silent = true })
@@ -418,7 +332,6 @@ return {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    -- event = { "BufRead", "BufnewFile", "BufReadPre" },
     opts = {
       messages = {
         enabled = false,
@@ -460,7 +373,6 @@ return {
         },
         "saadparwaiz1/cmp_luasnip", -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
-        -- "onsails/lspkind.nvim", -- vs-code like pictograms
         "hrsh7th/cmp-cmdline",
       },
       config = function()

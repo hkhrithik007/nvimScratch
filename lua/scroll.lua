@@ -23,11 +23,5 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
   end,
 })
 
--- Keymappings for smooth scrolling
--- vim.api.nvim_set_keymap("n", "<C-u>", "<C-u>zz", opts)
--- vim.api.nvim_set_keymap("n", "<C-d>", "<C-d>zz", opts)
--- vim.api.nvim_set_keymap("n", "<C-b>", "<C-b>zz", opts)
--- vim.api.nvim_set_keymap("n", "<C-f>", "<C-f>zz", opts)
-
 -- Optionally, you can add these for even smoother scrolling
 vim.opt.smoothscroll = true -- Only available in Neovim 0.8+

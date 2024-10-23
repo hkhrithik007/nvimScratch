@@ -9,29 +9,6 @@ local function rand_banner()
   local randomKey = keys[math.random(#keys)]
   return banners[randomKey]
 end
-
--- local header = {
---   banner = rand_banner(),
---   title = "  Welcome to Neovim",
---   details = {
---     { icon = " ", desc = vim.fn.fnamemodify(vim.fn.getcwd(), ":t") },
---     { icon = " ", desc = vim.fn.system "git branch --show-current" },
---     { icon = " ", desc = vim.fn.strftime "%a %b %d %I:%M %p" },
---   },
--- }
---
--- local function headerToTable()
---   local m = {}
---   table.insert(m, header.banner)
---   table.insert(m, { header.title })
---   for _, detail in ipairs(header.details) do
---     table.insert(m, {
---       detail.icon .. detail.desc .. string.rep(" ", 43 - #detail.desc),
---     })
---   end
---   return m
--- end
-
 local opts = {
   theme = "doom",
   config = {

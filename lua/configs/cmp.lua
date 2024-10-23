@@ -62,28 +62,9 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
-  -- window = {
-  --   completion = cmp.config.window.bordered {
-  --     border = "single",
-  --     winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-  --   },
-  --   documentation = cmp.config.window.bordered {
-  --     border = "single",
-  --     winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
-  --   },
-  -- },
-  --
   formatting = {
     fields = { "abbr", "kind" },
     format = function(entry, vim_item)
-      -- -- Source
-      -- vim_item.menu = ({
-      --   nvim_lsp = "LSP",
-      --   luasnip = "Snippet",
-      --   buffer = "Buffer",
-      --   path = "Path",
-      -- })[entry.source.name]
-
       -- Kind icons
       vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
 
@@ -138,7 +119,10 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities()
 require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
   capabilities = capabilities,
 }
-
+require "lspconfig"
+require("lua-language-server").start {
+  capabilities = capabilities,
+}
 -- Set up custom highlights
 vim.cmd [[
   highlight CmpItemAbbrDefault guifg=#abb2bf

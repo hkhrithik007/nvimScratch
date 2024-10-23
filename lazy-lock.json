@@ -52,7 +52,6 @@
   "oldworld.nvim": { "branch": "main", "commit": "1b8e1b2052b5591386187206a9afbe9e7fdbb35f" },
   "plenary.nvim": { "branch": "master", "commit": "2d9b06177a975543726ce5c73fca176cedbffe9d" },
   "smart-splits.nvim": { "branch": "master", "commit": "32172b6598c1c647b96aeead67896c59ca4b7aa6" },
-  "telescope-diff.nvim": { "branch": "master", "commit": "141afaaed3e2dfdb7badad6558cdd682441dfe5f" },
   "telescope-live-grep-args.nvim": { "branch": "master", "commit": "649b662a8f476fd2c0289570764459e95ebaa3f3" },
   "telescope-undo.nvim": { "branch": "main", "commit": "51be9ae7c42fc27c0b05505e3a0162e0f05fbb6a" },
   "telescope.nvim": { "branch": "master", "commit": "df534c3042572fb958586facd02841e10186707c" },
