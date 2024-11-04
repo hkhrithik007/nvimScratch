@@ -88,7 +88,8 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    ft = { "java", "kotlin" },
+    ft = { ".java", "kt" },
+    lazy = true,
     dependencies = {
       "jay-babu/mason-nvim-dap.nvim",
       "rcarriga/nvim-dap-ui",
@@ -100,6 +101,7 @@ return {
   {
     "rcarriga/nvim-dap-ui",
     ft = { "java", "kotlin" },
+    lazy = true,
     dependencies = { "nvim-neotest/nvim-nio" },
     config = function()
       require "configs.dapui"
@@ -108,6 +110,7 @@ return {
   {
     "jay-babu/mason-nvim-dap.nvim",
     ft = { "java", "kotlin" },
+    lazy = true,
     dependencies = {
       "mfussenegger/nvim-dap",
       "nvim-neotest/nvim-nio",
@@ -132,14 +135,6 @@ return {
     event = { "BufRead", "BufnewFile" },
     config = function()
       require "configs.lspconfig"
-    end,
-  },
-
-  { -- display type hints at eol, not in the middle of a line
-    "chrisgrieser/nvim-lsp-endhints",
-    event = "LspAttach",
-    config = function()
-      require "configs.end_hints"
     end,
   },
   {
@@ -390,11 +385,8 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
-    opts = function()
-      return require "configs.gitsigns"
-    end,
-    config = function(_, opts)
-      require("gitsigns").setup(opts)
+    config = function()
+      require "configs.gitsigns"
     end,
   },
   {

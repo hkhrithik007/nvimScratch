@@ -17,7 +17,7 @@ mason_lspconfig.setup {
   -- list of servers for mason to install
   ensure_installed = {
     "lua_ls",
-    -- "jdtls",
+    "jdtls",
     -- "kotlin_language_server",
   },
 }
@@ -25,10 +25,10 @@ mason_lspconfig.setup {
 mason_tool_installer.setup {
   ensure_installed = {
     "stylua", -- lua formatter
-    -- "google-java-format", -- java formatter
+    "google-java-format", -- java formatter
     -- "ktfmt", -- kotlin formatter
     -- "trivy", --java linter
-    -- "java-debug-adapter", --java debugger
+    "java-debug-adapter", --java debugger
   },
 }
 --- EXAMPLE: Run mason after lazy finishes updating.

@@ -120,9 +120,6 @@ require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
   capabilities = capabilities,
 }
 require "lspconfig"
-require("lua-language-server").start {
-  capabilities = capabilities,
-}
 -- Set up custom highlights
 vim.cmd [[
   highlight CmpItemAbbrDefault guifg=#abb2bf
