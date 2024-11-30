@@ -99,6 +99,15 @@ return {
     end,
   },
   {
+    "mfussenegger/nvim-dap-python",
+    ft = { "python" },
+    dependencies = { "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+    config = function()
+      local PATH = "~/.local/share/nvim/mason/packages/debugpy/venv/bin/python"
+      require("dap-python").setup(PATH)
+    end,
+  },
+  {
     "rcarriga/nvim-dap-ui",
     ft = { "java", "kotlin" },
     lazy = true,
@@ -435,6 +444,7 @@ return {
   },
   {
     "p5quared/apple-music.nvim",
+    enabled = false,
     lazy = "VeryLazy",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = true,

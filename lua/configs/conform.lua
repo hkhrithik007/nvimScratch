@@ -3,5 +3,6 @@ require("conform").setup {
     lua = { "stylua" },
     -- java = { "google-java-format" },
     -- kotlin = { "ktfmt" },
+    python = { "black" },
   },
 }

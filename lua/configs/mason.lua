@@ -19,6 +19,7 @@ mason_lspconfig.setup {
     "lua_ls",
     "jdtls",
     -- "kotlin_language_server",
+    "pyright",
   },
 }
 
@@ -29,6 +30,10 @@ mason_tool_installer.setup {
     -- "ktfmt", -- kotlin formatter
     -- "trivy", --java linter
     "java-debug-adapter", --java debugger
+    "mypy",
+    "ruff",
+    "black",
+    "debugpy",
   },
 }
 --- EXAMPLE: Run mason after lazy finishes updating.

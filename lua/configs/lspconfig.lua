@@ -109,4 +109,10 @@ mason_lspconfig.setup_handlers {
       },
     }
   end,
+  ["pylsp"] = function()
+    -- configure lua server (with special settings)
+    lspconfig["pylsp"].setup {
+      capabilities = capabilities,
+    }
+  end,
 }
