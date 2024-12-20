@@ -3,6 +3,7 @@
         "vim",
         "on_attach",
         "capabilities",
-        "desc"
+        "desc",
+        "local"
     ]
 }

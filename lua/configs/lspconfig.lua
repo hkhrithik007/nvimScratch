@@ -15,13 +15,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
     local opts = { buffer = ev.buf, silent = true }
   end,
 })
-
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
 -- Change the Diagnostic symbols in the sign column (gutter)
 -- (not in youtube nvim video)
-local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
@@ -83,32 +82,31 @@ mason_lspconfig.setup_handlers {
       },
     }
   end,
-  ["kotlin_language_server"] = function()
-    -- configure lua server (with special settings)
-    lspconfig["kotlin_language_server"].setup {
-      capabilities = capabilities,
-      settings = {
-        kotlin = {
-          inlayHints = {
-            includeInlayEnumMemberValueHints = true,
-            includeInlayFunctionLikeReturnTypeHints = true,
-            includeInlayFunctionParameterTypeHints = true,
-            includeInlayParameterNameHints = "all",
-            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-            includeInlayPropertyDeclarationTypeHints = true,
-            includeInlayVariableTypeHints = true,
-            includeInlayVariableTypeHintsWhenTypeMatchesName = true,
-          },
-          hint = { -- inlay hints
-            enable = true,
-            setType = true,
-            arrayIndex = "Disable", -- too noisy
-            semicolon = "Disable", -- mostly wrong on invalid code
-          },
-        },
-      },
-    }
-  end,
+  -- ["kotlin_language_server"] = function()
+  --   lspconfig["kotlin_language_server"].setup {
+  --     capabilities = capabilities,
+  --     settings = {
+  --       kotlin = {
+  --         inlayHints = {
+  --           includeInlayEnumMemberValueHints = true,
+  --           includeInlayFunctionLikeReturnTypeHints = true,
+  --           includeInlayFunctionParameterTypeHints = true,
+  --           includeInlayParameterNameHints = "all",
+  --           includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+  --           includeInlayPropertyDeclarationTypeHints = true,
+  --           includeInlayVariableTypeHints = true,
+  --           includeInlayVariableTypeHintsWhenTypeMatchesName = true,
+  --         },
+  --         hint = { -- inlay hints
+  --           enable = true,
+  --           setType = true,
+  --           arrayIndex = "Disable", -- too noisy
+  --           semicolon = "Disable", -- mostly wrong on invalid code
+  --         },
+  --       },
+  --     },
+  --   }
+  -- end,
   ["pylsp"] = function()
     -- configure lua server (with special settings)
     lspconfig["pylsp"].setup {

@@ -46,6 +46,7 @@ return {
           "vimdoc",
           "html",
           "css",
+          "pyhton",
           -- "java",
           -- "kotlin",
         },
@@ -156,11 +157,28 @@ return {
   },
   {
     "EdenEast/nightfox.nvim",
-    enabled = true,
+    enabled = false,
     lazy = false,
     priority = 1000,
     config = function()
       require "configs.nightfox"
+    end,
+  },
+  -- {
+  --   "folke/tokyonight.nvim",
+  --   enabled = true,
+  --   lazy = false,
+  --   priority = 1000,
+  --   config = function()
+  --     require "configs.tokyonight"
+  --   end,
+  -- },
+  {
+    "Vallen217/eidolon.nvim",
+    lazy = false,
+    priority = 1000,
+    config = function()
+      vim.cmd [[colorscheme eidolon-midnight]]
     end,
   },
   {
@@ -338,7 +356,7 @@ return {
     },
     opts = {
       messages = {
-        enabled = false,
+        enabled = true,
       },
       notify = {
         enabled = true,
@@ -351,7 +369,7 @@ return {
           enabled = true,
         },
         signature = {
-          enabled = false,
+          enabled = true,
         },
       },
     },
@@ -441,12 +459,5 @@ return {
     opts = {
       aggressive_mode = true,
     },
-  },
-  {
-    "p5quared/apple-music.nvim",
-    enabled = false,
-    lazy = "VeryLazy",
-    dependencies = { "nvim-telescope/telescope.nvim" },
-    config = true,
   },
 }
