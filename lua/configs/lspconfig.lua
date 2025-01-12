@@ -6,15 +6,15 @@ local mason_lspconfig = require "mason-lspconfig"
 -- import cmp-nvim-lsp plugin
 local cmp_nvim_lsp = require "cmp_nvim_lsp"
 
-local keymap = vim.keymap -- for conciseness
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-  callback = function(ev)
-    -- Buffer local mappings.
-    -- See `:help vim.lsp.*` for documentation on any of the below functions
-    local opts = { buffer = ev.buf, silent = true }
-  end,
-})
+-- local keymap = vim.keymap -- for conciseness
+-- vim.api.nvim_create_autocmd("LspAttach", {
+--   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+--   callback = function(ev)
+--     -- Buffer local mappings.
+--     -- See `:help vim.lsp.*` for documentation on any of the below functions
+--     local opts = { buffer = ev.buf, silent = true }
+--   end,
+-- })
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
@@ -65,21 +65,21 @@ mason_lspconfig.setup_handlers {
     -- configure lua server (with special settings)
     lspconfig["jdtls"].setup {
       capabilities = capabilities,
-      settings = {
-        java = {
-          hint = { -- inlay hints
-            enable = true,
-            setType = true,
-            arrayIndex = "Enable", -- too noisy
-            semicolon = "Disable", -- mostly wrong on invalid code
-          },
-          signatureHelp = { enabled = true },
-          contentProvider = { preferred = "fernflower" },
-          sources = {
-            organizeImports = true,
-          },
-        },
-      },
+      -- settings = {
+      --   java = {
+      --     hint = { -- inlay hints
+      --       enable = true,
+      --       setType = true,
+      --       arrayIndex = "Enable", -- too noisy
+      --       semicolon = "Disable", -- mostly wrong on invalid code
+      --     },
+      --     signatureHelp = { enabled = true },
+      --     contentProvider = { preferred = "fernflower" },
+      --     sources = {
+      --       organizeImports = true,
+      --     },
+      --   },
+      -- },
     }
   end,
   -- ["kotlin_language_server"] = function()

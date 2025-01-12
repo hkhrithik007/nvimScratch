@@ -29,6 +29,10 @@ return {
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope-live-grep-args.nvim",
       "debugloop/telescope-undo.nvim",
+      {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+      },
     },
     config = function()
       require "configs.telescope"
@@ -66,6 +70,7 @@ return {
       require "configs.conform"
     end,
   },
+
   {
     "williamboman/mason.nvim",
     event = "BufRead",
@@ -136,11 +141,18 @@ return {
       "windwp/nvim-autopairs",
       "williamboman/mason.nvim",
       "hrsh7th/nvim-cmp",
-      "L3MON4D3/LuaSnip",
       "onsails/lspkind.nvim",
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-nvim-lsp",
       "saadparwaiz1/cmp_luasnip",
+      {
+        "L3MON4D3/LuaSnip",
+        -- follow latest release.
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        -- install jsregexp (optional!).
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+      },
     },
     event = { "BufRead", "BufnewFile" },
     config = function()
@@ -356,20 +368,20 @@ return {
     },
     opts = {
       messages = {
-        enabled = true,
+        enabled = false,
       },
       notify = {
         enabled = true,
       },
       lsp = {
         progress = {
-          enabled = true,
+          enabled = false,
         },
         hover = {
           enabled = true,
         },
         signature = {
-          enabled = true,
+          enabled = false,
         },
       },
     },
@@ -459,5 +471,14 @@ return {
     opts = {
       aggressive_mode = true,
     },
+  },
+  {
+    "ngtuonghy/live-server-nvim",
+    enabled = false,
+    lazy = "VeryLazy",
+    build = ":LiveServerInstall",
+    config = function()
+      require("live-server-nvim").setup {}
+    end,
   },
 }

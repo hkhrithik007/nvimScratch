@@ -3,6 +3,11 @@ local luasnip = require "luasnip"
 -- local lspkind = require "lspkind"
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
+require "lspconfig"
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
+  capabilities = capabilities,
+}
 require("luasnip.loaders.from_vscode").lazy_load()
 local kind_icons = {
   Text = "󰷾  ",
@@ -42,7 +47,6 @@ cmp.setup.cmdline("/", {
     { name = "buffer" },
   },
 })
--- `:` cmdline setup.
 cmp.setup.cmdline(":", {
   mapping = cmp.mapping.preset.cmdline(),
   sources = cmp.config.sources({
@@ -59,7 +63,7 @@ cmp.setup.cmdline(":", {
 cmp.setup {
   snippet = {
     expand = function(args)
-      luasnip.lsp_expand(args.body)
+      require("luasnip").lsp_expand(args.body)
     end,
   },
   formatting = {
@@ -81,7 +85,7 @@ cmp.setup {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
-      elseif luasnip.expand_or_jumpable() then
+      elseif luasnip.expand_or_jumpable() then -- This is more comprehensive
         luasnip.expand_or_jump()
       else
         fallback()
@@ -104,12 +108,10 @@ cmp.setup {
   },
   sources = cmp.config.sources({
     { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "codeium" },
+    { name = "luasnip", option = { show_autosnippets = true } },
   }, {
     { name = "buffer" },
     { name = "path" },
-    { name = "luasnip" },
   }),
 }
 
@@ -121,16 +123,20 @@ require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
 }
 require "lspconfig"
 -- Set up custom highlights
-vim.cmd [[
-  highlight CmpItemAbbrDefault guifg=#abb2bf
-  highlight CmpItemAbbrMatchDefault guifg=#61afef
-  highlight CmpItemAbbrMatchFuzzyDefault guifg=#61afef
-  highlight CmpItemKindDefault guifg=#c678dd
-  highlight CmpItemMenuDefault guifg=#98c379
-  highlight PmenuSel guibg=#3e4452
-  highlight Pmenu guibg=#282c34
-  highlight FloatBorder guifg=#3e4452
-]]
+local highlights = {
+  CmpItemAbbrDefault = { fg = "#abb2bf" },
+  CmpItemAbbrMatchDefault = { fg = "#61afef" },
+  CmpItemAbbrMatchFuzzyDefault = { fg = "#61afef" },
+  CmpItemKindDefault = { fg = "#c678dd" },
+  CmpItemMenuDefault = { fg = "#98c379" },
+  PmenuSel = { bg = "#3e4452" },
+  Pmenu = { bg = "#282c34" },
+  FloatBorder = { fg = "#3e4452" },
+}
+
+for group, opts in pairs(highlights) do
+  vim.api.nvim_set_hl(0, group, opts)
+end
 
 -- Set up autopairs integration
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
