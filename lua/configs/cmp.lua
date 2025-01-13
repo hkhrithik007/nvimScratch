@@ -1,13 +1,8 @@
 local cmp = require "cmp"
 local luasnip = require "luasnip"
--- local lspkind = require "lspkind"
+local lspkind = require "lspkind"
 local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
-require "lspconfig"
-local capabilities = require("cmp_nvim_lsp").default_capabilities()
-require("lspconfig")["<YOUR_LSP_SERVER>"].setup {
-  capabilities = capabilities,
-}
 require("luasnip.loaders.from_vscode").lazy_load()
 local kind_icons = {
   Text = "󰷾  ",
@@ -35,6 +30,7 @@ local kind_icons = {
   Operator = "  ",
   TypeParameter = "  ",
   fields = "",
+  codeium = "",
 }
 
 local borderstyle = {
@@ -69,8 +65,24 @@ cmp.setup {
   formatting = {
     fields = { "abbr", "kind" },
     format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+      local kind_item = lspkind.cmp_format {
+        mode = "symbol_text",
+        maxwidth = 50,
+        ellipsis_char = "...",
+        symbol_map = { Codeium = "" },
+      }(entry, vim_item)
+
+      -- Add our custom kind icons
+      -- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
+
+      -- Set menu source hints
+      -- vim_item.menu = ({
+      --   nvim_lsp = "[LSP]",
+      --   luasnip = "[Snippet]",
+      --   buffer = "[Buffer]",
+      --   path = "[Path]",
+      --   codeium = "[AI]",
+      -- })[entry.source.name]
 
       return vim_item
     end,
@@ -107,6 +119,7 @@ cmp.setup {
     documentation = borderstyle,
   },
   sources = cmp.config.sources({
+    { name = "codeium" },
     { name = "nvim_lsp" },
     { name = "luasnip", option = { show_autosnippets = true } },
   }, {

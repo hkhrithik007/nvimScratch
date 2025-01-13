@@ -57,12 +57,18 @@ return {
       },
     },
   },
+  --java tools
   {
-    "mfussenegger/nvim-jdtls",
-    lazy = "VeryLazy",
-    ft = "java",
+    {
+      "mfussenegger/nvim-jdtls",
+      dependencies = { "pojokcodeid/auto-jdtls.nvim", "rcarriga/nvim-notify", "williamboman/mason.nvim" },
+      lazy = "VeryLazy",
+      ft = "java",
+      config = function()
+        require("auto-jdtls").setup()
+      end,
+    },
   },
-
   {
     "stevearc/conform.nvim",
     event = { "BufReadPre", "BufRead" },
@@ -320,7 +326,7 @@ return {
 
   {
     "Exafunction/codeium.vim",
-    enabled = true,
+    enabled = false,
     event = { "InsertEnter" },
     commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
     config = function()
@@ -342,6 +348,17 @@ return {
       vim.keymap.set("i", "<C-space>", function()
         return vim.fn["codeium#Complete"]()
       end, { expr = true, silent = true })
+    end,
+  },
+  {
+    "Exafunction/codeium.nvim",
+    event = "InsertEnter",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require "configs.codeium"
     end,
   },
   {
