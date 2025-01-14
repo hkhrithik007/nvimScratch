@@ -61,12 +61,8 @@ return {
   {
     {
       "mfussenegger/nvim-jdtls",
-      dependencies = { "pojokcodeid/auto-jdtls.nvim", "rcarriga/nvim-notify", "williamboman/mason.nvim" },
       lazy = "VeryLazy",
       ft = "java",
-      config = function()
-        require("auto-jdtls").setup()
-      end,
     },
   },
   {
@@ -76,27 +72,30 @@ return {
       require "configs.conform"
     end,
   },
-
+  {
+    "linrongbin16/lsp-progress.nvim",
+    config = function()
+      require "configs.progress"
+    end,
+  },
   {
     "williamboman/mason.nvim",
     event = "BufRead",
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
-      "Zeioth/mason-extra-cmds",
     },
     config = function()
       require "configs.mason"
     end,
-    cmd = {
-      "Mason",
-      "MasonInstall",
-      "MasonUninstall",
-      "MasonUninstallAll",
-      "MasonLog",
-      "MasonUpdate",
-      "MasonUpdateAll",
-    },
+  },
+  {
+    "arkav/lualine-lsp-progress",
+    event = "LspAttach",
+    lazy = true,
+    config = function()
+      require "configs.progress"
+    end,
   },
   {
     "mfussenegger/nvim-dap",
@@ -153,9 +152,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       {
         "L3MON4D3/LuaSnip",
-        -- follow latest release.
         version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        -- install jsregexp (optional!).
         build = "make install_jsregexp",
         dependencies = { "rafamadriz/friendly-snippets" },
       },
@@ -182,15 +179,6 @@ return {
       require "configs.nightfox"
     end,
   },
-  -- {
-  --   "folke/tokyonight.nvim",
-  --   enabled = true,
-  --   lazy = false,
-  --   priority = 1000,
-  --   config = function()
-  --     require "configs.tokyonight"
-  --   end,
-  -- },
   {
     "Vallen217/eidolon.nvim",
     lazy = false,
@@ -378,30 +366,14 @@ return {
   {
     "folke/noice.nvim",
     enabled = true,
-    lazy = true,
+    event = "BufRead",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "rcarriga/nvim-notify",
     },
-    opts = {
-      messages = {
-        enabled = false,
-      },
-      notify = {
-        enabled = true,
-      },
-      lsp = {
-        progress = {
-          enabled = false,
-        },
-        hover = {
-          enabled = true,
-        },
-        signature = {
-          enabled = false,
-        },
-      },
-    },
+    config = function()
+      require "configs.noice"
+    end,
   },
   {
     "seandewar/killersheep.nvim",
@@ -480,14 +452,6 @@ return {
     config = function()
       require "configs.neoscroll"
     end,
-  },
-  {
-    "zeioth/garbage-day.nvim",
-    dependencies = "neovim/nvim-lspconfig",
-    lazy = true,
-    opts = {
-      aggressive_mode = true,
-    },
   },
   {
     "ngtuonghy/live-server-nvim",

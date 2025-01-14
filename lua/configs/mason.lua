@@ -28,7 +28,7 @@ mason_tool_installer.setup {
     "stylua", -- lua formatter
     "google-java-format", -- java formatter
     -- "ktfmt", -- kotlin formatter
-    "trivy", --java linter
+    "checkstyle",
     "java-debug-adapter", --java debugger
     "mypy",
     "ruff",

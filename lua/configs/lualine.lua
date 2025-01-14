@@ -203,13 +203,19 @@ require("lualine").setup {
       diff,
       space,
       location,
+      {
+        function()
+          -- invoke `progress` here.
+          return require("lsp-progress").progress()
+        end,
+      },
     },
     lualine_x = {
 
       { lazy_status.updates, cond = lazy_status.has_updates, color = { fg = colors.red } },
       space,
     },
-    lualine_y = { macro, space },
+    lualine_y = { space },
     lualine_z = {
       dia,
       lsp,
@@ -224,3 +230,9 @@ require("lualine").setup {
     lualine_z = {},
   },
 }
+vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
+vim.api.nvim_create_autocmd("User", {
+  group = "lualine_augroup",
+  pattern = "LspProgressStatusUpdated",
+  callback = require("lualine").refresh,
+})
