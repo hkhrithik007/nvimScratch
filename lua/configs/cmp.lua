@@ -72,18 +72,6 @@ cmp.setup {
         symbol_map = { Codeium = "" },
       }(entry, vim_item)
 
-      -- Add our custom kind icons
-      -- vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-
-      -- Set menu source hints
-      -- vim_item.menu = ({
-      --   nvim_lsp = "[LSP]",
-      --   luasnip = "[Snippet]",
-      --   buffer = "[Buffer]",
-      --   path = "[Path]",
-      --   codeium = "[AI]",
-      -- })[entry.source.name]
-
       return vim_item
     end,
   },
