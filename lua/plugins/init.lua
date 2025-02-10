@@ -31,7 +31,7 @@ return {
       "debugloop/telescope-undo.nvim",
       {
         "nvim-telescope/telescope-fzf-native.nvim",
-        build = "cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release",
+        build = "make",
       },
     },
     config = function()
@@ -74,6 +74,8 @@ return {
   },
   {
     "linrongbin16/lsp-progress.nvim",
+    lazy = true,
+    evenet = { "LspAttach", "BufRead" },
     config = function()
       require "configs.progress"
     end,
@@ -99,7 +101,7 @@ return {
   },
   {
     "mfussenegger/nvim-dap",
-    ft = { ".java", "kt" },
+    ft = { ".java", "kt", "python" },
     lazy = true,
     dependencies = {
       "jay-babu/mason-nvim-dap.nvim",
@@ -340,10 +342,11 @@ return {
   },
   {
     "Exafunction/codeium.nvim",
+    enabled = true,
     event = "InsertEnter",
     dependencies = {
       "nvim-lua/plenary.nvim",
-      "hrsh7th/nvim-cmp",
+      -- "hrsh7th/nvim-cmp",
     },
     config = function()
       require "configs.codeium"
@@ -385,6 +388,7 @@ return {
   {
     {
       "hrsh7th/nvim-cmp",
+      enabled = true,
       event = "InsertEnter",
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer

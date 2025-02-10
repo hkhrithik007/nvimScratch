@@ -5,5 +5,9 @@
         "capabilities",
         "desc",
         "local"
+    ],
+    "diagnostics.disable": [
+        "trailing-space",
+        "different-requires"
     ]
 }

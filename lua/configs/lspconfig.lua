@@ -73,11 +73,11 @@ mason_lspconfig.setup_handlers {
       --       arrayIndex = "Enable", -- too noisy
       --       semicolon = "Disable", -- mostly wrong on invalid code
       --     },
-      --     signatureHelp = { enabled = true },
-      --     contentProvider = { preferred = "fernflower" },
-      --     sources = {
-      --       organizeImports = true,
-      --     },
+      signatureHelp = { enabled = true },
+      contentProvider = { preferred = "fernflower" },
+      sources = {
+        organizeImports = true,
+      },
       --   },
       -- },
     }
