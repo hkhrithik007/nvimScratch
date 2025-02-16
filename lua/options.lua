@@ -16,6 +16,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
     require("lint").try_lint()
   end,
 })
+
 o.termguicolors = true
 o.shiftwidth = 2
 o.softtabstop = 2

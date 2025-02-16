@@ -147,7 +147,7 @@ return {
     dependencies = {
       "windwp/nvim-autopairs",
       "williamboman/mason.nvim",
-      "onsails/lspkind.nvim",
+      -- "onsails/lspkind.nvim",
       "Saghen/blink.cmp",
       {
         "L3MON4D3/LuaSnip",
@@ -163,12 +163,18 @@ return {
   },
   {
     "saghen/blink.cmp",
+    event = "InsertEnter",
     lazy = true,
     dependencies = {
       "rafamadriz/friendly-snippets",
-      "moyiz/blink-emoji.nvim",
       "mikavilpas/blink-ripgrep.nvim",
-      "saghen/blink.compat",
+      {
+        "saghen/blink.compat",
+        version = "event",
+        opts = {
+          enable_events = true,
+        },
+      },
     },
     config = function()
       require("configs.blink").setup()
@@ -351,20 +357,15 @@ return {
   --   end,
   -- },
   {
-    "Exafunction/codeium.nvim",
-    event = { "InsertEnter" },
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "Saghen/blink.cmp",
+    "supermaven-inc/supermaven-nvim",
+
+    event = "InsertEnter",
+    keymaps = {
+      accept_suggestion = nil,
     },
-    config = function()
-      require("codeium").setup {
-        enable_cmp_source = true,
-        virtual_text = {
-          enabled = false,
-        },
-      }
-    end,
+    opts = {
+      disable_inline_completion = false,
+    },
   },
   {
     "David-Kunz/gen.nvim",

@@ -2,7 +2,6 @@ local M = {}
 
 function M.setup()
   local blink = require "blink.cmp"
-  local codeium = require "codeium"
   blink.setup {
     enabled = function()
       local filetype = vim.bo.filetype
@@ -10,15 +9,7 @@ function M.setup()
     end,
 
     sources = {
-      default = {
-        "codeium",
-        "lsp",
-        "path",
-        "snippets",
-        "buffer",
-        "ripgrep",
-        "emoji",
-      },
+      default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
       providers = {
         lsp = {
           name = "lsp",
@@ -26,10 +17,6 @@ function M.setup()
           module = "blink.cmp.sources.lsp",
           min_keyword_length = 2,
           score_offset = 90,
-        },
-        codeium = {
-          name = "codeium",
-          module = "blink.compat.source",
         },
         path = {
           name = "Path",
@@ -65,10 +52,6 @@ function M.setup()
           module = "blink.cmp.sources.snippets",
           score_offset = 85,
         },
-        emoji = {
-          name = "Emoji",
-          module = "blink-emoji",
-        },
         ripgrep = {
           name = "Ripgrep",
           module = "blink-ripgrep",
@@ -93,7 +76,7 @@ function M.setup()
       list = {
         selection = {
           preselect = true, -- ✅ Fixed: Boolean instead of string
-          auto_insert = false, -- ✅ Prevents auto-inserting suggestions
+          auto_insert = true, -- ✅ Prevents auto-inserting suggestions
         },
       },
       accept = { auto_brackets = { enabled = true } },
