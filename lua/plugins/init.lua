@@ -147,11 +147,8 @@ return {
     dependencies = {
       "windwp/nvim-autopairs",
       "williamboman/mason.nvim",
-      "hrsh7th/nvim-cmp",
       "onsails/lspkind.nvim",
-      "hrsh7th/cmp-buffer",
-      "hrsh7th/cmp-nvim-lsp",
-      "saadparwaiz1/cmp_luasnip",
+      "Saghen/blink.cmp",
       {
         "L3MON4D3/LuaSnip",
         version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
@@ -162,6 +159,19 @@ return {
     event = { "BufRead", "BufnewFile" },
     config = function()
       require "configs.lspconfig"
+    end,
+  },
+  {
+    "saghen/blink.cmp",
+    lazy = true,
+    dependencies = {
+      "rafamadriz/friendly-snippets",
+      "moyiz/blink-emoji.nvim",
+      "mikavilpas/blink-ripgrep.nvim",
+      "saghen/blink.compat",
+    },
+    config = function()
+      require("configs.blink").setup()
     end,
   },
   {
@@ -303,53 +313,57 @@ return {
     vscode = true,
     event = "BufRead",
     opts = {},
-        -- stylua: ignore
-        keys =
-        {
-            { "A",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-           { "T",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-            { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-            { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-            { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
-        },
+    -- stylua: ignore
+    keys =
+    {
+      { "A",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "T",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
   },
 
-  {
-    "Exafunction/codeium.vim",
-    enabled = false,
-    event = { "InsertEnter" },
-    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
-    config = function()
-      vim.keymap.set("i", "<C-g>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-;>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set({ "i", "n" }, "<C-h", function()
-        return vim.fn["codeium#Chat"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-space>", function()
-        return vim.fn["codeium#Complete"]()
-      end, { expr = true, silent = true })
-    end,
-  },
+  -- {
+  --   "Exafunction/codeium.vim",
+  --   enabled = false,
+  --   event = { "InsertEnter" },
+  --   commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
+  --   config = function()
+  --     vim.keymap.set("i", "<C-g>", function()
+  --       return vim.fn["codeium#Accept"]()
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-;>", function()
+  --       return vim.fn["codeium#CycleCompletions"](1)
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-,>", function()
+  --       return vim.fn["codeium#CycleCompletions"](-1)
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-x>", function()
+  --       return vim.fn["codeium#Clear"]()
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set({ "i", "n" }, "<C-h", function()
+  --       return vim.fn["codeium#Chat"]()
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-space>", function()
+  --       return vim.fn["codeium#Complete"]()
+  --     end, { expr = true, silent = true })
+  --   end,
+  -- },
   {
     "Exafunction/codeium.nvim",
-    enabled = true,
-    event = "InsertEnter",
+    event = { "InsertEnter" },
     dependencies = {
       "nvim-lua/plenary.nvim",
-      -- "hrsh7th/nvim-cmp",
+      "Saghen/blink.cmp",
     },
     config = function()
-      require "configs.codeium"
+      require("codeium").setup {
+        enable_cmp_source = true,
+        virtual_text = {
+          enabled = false,
+        },
+      }
     end,
   },
   {
@@ -388,7 +402,7 @@ return {
   {
     {
       "hrsh7th/nvim-cmp",
-      enabled = true,
+      enabled = false,
       event = "InsertEnter",
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
@@ -440,13 +454,6 @@ return {
     },
     config = function()
       require "configs.cokeline"
-    end,
-  },
-  {
-    "norcalli/nvim-colorizer.lua",
-    event = { "BufRead", "BufNewFile" },
-    config = function()
-      require "configs.colorizer"
     end,
   },
   {
