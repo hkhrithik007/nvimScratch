@@ -1,4 +1,3 @@
----@diagnostic disable-next-line: unused-local
 local lazy = require "lazy"
 return {
   {
@@ -175,6 +174,15 @@ return {
           enable_events = true,
         },
       },
+      {
+        "L3MON4D3/LuaSnip",
+        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+        build = "make install_jsregexp",
+        dependencies = { "rafamadriz/friendly-snippets" },
+        config = function()
+          require("luasnip.loaders.from_vscode").lazy_load "friendly-snippets"
+        end,
+      },
     },
     config = function()
       require("configs.blink").setup()
@@ -330,43 +338,33 @@ return {
     },
   },
 
-  -- {
-  --   "Exafunction/codeium.vim",
-  --   enabled = false,
-  --   event = { "InsertEnter" },
-  --   commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
-  --   config = function()
-  --     vim.keymap.set("i", "<C-g>", function()
-  --       return vim.fn["codeium#Accept"]()
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-;>", function()
-  --       return vim.fn["codeium#CycleCompletions"](1)
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-,>", function()
-  --       return vim.fn["codeium#CycleCompletions"](-1)
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-x>", function()
-  --       return vim.fn["codeium#Clear"]()
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set({ "i", "n" }, "<C-h", function()
-  --       return vim.fn["codeium#Chat"]()
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-space>", function()
-  --       return vim.fn["codeium#Complete"]()
-  --     end, { expr = true, silent = true })
-  --   end,
-  -- },
   {
-    "supermaven-inc/supermaven-nvim",
-
-    event = "InsertEnter",
-    keymaps = {
-      accept_suggestion = nil,
-    },
-    opts = {
-      disable_inline_completion = false,
-    },
+    "Exafunction/codeium.vim",
+    enabled = true,
+    event = { "InsertEnter" },
+    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
+    config = function()
+      vim.keymap.set("i", "<C-g>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-;>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-,>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-x>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set({ "i", "n" }, "<C-h", function()
+        return vim.fn["codeium#Chat"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-space>", function()
+        return vim.fn["codeium#Complete"]()
+      end, { expr = true, silent = true })
+    end,
   },
+
   {
     "David-Kunz/gen.nvim",
     enabled = true,

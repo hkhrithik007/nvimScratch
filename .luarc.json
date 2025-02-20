@@ -8,6 +8,7 @@
     ],
     "diagnostics.disable": [
         "trailing-space",
-        "different-requires"
+        "different-requires",
+        "unused-local"
     ]
 }

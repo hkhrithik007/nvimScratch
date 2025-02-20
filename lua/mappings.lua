@@ -1,7 +1,6 @@
 -- add yours here
 
 local map = vim.keymap.set
-
 map("n", ";", ":", { desc = "CMD enter command mode" })
 on_attach = function(client, bufnr)
   vim.keymap.set("n", "<leader>w", function()

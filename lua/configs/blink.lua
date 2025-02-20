@@ -2,21 +2,34 @@ local M = {}
 
 function M.setup()
   local blink = require "blink.cmp"
+  local ok, luasnip = pcall(require, "luasnip")
   blink.setup {
     enabled = function()
       local filetype = vim.bo.filetype
       return not vim.tbl_contains({ "TelescopePrompt", "minifiles", "snacks_picker_input" }, filetype)
     end,
-
     sources = {
-      default = { "lsp", "path", "snippets", "buffer", "ripgrep" },
+      default = { "ripgrep", "lsp", "snippets", "path" },
       providers = {
         lsp = {
           name = "lsp",
           enabled = true,
           module = "blink.cmp.sources.lsp",
-          min_keyword_length = 2,
-          score_offset = 90,
+          -- min_keyword_length = 3,
+          -- score_offset = 90,
+        },
+
+        snippets = {
+          name = "snippets",
+          enabled = true,
+          -- max_items = 15,
+          -- min_keyword_length = 4,
+          module = "blink.cmp.sources.snippets",
+          -- score_offset = 85,
+        },
+        ripgrep = {
+          name = "Ripgrep",
+          module = "blink-ripgrep",
         },
         path = {
           name = "Path",
@@ -43,18 +56,6 @@ function M.setup()
           module = "blink.cmp.sources.buffer",
           min_keyword_length = 4,
           score_offset = 15,
-        },
-        snippets = {
-          name = "snippets",
-          enabled = true,
-          max_items = 15,
-          min_keyword_length = 2,
-          module = "blink.cmp.sources.snippets",
-          score_offset = 85,
-        },
-        ripgrep = {
-          name = "Ripgrep",
-          module = "blink-ripgrep",
         },
       },
     },
@@ -104,29 +105,18 @@ function M.setup()
     snippets = {
       preset = "luasnip",
       expand = function(snippet)
-        local ok, luasnip = pcall(require, "luasnip")
-        if ok then
-          luasnip.lsp_expand(snippet)
-        end
+        require("luasnip").lsp_expand(snippet)
       end,
       active = function(filter)
-        local ok, luasnip = pcall(require, "luasnip")
-        if ok then
-          if filter and filter.direction then
-            return luasnip.jumpable(filter.direction)
-          end
-          return luasnip.in_snippet()
+        if filter and filter.direction then
+          return require("luasnip").jumpable(filter.direction)
         end
-        return false
+        return require("luasnip").in_snippet()
       end,
       jump = function(direction)
-        local ok, luasnip = pcall(require, "luasnip")
-        if ok then
-          luasnip.jump(direction)
-        end
+        require("luasnip").jump(direction)
       end,
     },
-
     keymap = {
       preset = "enter",
       ["<Tab>"] = { "snippet_forward", "fallback" },
