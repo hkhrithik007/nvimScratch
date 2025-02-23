@@ -148,12 +148,6 @@ return {
       "williamboman/mason.nvim",
       -- "onsails/lspkind.nvim",
       "Saghen/blink.cmp",
-      {
-        "L3MON4D3/LuaSnip",
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        build = "make install_jsregexp",
-        dependencies = { "rafamadriz/friendly-snippets" },
-      },
     },
     event = { "BufRead", "BufnewFile" },
     config = function()
@@ -163,14 +157,17 @@ return {
   {
     "saghen/blink.cmp",
     event = "InsertEnter",
+    build = "cargo build --release", -- Uncomment this line
     lazy = true,
     dependencies = {
       "rafamadriz/friendly-snippets",
       "mikavilpas/blink-ripgrep.nvim",
       {
         "saghen/blink.compat",
-        version = "event",
+        main = "blink-compat",
+        version = "*",
         opts = {
+          impersonate_nvim_cmp = true,
           enable_events = true,
         },
       },

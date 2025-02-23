@@ -9,6 +9,9 @@
     "diagnostics.disable": [
         "trailing-space",
         "different-requires",
-        "unused-local"
+        "unused-local",
+        "redundant-parameter",
+        "undefined-field",
+        "undefined-doc-name"
     ]
 }

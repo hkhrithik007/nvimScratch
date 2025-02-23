@@ -9,7 +9,12 @@ function M.setup()
       return not vim.tbl_contains({ "TelescopePrompt", "minifiles", "snacks_picker_input" }, filetype)
     end,
     sources = {
-      default = { "ripgrep", "lsp", "snippets", "path" },
+      default = {
+        "ripgrep",
+        "lsp",
+        "snippets",
+        "path",
+      },
       providers = {
         lsp = {
           name = "lsp",
