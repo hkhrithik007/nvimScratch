@@ -6,14 +6,22 @@ function M.setup()
   blink.setup {
     enabled = function()
       local filetype = vim.bo.filetype
-      return not vim.tbl_contains({ "TelescopePrompt", "minifiles", "snacks_picker_input" }, filetype)
+      return not vim.tbl_contains({
+        "TelescopePrompt",
+        "minifiles",
+        "snacks_picker_input",
+        "NvimTree",
+        "nvimtree",
+        "DressingInput", -- Add this line
+      }, filetype)
     end,
     sources = {
       default = {
         "ripgrep",
         "lsp",
         "snippets",
-        "path",
+        -- "path",
+        -- "buffer",
       },
       providers = {
         lsp = {
@@ -40,7 +48,7 @@ function M.setup()
           name = "Path",
           module = "blink.cmp.sources.path",
           score_offset = 25,
-          fallbacks = { "snippets", "buffer" },
+          fallbacks = { "snippets" },
           min_keyword_length = 2,
           opts = {
             trailing_slash = false,
@@ -54,14 +62,14 @@ function M.setup()
             show_hidden_files_by_default = true,
           },
         },
-        buffer = {
-          name = "Buffer",
-          enabled = true,
-          max_items = 3,
-          module = "blink.cmp.sources.buffer",
-          min_keyword_length = 4,
-          score_offset = 15,
-        },
+        -- buffer = {
+        --   name = "Buffer",
+        --   enabled = true,
+        --   max_items = 3,
+        --   module = "blink.cmp.sources.buffer",
+        --   min_keyword_length = 4,
+        --   score_offset = 15,
+        -- },
       },
     },
 
