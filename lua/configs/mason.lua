@@ -1,39 +1,35 @@
 local mason = require "mason"
 local mason_lspconfig = require "mason-lspconfig"
 local mason_tool_installer = require "mason-tool-installer"
--- enable mason and configure icons
-mason.setup {
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-}
-mason_lspconfig.setup {
-  -- list of servers for mason to install
-  ensure_installed = {
-    "lua_ls",
-    "jdtls",
-    -- "kotlin_language_server",
-    "pyright",
-  },
-}
+      local servers = {
+        pyright = {},
+        lua_ls = {
+          Lua = {
+            workspace = { checkThirdParty = false },
+            telemetry = { enable = false },
+          },
+        },
+      }
 
-mason_tool_installer.setup {
-  ensure_installed = {
-    "stylua", -- lua formatter
-    "google-java-format", -- java formatter
-    -- "ktfmt", -- kotlin formatter
-    "checkstyle",
-    "java-debug-adapter", --java debugger
-    "mypy",
-    "ruff",
-    "black",
-    "debugpy",
-  },
-}
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+        handlers = handlers,
+      })
+
+      mason.setup()
+      mason_lspconfig.setup {
+        automatic_enable = false, -- HACK: rely on lspconfig[server_name].setup to enable the LSPs. For some reason, pyright doesn't get enabled this way
+        ensure_installed = vim.tbl_keys(servers),
+      }
+
+      for server_name, _ in pairs(servers) do
+        require('lspconfig')[server_name].setup {
+          capabilities = capabilities,
+          on_attach = on_attach,
+          handlers = handlers,
+        }
+      end
 --- EXAMPLE: Run mason after lazy finishes updating.
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyInstall",
