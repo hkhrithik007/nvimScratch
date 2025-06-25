@@ -72,14 +72,6 @@ return {
     end,
   },
   {
-    "linrongbin16/lsp-progress.nvim",
-    lazy = true,
-    evenet = { "LspAttach", "BufRead" },
-    config = function()
-      require "configs.progress"
-    end,
-  },
-  {
     "williamboman/mason.nvim",
     event = "BufRead",
     dependencies = {
@@ -88,14 +80,6 @@ return {
     },
     config = function()
       require "configs.mason"
-    end,
-  },
-  {
-    "arkav/lualine-lsp-progress",
-    event = "LspAttach",
-    lazy = true,
-    config = function()
-      require "configs.progress"
     end,
   },
   {
@@ -149,7 +133,7 @@ return {
       -- "onsails/lspkind.nvim",
       "Saghen/blink.cmp",
     },
-    event = { "BufRead", "BufnewFile" },
+    event = { "BufRead", "BufnewFile", "BufReadPre" },
     config = function()
       require "configs.lspconfig"
     end,

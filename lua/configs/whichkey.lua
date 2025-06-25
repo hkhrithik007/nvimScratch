@@ -36,30 +36,6 @@ wk.add {
       mode = "n",
       icon = "",
     },
-    -- {
-    --   "<leader>fp",
-    --   function()
-    --     require("apple-music").select_playlist_telescope()
-    --   end,
-    --   desc = "[F]ind [P]laylists",
-    --   icon = "󰀶",
-    -- },
-    -- {
-    --   "<leader>fa",
-    --   function()
-    --     require("apple-music").select_album_telescope()
-    --   end,
-    --   desc = "[F]ind [A]lbum",
-    --   icon = "󰀶",
-    -- },
-    -- {
-    --   "<leader>fs",
-    --   function()
-    --     require("apple-music").select_track_telescope()
-    --   end,
-    --   desc = "[F]ind [S]ong",
-    --   icon = "󰀶",
-    -- },
   },
   {
     { "<leader>g", group = "git" },
@@ -172,22 +148,6 @@ wk.add {
     },
     { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info", mode = "n", icon = "" },
     { "<leader>lI", "<cmd>Mason<cr>", desc = "Installer Info", mode = "n", icon = "" },
-    {
-      "<leader>lj",
-      function()
-        vim.diagnostic.goto_next()
-      end,
-      desc = "Next Diagnostic",
-      mode = "n",
-    },
-    {
-      "<leader>lk",
-      function()
-        vim.diagnostic.goto_prev()
-      end,
-      desc = "Prev Diagnostic",
-      mode = "n",
-    },
     {
       "<leader>ll",
       function()
@@ -440,32 +400,6 @@ wk.add {
       icon = "󰙳",
     },
   },
-  -- {
-  --   { "<leader>a", group = "Apple-music", icon = "" },
-  --
-  --   {
-  --     "<leader>ap",
-  --     function()
-  --       require("apple-music").toggle_play()
-  --     end,
-  --     desc = "Toggle [P]layback",
-  --   },
-  --   {
-  --     "<leader>as",
-  --     function()
-  --       require("apple-music").toggle_shuffle()
-  --     end,
-  --     desc = "Toggle [S]huffle",
-  --   },
-  --
-  --   {
-  --     "<leader>ax",
-  --     function()
-  --       require("apple-music").cleanup_all()
-  --     end,
-  --     desc = "Cleanup Temp Playlists",
-  --   },
-  -- },
   {
     -- Nested mappings are allowed and can be added in any order
     -- Most attributes can be inherited or overridden on any level
@@ -473,7 +407,7 @@ wk.add {
     mode = { "n", "v" }, -- NORMAL and VISUAL mode
     { "<leader>k", "<cmd>KillKillKill<cr>", desc = "Killersheep", mode = "n", icon = "󰳆" },
     { "<leader>q", "<cmd>q!<cr>", desc = "Quit", icon = "󰈆" }, -- no need to specify mode since it's inherited
-    { "<leader>w", "<cmd>w!<cr>", desc = "Write", icon = "󱣪" },
+    { "<leader>w", "<cmd>w<cr>", desc = "Write", icon = "󱣪" },
     { "<leader>e", "<cmd>:NvimTreeToggle<cr>", desc = "NvimTree Focus", icon = "" },
     { "<leader>x", "<cmd>bw<cr>", desc = "buffer close", icon = "󰱞", mode = "n" },
   },
