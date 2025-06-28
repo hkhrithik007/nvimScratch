@@ -178,27 +178,11 @@ return {
     end,
   },
   {
-    "EdenEast/nightfox.nvim",
-    enabled = false,
-    lazy = false,
-    priority = 1000,
-    config = function()
-      require "configs.nightfox"
-    end,
-  },
-  {
     "Vallen217/eidolon.nvim",
     lazy = false,
     priority = 1000,
     config = function()
       vim.cmd [[colorscheme eidolon-midnight]]
-    end,
-  },
-  {
-    "dgox16/oldworld.nvim",
-    lazy = "VeryLazy",
-    config = function()
-      require("oldworld").setup()
     end,
   },
   {
@@ -320,33 +304,6 @@ return {
   },
 
   {
-    "Exafunction/codeium.vim",
-    enabled = true,
-    event = { "InsertEnter" },
-    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
-    config = function()
-      vim.keymap.set("i", "<C-g>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-;>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set({ "i", "n" }, "<C-h", function()
-        return vim.fn["codeium#Chat"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-space>", function()
-        return vim.fn["codeium#Complete"]()
-      end, { expr = true, silent = true })
-    end,
-  },
-
-  {
     "David-Kunz/gen.nvim",
     enabled = true,
     event = { "BufRead", "BufNewFile" },
@@ -378,28 +335,6 @@ return {
     config = function()
       require "configs.killersheep"
     end,
-  },
-  {
-    {
-      "hrsh7th/nvim-cmp",
-      enabled = false,
-      event = "InsertEnter",
-      dependencies = {
-        "hrsh7th/cmp-buffer", -- source for text in buffer
-        "onsails/lspkind.nvim",
-        "hrsh7th/cmp-path", -- source for file system paths
-        {
-          "L3MON4D3/LuaSnip",
-          build = "make install_jsregexp",
-        },
-        "saadparwaiz1/cmp_luasnip", -- for autocompletion
-        "rafamadriz/friendly-snippets", -- useful snippets
-        "hrsh7th/cmp-cmdline",
-      },
-      config = function()
-        require "configs.cmp"
-      end,
-    },
   },
   {
     "windwp/nvim-autopairs",
@@ -451,6 +386,13 @@ return {
     build = ":LiveServerInstall",
     config = function()
       require("live-server-nvim").setup {}
+    end,
+  },
+  {
+    "monkoose/neocodeium",
+    event = "InsertEnter",
+    config = function()
+      require "configs.neocodeium"
     end,
   },
 }
