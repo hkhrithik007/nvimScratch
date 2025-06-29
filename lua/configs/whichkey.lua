@@ -1,7 +1,6 @@
 local wk = require "which-key"
 ---@diagnostic disable-next-line: unused-local
-local telescope = require "telescope"
-
+require "snacks"
 function _LAZYGIT_TOGGLE()
   local Terminal = require("toggleterm.terminal").Terminal
   local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
@@ -10,28 +9,29 @@ end
 wk.add {
   {
     { "<leader>f", group = "file", icon = "" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find File", mode = "n", icon = "󰈞" },
+    {
+      "<leader>ff",
+      function()
+        Snacks.picker.files()
+      end,
+      desc = "Find File",
+      mode = "n",
+      icon = "󰈞",
+    },
     {
       "<leader>fg",
       function()
-        require("telescope").extensions.live_grep_args.live_grep_args()
+        Snacks.picker.grep()
       end,
       desc = "Find Text",
       mode = "n",
       icon = "󰺮",
     },
     {
-      "<leader>fu",
-      function()
-        require("telescope").extensions.undo.undo()
-      end,
-      desc = "find undo history",
-      mode = "n",
-      icon = "",
-    },
-    {
       "<leader>fb",
-      "<cmd>Telescope buffers<cr>",
+      function()
+        Snacks.picker.buffers()
+      end,
       desc = "Buffers",
       mode = "n",
       icon = "",
@@ -408,7 +408,14 @@ wk.add {
     { "<leader>k", "<cmd>KillKillKill<cr>", desc = "Killersheep", mode = "n", icon = "󰳆" },
     { "<leader>q", "<cmd>q!<cr>", desc = "Quit", icon = "󰈆" }, -- no need to specify mode since it's inherited
     { "<leader>w", "<cmd>w<cr>", desc = "Write", icon = "󱣪" },
-    { "<leader>e", "<cmd>:NvimTreeToggle<cr>", desc = "NvimTree Focus", icon = "" },
+    {
+      "<leader>e",
+      function()
+        Snacks.explorer()
+      end,
+      desc = "NvimTree Focus",
+      icon = "",
+    },
     { "<leader>x", "<cmd>bw<cr>", desc = "buffer close", icon = "󰱞", mode = "n" },
   },
 }

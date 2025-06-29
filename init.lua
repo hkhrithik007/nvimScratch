@@ -59,9 +59,3 @@ local opts = {
 require "mappings"
 require "options"
 require "undo"
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "java",
---   callback = function()
---     require("configs.jdtls").setup()
---   end,
--- })

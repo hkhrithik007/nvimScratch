@@ -15,26 +15,14 @@ return {
     end,
   },
   {
-    "nvim-tree/nvim-tree.lua",
-    event = "bufread",
-    config = function()
-      require "configs.nvimtree"
-    end,
-  },
-  {
-    "nvim-telescope/telescope.nvim",
+    "folke/noice.nvim",
+    enabled = true,
     event = "BufRead",
     dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope-live-grep-args.nvim",
-      "debugloop/telescope-undo.nvim",
-      {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make",
-      },
+      "MunifTanjim/nui.nvim",
     },
     config = function()
-      require "configs.telescope"
+      require "configs.noice"
     end,
   },
   {
@@ -50,6 +38,7 @@ return {
           "html",
           "css",
           "pyhton",
+          "javascript",
           -- "java",
           -- "kotlin",
         },
@@ -169,6 +158,33 @@ return {
       require("configs.blink").setup()
     end,
   },
+
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    -- opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+    -- bigfile = { enabled = true },
+    -- dashboard = { enabled = false },
+    -- explorer = { enabled = true },
+    -- indent = { enabled = true },
+    -- input = { enabled = true },
+    -- picker = { enabled = true },
+    -- notifier = { enabled = true },
+    -- quickfile = { enabled = true },
+    -- scope = { enabled = true },
+    -- scroll = { enabled = true },
+    -- statuscolumn = { enabled = true },
+    -- words = { enabled = true },
+    -- },
+    config = function(_, opts)
+      require("configs.snacks").setup(opts)
+    end,
+  },
   {
     "mfussenegger/nvim-lint",
     lazy = "VeryLazy",
@@ -186,27 +202,8 @@ return {
     end,
   },
   {
-
-    {
-      "stevearc/dressing.nvim",
-      lazy = "VeryLazy",
-      init = function()
-        ---@diagnostic disable-next-line: duplicate-set-field
-        vim.ui.select = function(...)
-          require("lazy").load { plugins = { "dressing.nvim" } }
-          return vim.ui.select(...)
-        end
-        ---@diagnostic disable-next-line: duplicate-set-field
-        vim.ui.input = function(...)
-          require("lazy").load { plugins = { "dressing.nvim" } }
-          return vim.ui.input(...)
-        end
-      end,
-    },
-  },
-  {
     "nvimdev/dashboard-nvim",
-    enabled = true,
+    enabled = false,
     event = "VimEnter",
     config = function()
       require "configs.dashboard"
@@ -317,18 +314,7 @@ return {
       )
     end,
   },
-  {
-    "folke/noice.nvim",
-    enabled = true,
-    event = "BufRead",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
-    },
-    config = function()
-      require "configs.noice"
-    end,
-  },
+
   {
     "seandewar/killersheep.nvim",
     event = "BufRead",
