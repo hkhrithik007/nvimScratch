@@ -84,7 +84,6 @@ function M.setup()
         return {}
       end,
     },
-
     completion = {
       keyword = { range = "full" },
       list = {
@@ -96,9 +95,7 @@ function M.setup()
       accept = { auto_brackets = { enabled = true } },
       menu = {
         border = "rounded",
-        auto_show = function(ctx)
-          return ctx.mode ~= "default"
-        end,
+        auto_show = true,
         draw = {
           columns = {
             { "label", "label_description", gap = 1 },

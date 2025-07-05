@@ -1,12 +1,35 @@
 local mason = require "mason"
 local mason_lspconfig = require "mason-lspconfig"
 local mason_tool_installer = require "mason-tool-installer"
--- Configure a server via `vim.lsp.config()` or `{after/}lsp/lua_ls.lua`
-require("mason").setup()
--- Note: `nvim-lspconfig` needs to be in 'runtimepath' by the time you set up mason-lspconfig.nvim
-require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls" },
+local servers = {
+  pyright = {},
+  lua_ls = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+    },
+  },
 }
+
+vim.lsp.config("*", {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  handlers = handlers,
+})
+
+mason.setup()
+mason_lspconfig.setup {
+  automatic_enable = false, -- HACK: rely on lspconfig[server_name].setup to enable the LSPs. For some reason, pyright doesn't get enabled this way
+  ensure_installed = vim.tbl_keys(servers),
+}
+
+for server_name, _ in pairs(servers) do
+  require("lspconfig")[server_name].setup {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+  }
+end
 --- EXAMPLE: Run mason after lazy finishes updating.
 vim.api.nvim_create_autocmd("User", {
   pattern = "LazyInstall",
@@ -14,7 +37,3 @@ vim.api.nvim_create_autocmd("User", {
     vim.cmd ":MasonUpdateAll"
   end,
 })
-require("mason").setup()
-require("mason-lspconfig").setup {
-  ensure_installed = { "lua_ls", "jdtls", "pylsp" },
-}

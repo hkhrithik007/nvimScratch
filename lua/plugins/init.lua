@@ -15,17 +15,6 @@ return {
     end,
   },
   {
-    "folke/noice.nvim",
-    enabled = true,
-    event = "BufRead",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-    },
-    config = function()
-      require "configs.noice"
-    end,
-  },
-  {
     {
       "nvim-treesitter/nvim-treesitter",
       event = "BufRead",
@@ -38,7 +27,6 @@ return {
           "html",
           "css",
           "pyhton",
-          "javascript",
           -- "java",
           -- "kotlin",
         },
@@ -122,7 +110,7 @@ return {
       -- "onsails/lspkind.nvim",
       "Saghen/blink.cmp",
     },
-    event = { "BufRead", "BufnewFile", "BufReadPre" },
+    event = { "BufRead", "BufnewFile" },
     config = function()
       require "configs.lspconfig"
     end,
@@ -158,39 +146,21 @@ return {
       require("configs.blink").setup()
     end,
   },
-
-  {
-    "folke/snacks.nvim",
-    priority = 1000,
-    lazy = false,
-    ---@type snacks.Config
-    -- opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    -- bigfile = { enabled = true },
-    -- dashboard = { enabled = false },
-    -- explorer = { enabled = true },
-    -- indent = { enabled = true },
-    -- input = { enabled = true },
-    -- picker = { enabled = true },
-    -- notifier = { enabled = true },
-    -- quickfile = { enabled = true },
-    -- scope = { enabled = true },
-    -- scroll = { enabled = true },
-    -- statuscolumn = { enabled = true },
-    -- words = { enabled = true },
-    -- },
-    config = function(_, opts)
-      require("configs.snacks").setup(opts)
-    end,
-  },
   {
     "mfussenegger/nvim-lint",
     lazy = "VeryLazy",
     enabled = true,
     config = function()
       require "configs.lint"
+    end,
+  },
+  {
+    "EdenEast/nightfox.nvim",
+    enabled = false,
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require "configs.nightfox"
     end,
   },
   {
@@ -203,7 +173,7 @@ return {
   },
   {
     "nvimdev/dashboard-nvim",
-    enabled = false,
+    enabled = true,
     event = "VimEnter",
     config = function()
       require "configs.dashboard"
@@ -275,6 +245,32 @@ return {
     end,
   },
   {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    -- opts = {
+    -- your configuration comes here
+    -- or leave it empty to use the default settings
+    -- refer to the configuration section below
+    -- bigfile = { enabled = true },
+    -- dashboard = { enabled = false },
+    -- explorer = { enabled = true },
+    -- indent = { enabled = true },
+    -- input = { enabled = true },
+    -- picker = { enabled = true },
+    -- notifier = { enabled = true },
+    -- quickfile = { enabled = true },
+    -- scope = { enabled = true },
+    -- scroll = { enabled = true },
+    -- statuscolumn = { enabled = true },
+    -- words = { enabled = true },
+    -- },
+    config = function(_, opts)
+      require("configs.snacks").setup(opts)
+    end,
+  },
+  {
     "akinsho/toggleterm.nvim",
     lazy = "VeryLazy",
     cmd = "ToggleTerm",
@@ -301,6 +297,33 @@ return {
   },
 
   {
+    "Exafunction/codeium.vim",
+    enabled = true,
+    event = { "InsertEnter" },
+    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
+    config = function()
+      vim.keymap.set("i", "<C-g>", function()
+        return vim.fn["codeium#Accept"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-;>", function()
+        return vim.fn["codeium#CycleCompletions"](1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-,>", function()
+        return vim.fn["codeium#CycleCompletions"](-1)
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-x>", function()
+        return vim.fn["codeium#Clear"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set({ "i", "n" }, "<C-h", function()
+        return vim.fn["codeium#Chat"]()
+      end, { expr = true, silent = true })
+      vim.keymap.set("i", "<C-space>", function()
+        return vim.fn["codeium#Complete"]()
+      end, { expr = true, silent = true })
+    end,
+  },
+
+  {
     "David-Kunz/gen.nvim",
     enabled = true,
     event = { "BufRead", "BufNewFile" },
@@ -314,13 +337,46 @@ return {
       )
     end,
   },
-
+  {
+    "folke/noice.nvim",
+    enabled = true,
+    event = "BufRead",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require "configs.noice"
+    end,
+  },
   {
     "seandewar/killersheep.nvim",
     event = "BufRead",
     config = function()
       require "configs.killersheep"
     end,
+  },
+  {
+    {
+      "hrsh7th/nvim-cmp",
+      enabled = false,
+      event = "InsertEnter",
+      dependencies = {
+        "hrsh7th/cmp-buffer", -- source for text in buffer
+        "onsails/lspkind.nvim",
+        "hrsh7th/cmp-path", -- source for file system paths
+        {
+          "L3MON4D3/LuaSnip",
+          build = "make install_jsregexp",
+        },
+        "saadparwaiz1/cmp_luasnip", -- for autocompletion
+        "rafamadriz/friendly-snippets", -- useful snippets
+        "hrsh7th/cmp-cmdline",
+      },
+      config = function()
+        require "configs.cmp"
+      end,
+    },
   },
   {
     "windwp/nvim-autopairs",
@@ -372,13 +428,6 @@ return {
     build = ":LiveServerInstall",
     config = function()
       require("live-server-nvim").setup {}
-    end,
-  },
-  {
-    "monkoose/neocodeium",
-    event = "InsertEnter",
-    config = function()
-      require "configs.neocodeium"
     end,
   },
 }

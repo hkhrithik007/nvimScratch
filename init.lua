@@ -59,4 +59,3 @@ local opts = {
 require "mappings"
 require "options"
 require "undo"
-vim.o.shell = "/opt/homebrew/bin/fish" -- or the result of `which fish`
