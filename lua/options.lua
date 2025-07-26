@@ -28,7 +28,7 @@ o.number = true
 o.signcolumn = "yes"
 -- For Lua configuration
 o.termguicolors = true
-
+vim.cmd.colorscheme "eidolon-midnight"
 -- You may also want to set the following for better color support
 o.syntax = "on"
 o.background = "dark" -- or "light" if you prefer a light background

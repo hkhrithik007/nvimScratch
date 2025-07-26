@@ -11,76 +11,112 @@ function M.setup()
         {
           pane = 2,
           section = "terminal",
-          cmd = "fish -c '/Users/hkhrithik/.config/color-scripts/color-scripts/square'",
+          cmd = "python3 '/Users/hkhrithik/.config/color-scripts/color-scripts/unowns.py'",
           height = 5,
           padding = 1,
         },
         { section = "keys", gap = 1, padding = 1 },
+        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
         {
           pane = 2,
-          icon = " ",
-          desc = "Browse Repo",
-          padding = 1,
-          key = "b",
-          action = function()
-            Snacks.gitbrowse()
+          icon = " ",
+          title = "Git Status",
+          section = "terminal",
+          enabled = function()
+            return snacks.git.get_root() ~= nil
           end,
+          cmd = "git status --short --branch --renames",
+          height = 5,
+          padding = 1,
+          ttl = 5 * 60,
+          indent = 3,
         },
-        unpack((function()
-          local in_git = Snacks.git.get_root() ~= nil
-          local cmds = {
-            {
-              title = "Notifications",
-              cmd = "fish -c 'gh notify -s -a -n5'",
-              action = function()
-                vim.ui.open "https://github.com/notifications"
-              end,
-              key = "n",
-              icon = " ",
-              height = 5,
-              enabled = true,
-            },
-            {
-              title = "Open Issues",
-              cmd = "fish -c 'gh issue list -L 3'",
-              key = "i",
-              action = function()
-                vim.fn.jobstart({ "fish", "-c", "gh issue list --web" }, { detach = true })
-              end,
-              icon = " ",
-              height = 7,
-            },
-            {
-              icon = " ",
-              title = "Open PRs",
-              cmd = "fish -c 'gh pr list -L 3'",
-              key = "P",
-              action = function()
-                vim.fn.jobstart({ "fish", "-c", "gh pr list --web" }, { detach = true })
-              end,
-              height = 7,
-            },
-            {
-              icon = " ",
-              title = "Git Status",
-              cmd = "fish -c 'git --no-pager diff --stat -B -M -C'",
-              height = 10,
-            },
-          }
-
-          return vim.tbl_map(function(cmd)
-            return vim.tbl_extend("force", {
-              pane = 2,
-              section = "terminal",
-              enabled = in_git,
-              padding = 1,
-              ttl = 5 * 60,
-              indent = 3,
-            }, cmd)
-          end, cmds)
-        end)()),
         { section = "startup" },
       },
+    },
+    lazygit = {
+      {
+        configure = true,
+        config = {
+          os = { editPreset = "nvim-remote" },
+          gui = {
+            -- set to an empty string "" to disable icons
+            nerdFontsVersion = "3",
+          },
+        },
+        theme_path = svim.fs.normalize(vim.fn.stdpath "cache" .. "/lazygit-theme.yml"),
+        -- Theme for lazygit
+        theme = {
+          [241] = { fg = "Special" },
+          activeBorderColor = { fg = "MatchParen", bold = true },
+          cherryPickedCommitBgColor = { fg = "Identifier" },
+          cherryPickedCommitFgColor = { fg = "Function" },
+          defaultFgColor = { fg = "Normal" },
+          inactiveBorderColor = { fg = "FloatBorder" },
+          optionsTextColor = { fg = "Function" },
+          searchingActiveBorderColor = { fg = "MatchParen", bold = true },
+          selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
+          unstagedChangesColor = { fg = "DiagnosticError" },
+        },
+        win = {
+          style = "lazygit",
+        },
+      },
+    },
+    terminal = {
+      {
+        bo = {
+          filetype = "snacks_terminal",
+        },
+        wo = {},
+        keys = {
+          q = "hide",
+          gf = function(self)
+            local f = vim.fn.findfile(vim.fn.expand "<cfile>", "**")
+            if f == "" then
+              Snacks.notify.warn "No file under cursor"
+            else
+              self:hide()
+              vim.schedule(function()
+                vim.cmd("e " .. f)
+              end)
+            end
+          end,
+          term_normal = {
+            "<esc>",
+            function(self)
+              self.esc_timer = self.esc_timer or (vim.uv or vim.loop).new_timer()
+              if self.esc_timer:is_active() then
+                self.esc_timer:stop()
+                vim.cmd "stopinsert"
+              else
+                self.esc_timer:start(200, 0, function() end)
+                return "<esc>"
+              end
+            end,
+            mode = "t",
+            expr = true,
+            desc = "Double escape to normal mode",
+          },
+        },
+      },
+    },
+    scroll = {
+      animate = {
+        duration = { step = 15, total = 250 },
+        easing = "linear",
+      },
+      -- faster animation when repeating scroll after delay
+      animate_repeat = {
+        delay = 100, -- delay in ms before using the repeat animation
+        duration = { step = 5, total = 50 },
+        easing = "linear",
+      },
+      -- what buffers to animate
+      filter = function(buf)
+        return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= "terminal"
+      end,
     },
     explorer = { enabled = true },
     indent = { enabled = true },
@@ -89,7 +125,7 @@ function M.setup()
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    scroll = { enabled = true },
+    -- scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
   }

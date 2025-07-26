@@ -1,11 +1,11 @@
 local wk = require "which-key"
 ---@diagnostic disable-next-line: unused-local
 require "snacks"
-function _LAZYGIT_TOGGLE()
-  local Terminal = require("toggleterm.terminal").Terminal
-  local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
-  lazygit:toggle()
-end
+-- function _LAZYGIT_TOGGLE()
+--   local Terminal = require("toggleterm.terminal").Terminal
+--   local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
+--   lazygit:toggle()
+-- end
 wk.add {
   {
     { "<leader>f", group = "file", icon = "" },
@@ -39,7 +39,14 @@ wk.add {
   },
   {
     { "<leader>g", group = "git" },
-    { "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = "Lazygit", mode = "n" },
+    {
+      "<leader>gg",
+      function()
+        Snacks.lazygit()
+      end,
+      desc = "Lazygit",
+      mode = "n",
+    },
     {
       "<leader>gj",
       function()
@@ -112,9 +119,6 @@ wk.add {
       mode = "n",
       icon = "",
     },
-    { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file", mode = "n", icon = "" },
-    { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", mode = "n", icon = "" },
-    { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit", mode = "n", icon = "" },
     { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Diff", mode = "n", icon = "" },
   },
   {
@@ -174,21 +178,17 @@ wk.add {
       mode = "n",
       icon = "󰑕",
     },
-    { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols", mode = "n" },
-    { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols", mode = "n" },
-  },
-  {
-    { "<leader>S", group = "search", icon = "󱙓" },
-    { "<leader>Sb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch", mode = "n", icon = "" },
-    { "<leader>Sc", "<cmd>Telescope colorscheme<cr>", desc = "Colorscheme", mode = "n" },
-    { "<leader>Sr", "<cmd>Telescope oldfiles<cr>", desc = "Open Recent File", mode = "n" },
-    { "<leader>SR", "<cmd>Telescope registers<cr>", desc = "Registers", mode = "n" },
-    { "<leader>Sk", "<cmd>Telescope keymaps<cr>", desc = "Keymaps", mode = "n" },
-    { "<leader>SC", "<cmd>Telescope commands<cr>", desc = "Commands", mode = "n" },
   },
   {
     { "<leader>t", group = "terminal" },
-    { "<leader>tt", "<cmd>ToggleTerm<cr>", desc = "Toggle Terminal", mode = "n" },
+    {
+      "<leader>tt",
+      function()
+        Snacks.terminal()
+      end,
+      desc = "Toggle Terminal",
+      mode = "n",
+    },
     { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Toggle Float Terminal", mode = "n" },
     {
       "<leader>tv",
@@ -407,7 +407,7 @@ wk.add {
     mode = { "n", "v" }, -- NORMAL and VISUAL mode
     { "<leader>k", "<cmd>KillKillKill<cr>", desc = "Killersheep", mode = "n", icon = "󰳆" },
     { "<leader>q", "<cmd>q!<cr>", desc = "Quit", icon = "󰈆" }, -- no need to specify mode since it's inherited
-    { "<leader>w", "<cmd>w!<cr>", desc = "Write", icon = "󱣪" },
+    -- { "<leader>w", "<cmd>w!<cr>", desc = "Write", icon = "󱣪" },
     {
       "<leader>e",
       function()

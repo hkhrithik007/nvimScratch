@@ -165,7 +165,8 @@ return {
   },
   {
     "Vallen217/eidolon.nvim",
-    lazy = false,
+    lazy = true,
+    enabled = true,
     priority = 1000,
     config = function()
       vim.cmd [[colorscheme eidolon-midnight]]
@@ -173,7 +174,7 @@ return {
   },
   {
     "nvimdev/dashboard-nvim",
-    enabled = true,
+    enabled = false,
     event = "VimEnter",
     config = function()
       require "configs.dashboard"
@@ -188,43 +189,6 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require "configs.lualine"
-    end,
-  },
-  {
-    "echasnovski/mini.indentscope",
-    event = { "BufReadPre", "BufNewFile" },
-    lazy = true,
-    opts = {
-      symbol = "│",
-      options = { try_as_border = true },
-    },
-    init = function()
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = {
-          "help",
-          "alpha",
-          "dashboard",
-          "nvim-tree",
-          "Trouble",
-          "trouble",
-          "lazy",
-          "mason",
-          "notify",
-          "toggleterm",
-          "lazyterm",
-        },
-        callback = function()
-          vim.b.miniindentscope_disable = true
-        end,
-      })
-    end,
-  },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    event = "BufRead",
-    config = function()
-      require("ibl").setup()
     end,
   },
   {
@@ -271,14 +235,6 @@ return {
     end,
   },
   {
-    "akinsho/toggleterm.nvim",
-    lazy = "VeryLazy",
-    cmd = "ToggleTerm",
-    config = function()
-      require "configs.toggleterm"
-    end,
-  },
-  {
     "folke/flash.nvim",
     enabled = true,
     lazy = true,
@@ -292,7 +248,6 @@ return {
       { "T",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
 
@@ -413,14 +368,14 @@ return {
       require "configs.cokeline"
     end,
   },
-  {
-    "karb94/neoscroll.nvim",
-    event = { "BufRead", "BufNewFile" },
-    lazy = true,
-    config = function()
-      require "configs.neoscroll"
-    end,
-  },
+  -- {
+  --   "karb94/neoscroll.nvim",
+  --   event = { "BufRead", "BufNewFile" },
+  --   lazy = true,
+  --   config = function()
+  --     require "configs.neoscroll"
+  --   end,
+  -- },
   {
     "ngtuonghy/live-server-nvim",
     enabled = false,

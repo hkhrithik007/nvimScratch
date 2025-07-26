@@ -9,6 +9,7 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+  jdtls = {},
 }
 
 vim.lsp.config("*", {
