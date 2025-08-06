@@ -251,33 +251,32 @@ return {
     },
   },
 
-  {
-    "Exafunction/codeium.vim",
-    enabled = true,
-    event = { "InsertEnter" },
-    commit = "289eb724e5d6fab2263e94a1ad6e54afebefafb2",
-    config = function()
-      vim.keymap.set("i", "<C-g>", function()
-        return vim.fn["codeium#Accept"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-;>", function()
-        return vim.fn["codeium#CycleCompletions"](1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-,>", function()
-        return vim.fn["codeium#CycleCompletions"](-1)
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-x>", function()
-        return vim.fn["codeium#Clear"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set({ "i", "n" }, "<C-h", function()
-        return vim.fn["codeium#Chat"]()
-      end, { expr = true, silent = true })
-      vim.keymap.set("i", "<C-space>", function()
-        return vim.fn["codeium#Complete"]()
-      end, { expr = true, silent = true })
-    end,
-  },
-
+  -- {
+  --   "Exafunction/windsurf.vim",
+  --   enabled = true,
+  --   event = { "InsertEnter" },
+  --   config = function()
+  --     vim.keymap.set("i", "<C-g>", function()
+  --       return vim.fn["codeium#Accept"]()
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-;>", function()
+  --       return vim.fn["codeium#CycleCompletions"](1)
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-,>", function()
+  --       return vim.fn["codeium#CycleCompletions"](-1)
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-x>", function()
+  --       return vim.fn["codeium#Clear"]()
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set({ "i", "n" }, "<C-h", function()
+  --       return vim.fn["codeium#Chat"]()
+  --     end, { expr = true, silent = true })
+  --     vim.keymap.set("i", "<C-space>", function()
+  --       return vim.fn["codeium#Complete"]()
+  --     end, { expr = true, silent = true })
+  --   end,
+  -- },
+  --
   {
     "David-Kunz/gen.nvim",
     enabled = true,
@@ -290,6 +289,19 @@ return {
         ":lua require('gen').select_model()<CR>",
         { desc = "Select LLM Model", noremap = true, silent = true }
       )
+    end,
+  },
+  {
+    "Exafunction/windsurf.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "saghen/blink.cmp",
+    },
+    config = function()
+      require("codeium").setup {
+        enable_cmp_source = true,
+        virtual_text = { enabled = false },
+      }
     end,
   },
   {

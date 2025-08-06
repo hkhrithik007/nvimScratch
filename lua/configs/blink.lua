@@ -22,6 +22,7 @@ function M.setup()
         "snippets",
         -- "path",
         -- "buffer",
+        "codeium",
       },
       providers = {
         lsp = {
@@ -32,6 +33,7 @@ function M.setup()
           -- score_offset = 90,
         },
 
+        codeium = { name = "Codeium", module = "codeium.blink", async = true },
         snippets = {
           name = "snippets",
           enabled = true,
