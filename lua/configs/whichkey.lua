@@ -407,7 +407,7 @@ wk.add {
     mode = { "n", "v" }, -- NORMAL and VISUAL mode
     { "<leader>k", "<cmd>KillKillKill<cr>", desc = "Killersheep", mode = "n", icon = "󰳆" },
     { "<leader>q", "<cmd>q!<cr>", desc = "Quit", icon = "󰈆" }, -- no need to specify mode since it's inherited
-    -- { "<leader>w", "<cmd>w!<cr>", desc = "Write", icon = "󱣪" },
+    { "<leader>w", "<cmd>w!<cr>", desc = "Write", icon = "󱣪" },
     {
       "<leader>e",
       function()

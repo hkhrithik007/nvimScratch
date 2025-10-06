@@ -19,4 +19,4 @@ on_attach = function(client, bufnr)
 end
 vim.keymap.set("n", "<esc>", "<cmd>nohlsearch<cr>", { silent = true })
 vim.keymap.set("n", "<leader>ss", "<cmd>source %<cr>", { desc = "Source file" })
-vim.keymap.set("n", "<leader>w", "<cmd>w!<cr>", { desc = "Quit" })
+-- vim.keymap.set("n", "<leader>w", "<cmd>w!<cr>", { desc = "Quit" })

@@ -1,5 +1,4 @@
 local M = {}
-
 function M.setup()
   local blink = require "blink.cmp"
   local ok, luasnip = pcall(require, "luasnip")

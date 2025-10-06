@@ -4,5 +4,8 @@ require("conform").setup {
     java = { "google-java-format" },
     -- kotlin = { "ktfmt" },
     python = { "black" },
+    html = { "prettier" },
+    css = { "prettier" },
+    ts_ls = { "prettier" },
   },
 }
