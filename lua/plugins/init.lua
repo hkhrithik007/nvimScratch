@@ -166,11 +166,20 @@ return {
   {
     "Vallen217/eidolon.nvim",
     lazy = true,
-    enabled = true,
+    enabled = false,
     priority = 1000,
     config = function()
       vim.cmd [[colorscheme eidolon-midnight]]
     end,
+  },
+  {
+    "folke/tokyonight.nvim",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      style = "night",
+      transparent = true,
+    },
   },
   {
     "nvimdev/dashboard-nvim",
@@ -293,6 +302,7 @@ return {
   },
   {
     "Exafunction/windsurf.nvim",
+    event = { "BufRead", "BufNewFile" },
     dependencies = {
       "nvim-lua/plenary.nvim",
       "saghen/blink.cmp",
@@ -390,7 +400,7 @@ return {
   -- },
   {
     "ngtuonghy/live-server-nvim",
-    enabled = false,
+    enabled = true,
     lazy = "VeryLazy",
     build = ":LiveServerInstall",
     config = function()

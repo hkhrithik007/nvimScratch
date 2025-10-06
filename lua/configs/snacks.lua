@@ -11,7 +11,7 @@ function M.setup()
         {
           pane = 2,
           section = "terminal",
-          cmd = "python3 '/Users/hkhrithik/.config/color-scripts/color-scripts/unowns.py'",
+          cmd = "fish -c '/Users/hritiksharma/.config/color-scripts/color-scripts/square'",
           height = 5,
           padding = 1,
         },
@@ -45,7 +45,7 @@ function M.setup()
             nerdFontsVersion = "3",
           },
         },
-        theme_path = svim.fs.normalize(vim.fn.stdpath "cache" .. "/lazygit-theme.yml"),
+        theme_path = vim.fs.normalize(vim.fn.stdpath "cache" .. "/lazygit-theme.yml"),
         -- Theme for lazygit
         theme = {
           [241] = { fg = "Special" },
