@@ -27,6 +27,7 @@ return {
           "html",
           "css",
           "pyhton",
+          "javascript",
           -- "java",
           -- "kotlin",
         },
