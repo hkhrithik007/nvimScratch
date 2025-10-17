@@ -1,10 +1,3 @@
--- CosmicInk config for lualine
--- Author: Yeeloman
--- MIT license, see LICENSE for more details.
-
--- Main configuration for setting up lualine.nvim statusline plugin
-
--- Default Theme Colors: Define a set of base colors for your theme
 local colors = {
   BG = "#16181b", -- Dark background
   FG = "#c5c4c4", -- Light foreground for contrast
@@ -137,14 +130,10 @@ end
 local function hide_in_width()
   return vim.fn.winwidth(0) > 80 -- 'winwidth(0)' returns the current window width
 end
-
--- Condition: Check if the current workspace is inside a Git repository
--- This function checks if the current file is inside a Git repository by looking for a `.git` directory
--- in the current file's path. Returns true if the file is in a Git workspace.
 -- local function check_git_workspace()
--- 	local filepath = vim.fn.expand('%:p:h')               -- Get the current file's directory
--- 	local gitdir = vim.fn.finddir('.git', filepath .. ';') -- Search for a `.git` directory in the file path
--- 	return gitdir and #gitdir > 0 and #gitdir < #filepath -- Returns true if a `.git` directory is found
+--   local filepath = vim.fn.expand "%:p:h" -- Get the current file's directory
+--   local gitdir = vim.fn.finddir(".git", filepath .. ";") -- Search for a `.git` directory in the file path
+--   return gitdir and #gitdir > 0 and #gitdir < #filepath -- Returns true if a `.git` directory is found
 -- end
 
 -- -- Set random seed based on current time for randomness

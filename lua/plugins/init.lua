@@ -110,7 +110,8 @@ return {
       -- "onsails/lspkind.nvim",
       "Saghen/blink.cmp",
     },
-    event = { "BufRead", "BufnewFile" },
+    event = { "BufReadPre", "BufNewFile" },
+    cmd = { "LspInfo", "LspStart" },
     config = function()
       require "configs.lspconfig"
     end,
@@ -402,6 +403,18 @@ return {
     "ngtuonghy/live-server-nvim",
     enabled = true,
     lazy = "VeryLazy",
+    event = { "BufRead", "BufNewFile" },
+    fd = {
+      "index.html",
+      "index.php",
+      "index.js",
+      "index.ts",
+      "index.html",
+      "index.tsx",
+      "index.jsx",
+      "index.css",
+      "index.scss",
+    },
     build = ":LiveServerInstall",
     config = function()
       require("live-server-nvim").setup {}

@@ -11,7 +11,7 @@ function M.setup()
         {
           pane = 2,
           section = "terminal",
-          cmd = "fish -c '/Users/hritiksharma/.config/color-scripts/color-scripts/square'",
+          cmd = "fish -c '/Users/hkhrithik/.config/color-scripts/color-scripts/square'",
           height = 5,
           padding = 1,
         },
