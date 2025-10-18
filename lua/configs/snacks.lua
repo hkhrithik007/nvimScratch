@@ -35,6 +35,19 @@ function M.setup()
         { section = "startup" },
       },
     },
+    notification_history = {
+      border = "rounded",
+      zindex = 100,
+      width = 0.6,
+      height = 0.6,
+      minimal = false,
+      title = " Notification History ",
+      title_pos = "center",
+      ft = "markdown",
+      bo = { filetype = "snacks_notif_history", modifiable = false },
+      wo = { winhighlight = "Normal:SnacksNotifierHistory" },
+      keys = { q = "close" },
+    },
     lazygit = {
       {
         configure = true,
