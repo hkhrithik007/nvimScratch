@@ -1,54 +1,53 @@
--- Mason configuration - ONLY handles installation, NOT LSP setup
-local mason = require "mason"
-local mason_lspconfig = require "mason-lspconfig"
-local mason_tool_installer = require "mason-tool-installer"
+local mason = require("mason")
+local mason_lspconfig = require("mason-lspconfig")
 
--- List of servers to ensure are installed
-local servers = {
-  "pyright",
-  "lua_ls",
-  "jdtls",
-  "html",
-  "cssls",
-  "ts_ls",
-  "jsonls",
+-- Capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+
+-- On attach
+local function on_attach(client, bufnr)
+  local opts = { buffer = bufnr, silent = true }
+  vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+  vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+  vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+  vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+  vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+  vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
+  vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, opts)
+end
+
+-- Handlers
+local handlers = {
+  ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" }),
+  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" }),
 }
 
--- Mason setup (package manager)
-mason.setup {
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-    border = "rounded",
-  },
-  max_concurrent_installers = 10,
-}
-
--- Mason-lspconfig setup (bridges Mason with LSP)
-mason_lspconfig.setup {
-  ensure_installed = servers,
+-- Mason setup
+mason.setup()
+mason_lspconfig.setup({
+  ensure_installed = { "pyright", "lua_ls", "jdtls" },
   automatic_installation = true,
-  automatic_enable = true, -- Don't auto-enable, let vim.lsp.config handle it
-}
-
--- Mason-tool-installer (for formatters, linters, etc.)
-mason_tool_installer.setup {
-  ensure_installed = {
-    "prettier",
-    "stylua",
-    "black",
-    "pylint",
-    "eslint_d",
-  },
-}
-
--- Auto-update Mason after Lazy install
-vim.api.nvim_create_autocmd("User", {
-  pattern = "LazyInstall",
-  callback = function()
-    vim.cmd "MasonUpdateAll"
-  end,
 })
+
+-- Servers table with settings
+local servers = {
+  pyright = {},
+  lua_ls = {
+    Lua = {
+      workspace = { checkThirdParty = false },
+      telemetry = { enable = false },
+      diagnostics = { globals = { "vim" } },
+    },
+  },
+  jdtls = {},
+}
+
+-- Setup LSPs per server (modern API)
+for server_name, config in pairs(servers) do
+  vim.lsp.config(server_name, {
+    capabilities = capabilities,
+    on_attach = on_attach,
+    handlers = handlers,
+    settings = config,
+  })
+end

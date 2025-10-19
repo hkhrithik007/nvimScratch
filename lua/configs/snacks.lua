@@ -7,34 +7,37 @@ function M.setup()
     dashboard = {
       enabled = true,
       sections = {
-        { section = "header" },
+        { section = "header", gap = 1 },
         {
           pane = 2,
           section = "terminal",
           cmd = "fish -c '/Users/hkhrithik/.config/color-scripts/color-scripts/square'",
           height = 5,
           padding = 1,
+          gap = 1,
         },
         { section = "keys", gap = 1, padding = 1 },
-        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+        { pane = 2, icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1, gap = 1 },
+        { pane = 2, icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1, gap = 1 },
         {
           pane = 2,
           icon = " ",
           title = "Git Status",
           section = "terminal",
           enabled = function()
-            return snacks.git.get_root() ~= nil
+            return Snacks.git.get_root() ~= nil
           end,
           cmd = "git status --short --branch --renames",
           height = 5,
           padding = 1,
           ttl = 5 * 60,
           indent = 3,
+          gap = 1,
         },
-        { section = "startup" },
+        { section = "startup", gap = 1 },
       },
     },
+
     notification_history = {
       border = "rounded",
       zindex = 100,
@@ -48,18 +51,15 @@ function M.setup()
       wo = { winhighlight = "Normal:SnacksNotifierHistory" },
       keys = { q = "close" },
     },
+
     lazygit = {
       {
         configure = true,
         config = {
           os = { editPreset = "nvim-remote" },
-          gui = {
-            -- set to an empty string "" to disable icons
-            nerdFontsVersion = "3",
-          },
+          gui = { nerdFontsVersion = "3" },
         },
         theme_path = vim.fs.normalize(vim.fn.stdpath "cache" .. "/lazygit-theme.yml"),
-        -- Theme for lazygit
         theme = {
           [241] = { fg = "Special" },
           activeBorderColor = { fg = "MatchParen", bold = true },
@@ -69,19 +69,16 @@ function M.setup()
           inactiveBorderColor = { fg = "FloatBorder" },
           optionsTextColor = { fg = "Function" },
           searchingActiveBorderColor = { fg = "MatchParen", bold = true },
-          selectedLineBgColor = { bg = "Visual" }, -- set to `default` to have no background colour
+          selectedLineBgColor = { bg = "Visual" },
           unstagedChangesColor = { fg = "DiagnosticError" },
         },
-        win = {
-          style = "lazygit",
-        },
+        win = { style = "lazygit" },
       },
     },
+
     terminal = {
       {
-        bo = {
-          filetype = "snacks_terminal",
-        },
+        bo = { filetype = "snacks_terminal" },
         wo = {},
         keys = {
           q = "hide",
@@ -115,22 +112,24 @@ function M.setup()
         },
       },
     },
+
     scroll = {
       animate = {
         duration = { step = 15, total = 250 },
         easing = "linear",
       },
-      -- faster animation when repeating scroll after delay
       animate_repeat = {
-        delay = 100, -- delay in ms before using the repeat animation
+        delay = 100,
         duration = { step = 5, total = 50 },
         easing = "linear",
       },
-      -- what buffers to animate
       filter = function(buf)
-        return vim.g.snacks_scroll ~= false and vim.b[buf].snacks_scroll ~= false and vim.bo[buf].buftype ~= "terminal"
+        return vim.g.snacks_scroll ~= false
+          and vim.b[buf].snacks_scroll ~= false
+          and vim.bo[buf].buftype ~= "terminal"
       end,
     },
+
     explorer = { enabled = true },
     indent = { enabled = true },
     input = { enabled = true },
@@ -138,7 +137,6 @@ function M.setup()
     notifier = { enabled = true },
     quickfile = { enabled = true },
     scope = { enabled = true },
-    -- scroll = { enabled = true },
     statuscolumn = { enabled = true },
     words = { enabled = true },
   }

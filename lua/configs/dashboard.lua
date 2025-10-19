@@ -18,7 +18,7 @@ local opts = {
         icon = " ",
         desc = "Find File",
         action = function()
-          Snacks.picker.files()
+          require("telescope.builtin").find_files()
         end,
         key = "f",
       },
@@ -27,18 +27,34 @@ local opts = {
         icon = "󱄽 ",
         desc = "Find Word",
         action = function()
-          Snacks.picker.grep()
+          require("telescope.builtin").live_grep()
         end,
         key = "g",
+      },
+      {
+        icon = " ",
+        desc = "Recent Files",
+        action = function()
+          require("telescope.builtin").oldfiles()
+        end,
+        key = "r",
       },
       { icon = "󰙅 ", desc = "File Browser", action = "NvimTreeToggle", key = "e" },
       { icon = "󰊳 ", desc = "Open Lazy", action = "Lazy", key = "l" },
       { icon = "󰺾 ", desc = "Open Mason", action = "Mason", key = "m" },
       {
+        icon = "󰋗 ",
+        desc = "Search Help",
+        action = function()
+          require("telescope.builtin").help_tags()
+        end,
+        key = "h",
+      },
+      {
         icon = " ",
         desc = "Open Config",
         action = function()
-          require("Snacks.picker").find_files { cwd = "~/.config/nvim/" }
+          require("telescope.builtin").find_files { cwd = "~/.config/nvim/" }
         end,
         key = "c",
       },

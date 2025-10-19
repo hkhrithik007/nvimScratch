@@ -27,7 +27,6 @@ return {
           "html",
           "css",
           "pyhton",
-          "javascript",
           -- "java",
           -- "kotlin",
         },
@@ -51,7 +50,7 @@ return {
   },
   {
     "williamboman/mason.nvim",
-    event = "BufRead",
+    event = {"BufRead","BufReadPre","BufNewFile"},
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -105,14 +104,13 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
+    event = {"BufRead","BufReadPre","BufNewFile"},
     dependencies = {
       "windwp/nvim-autopairs",
       "williamboman/mason.nvim",
       -- "onsails/lspkind.nvim",
       "Saghen/blink.cmp",
     },
-    event = { "BufReadPre", "BufNewFile" },
-    cmd = { "LspInfo", "LspStart" },
     config = function()
       require "configs.lspconfig"
     end,
@@ -404,18 +402,6 @@ return {
     "ngtuonghy/live-server-nvim",
     enabled = true,
     lazy = "VeryLazy",
-    event = { "BufRead", "BufNewFile" },
-    fd = {
-      "index.html",
-      "index.php",
-      "index.js",
-      "index.ts",
-      "index.html",
-      "index.tsx",
-      "index.jsx",
-      "index.css",
-      "index.scss",
-    },
     build = ":LiveServerInstall",
     config = function()
       require("live-server-nvim").setup {}
