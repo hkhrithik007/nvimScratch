@@ -27,6 +27,7 @@ return {
           "html",
           "css",
           "pyhton",
+          "javascript",
           -- "java",
           -- "kotlin",
         },
@@ -43,14 +44,14 @@ return {
   },
   {
     "stevearc/conform.nvim",
-    event = { "BufReadPre", "BufRead" },
+    event = { "BufReadPre", "BufRead", "BufNewFile" },
     config = function()
       require "configs.conform"
     end,
   },
   {
     "williamboman/mason.nvim",
-    event = {"BufRead","BufReadPre","BufNewFile"},
+    event = { "BufRead", "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason-lspconfig.nvim",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
@@ -104,7 +105,7 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    event = {"BufRead","BufReadPre","BufNewFile"},
+    event = { "BufRead", "BufReadPre", "BufNewFile" },
     dependencies = {
       "windwp/nvim-autopairs",
       "williamboman/mason.nvim",
@@ -253,10 +254,10 @@ return {
     -- stylua: ignore
     keys =
     {
-      { "A",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
-      { "T",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
-      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
-      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "A", mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "T", mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r", mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     },
   },
 
@@ -341,12 +342,12 @@ return {
       dependencies = {
         "hrsh7th/cmp-buffer", -- source for text in buffer
         "onsails/lspkind.nvim",
-        "hrsh7th/cmp-path", -- source for file system paths
+        "hrsh7th/cmp-path",   -- source for file system paths
         {
           "L3MON4D3/LuaSnip",
           build = "make install_jsregexp",
         },
-        "saadparwaiz1/cmp_luasnip", -- for autocompletion
+        "saadparwaiz1/cmp_luasnip",     -- for autocompletion
         "rafamadriz/friendly-snippets", -- useful snippets
         "hrsh7th/cmp-cmdline",
       },
@@ -383,7 +384,7 @@ return {
     "willothy/nvim-cokeline",
     event = { "BufRead", "BufNewFile" },
     dependencies = {
-      "nvim-lua/plenary.nvim", -- Required for v0.4.0+
+      "nvim-lua/plenary.nvim",       -- Required for v0.4.0+
       "nvim-tree/nvim-web-devicons", -- If you want devicons
     },
     config = function()
@@ -402,6 +403,7 @@ return {
     "ngtuonghy/live-server-nvim",
     enabled = true,
     lazy = "VeryLazy",
+    ft = { "html", "css", "javascript", "typescript" },
     build = ":LiveServerInstall",
     config = function()
       require("live-server-nvim").setup {}

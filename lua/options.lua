@@ -5,12 +5,7 @@ vim.o.cursorline = true
 o.relativenumber = true
 o.cmdheight = 0
 o.clipboard = "unnamedplus"
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = "*",
-  callback = function(args)
-    require("conform").format { bufnr = args.buf }
-  end,
-})
+
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
   callback = function()
     require("lint").try_lint()
@@ -41,7 +36,7 @@ vim.api.nvim_create_autocmd("LspProgress", {
       title = "LSP Progress",
       opts = function(notif)
         notif.icon = ev.data.params.value.kind == "end" and " "
-          or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
+            or spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
       end,
     })
   end,
