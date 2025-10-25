@@ -391,14 +391,14 @@ return {
       require "configs.cokeline"
     end,
   },
-  -- {
-  --   "karb94/neoscroll.nvim",
-  --   event = { "BufRead", "BufNewFile" },
-  --   lazy = true,
-  --   config = function()
-  --     require "configs.neoscroll"
-  --   end,
-  -- },
+  {
+    "karb94/neoscroll.nvim",
+    event = { "BufRead", "BufNewFile" },
+    lazy = true,
+    config = function()
+      require "configs.neoscroll"
+    end,
+  },
   {
     "ngtuonghy/live-server-nvim",
     enabled = true,
