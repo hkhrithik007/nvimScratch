@@ -1,6 +1,6 @@
 local wk = require "which-key"
 ---@diagnostic disable-next-line: unused-local
-require "snacks"
+local snacks = require "snacks"
 -- function _LAZYGIT_TOGGLE()
 --   local Terminal = require("toggleterm.terminal").Terminal
 --   local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
@@ -12,7 +12,7 @@ wk.add {
     {
       "<leader>ff",
       function()
-        Snacks.picker.files()
+        snacks.picker.files()
       end,
       desc = "Find File",
       mode = "n",
@@ -21,7 +21,7 @@ wk.add {
     {
       "<leader>fg",
       function()
-        Snacks.picker.grep()
+        snacks.picker.grep()
       end,
       desc = "Find Text",
       mode = "n",
@@ -30,7 +30,7 @@ wk.add {
     {
       "<leader>fb",
       function()
-        Snacks.picker.buffers()
+        snacks.picker.buffers()
       end,
       desc = "Buffers",
       mode = "n",
@@ -42,7 +42,7 @@ wk.add {
     {
       "<leader>gg",
       function()
-        Snacks.lazygit()
+        snacks.lazygit()
       end,
       desc = "Lazygit",
       mode = "n",
@@ -180,11 +180,11 @@ wk.add {
     },
   },
   {
-    { "<leader>t", group = "terminal" },
+    { "<leader>t",  group = "terminal" },
     {
       "<leader>tt",
       function()
-        Snacks.terminal()
+        snacks.terminal()
       end,
       desc = "Toggle Terminal",
       mode = "n",
@@ -411,7 +411,7 @@ wk.add {
     {
       "<leader>e",
       function()
-        Snacks.explorer()
+        snacks.explorer()
       end,
       desc = "NvimTree Focus",
       icon = "",

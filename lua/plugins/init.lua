@@ -28,8 +28,6 @@ return {
           "css",
           "pyhton",
           "javascript",
-          -- "java",
-          -- "kotlin",
         },
       },
     },
@@ -222,24 +220,6 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    ---@type snacks.Config
-    -- opts = {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-    -- bigfile = { enabled = true },
-    -- dashboard = { enabled = false },
-    -- explorer = { enabled = true },
-    -- indent = { enabled = true },
-    -- input = { enabled = true },
-    -- picker = { enabled = true },
-    -- notifier = { enabled = true },
-    -- quickfile = { enabled = true },
-    -- scope = { enabled = true },
-    -- scroll = { enabled = true },
-    -- statuscolumn = { enabled = true },
-    -- words = { enabled = true },
-    -- },
     config = function(_, opts)
       require("configs.snacks").setup(opts)
     end,
@@ -260,33 +240,6 @@ return {
       { "R", mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
     },
   },
-
-  -- {
-  --   "Exafunction/windsurf.vim",
-  --   enabled = true,
-  --   event = { "InsertEnter" },
-  --   config = function()
-  --     vim.keymap.set("i", "<C-g>", function()
-  --       return vim.fn["codeium#Accept"]()
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-;>", function()
-  --       return vim.fn["codeium#CycleCompletions"](1)
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-,>", function()
-  --       return vim.fn["codeium#CycleCompletions"](-1)
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-x>", function()
-  --       return vim.fn["codeium#Clear"]()
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set({ "i", "n" }, "<C-h", function()
-  --       return vim.fn["codeium#Chat"]()
-  --     end, { expr = true, silent = true })
-  --     vim.keymap.set("i", "<C-space>", function()
-  --       return vim.fn["codeium#Complete"]()
-  --     end, { expr = true, silent = true })
-  --   end,
-  -- },
-  --
   {
     "David-Kunz/gen.nvim",
     enabled = true,

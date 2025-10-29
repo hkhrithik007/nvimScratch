@@ -25,7 +25,7 @@ function M.setup()
           title = "Git Status",
           section = "terminal",
           enabled = function()
-            return Snacks.git.get_root() ~= nil
+            return snacks.git.get_root() ~= nil
           end,
           cmd = "git status --short --branch --renames",
           height = 5,
@@ -85,7 +85,7 @@ function M.setup()
           gf = function(self)
             local f = vim.fn.findfile(vim.fn.expand "<cfile>", "**")
             if f == "" then
-              Snacks.notify.warn "No file under cursor"
+              snacks.notify.warn "No file under cursor"
             else
               self:hide()
               vim.schedule(function()
@@ -125,8 +125,8 @@ function M.setup()
       },
       filter = function(buf)
         return vim.g.snacks_scroll ~= false
-          and vim.b[buf].snacks_scroll ~= false
-          and vim.bo[buf].buftype ~= "terminal"
+            and vim.b[buf].snacks_scroll ~= false
+            and vim.bo[buf].buftype ~= "terminal"
       end,
     },
 
