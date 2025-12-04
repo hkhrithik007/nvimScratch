@@ -6,7 +6,7 @@ require("conform").setup {
     python = { "black" },
     html = { "prettier" },
     css = { "prettier" },
-    ts_ls = { "prettier" },
+    ts = { "prettier" },
   },
 }
 require("conform").setup({

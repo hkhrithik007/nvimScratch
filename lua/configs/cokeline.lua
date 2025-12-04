@@ -2,11 +2,11 @@ local is_picking_focus = require("cokeline/mappings").is_picking_focus
 local is_picking_close = require("cokeline/mappings").is_picking_close
 
 -- Define some colors (you can adjust these to match your colorscheme)
-local normal_fg = "#c0caf5" -- Soft blue-white for main text
-local normal_bg = "#1f1f28" -- Nightfox background color
+local normal_fg = "#c0caf5"  -- Soft blue-white for main text
+local normal_bg = "#1f1f28"  -- Nightfox background color
 local comment_fg = "#565f89" -- Muted blue-gray for comments
-local yellow = "#e0af68" -- Muted gold for highlights
-local red = "#f7768e" -- Soft pink-red for accents
+local yellow = "#e0af68"     -- Muted gold for highlights
+local red = "#f7768e"        -- Soft pink-red for accents
 require("cokeline").setup {
   show_if_buffers_are_at_least = 2,
 

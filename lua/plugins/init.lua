@@ -48,6 +48,14 @@ return {
     end,
   },
   {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    ft = { "typescript", "typescriptreact", "javascript", "javascriptreact" },
+    config = function()
+      require("typescript-tools").setup {}
+    end,
+  },
+  {
     "williamboman/mason.nvim",
     event = { "BufRead", "BufReadPre", "BufNewFile" },
     dependencies = {
@@ -362,4 +370,11 @@ return {
       require("live-server-nvim").setup {}
     end,
   },
+  {
+    "numToStr/FTerm.nvim",
+    lazy = true,
+    config = function()
+      require("configs.fterm")
+    end,
+  }
 }

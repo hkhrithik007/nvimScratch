@@ -1,11 +1,8 @@
 local wk = require "which-key"
 ---@diagnostic disable-next-line: unused-local
 local snacks = require "snacks"
--- function _LAZYGIT_TOGGLE()
---   local Terminal = require("toggleterm.terminal").Terminal
---   local lazygit = Terminal:new { cmd = "lazygit", hidden = true }
---   lazygit:toggle()
--- end
+
+
 wk.add {
   {
     { "<leader>f", group = "file", icon = "" },
@@ -179,37 +176,6 @@ wk.add {
       icon = "󰑕",
     },
   },
-  {
-    { "<leader>t",  group = "terminal" },
-    {
-      "<leader>tt",
-      function()
-        snacks.terminal()
-      end,
-      desc = "Toggle Terminal",
-      mode = "n",
-    },
-    { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Toggle Float Terminal", mode = "n" },
-    {
-      "<leader>tv",
-      "<cmd>ToggleTerm size=80 direction=vertical<cr>",
-      desc = "Toggle Vertical Terminal",
-      mode = "n",
-    },
-  },
-
-  {
-    { "<leader>p", group = "lazy", icon = "" },
-    { "<leader>pi", "<cmd>Lazy install<cr>", desc = "Install", mode = "n", icon = "" },
-    { "<leader>ps", "<cmd>Lazy sync<cr>", desc = "Sync", mode = "n", icon = "" },
-    { "<leader>pS", "<cmd>Lazy clear<cr>", desc = "Status", mode = "n", icon = "󱖫" },
-    { "<leader>pc", "<cmd>Lazy clean<cr>", desc = "Clean", mode = "n", icon = "󰿞" },
-    { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update", mode = "n", icon = "󰚰" },
-    { "<leader>pp", "<cmd>Lazy profile<cr>", desc = "Profile", mode = "n", icon = "󰙄" },
-    { "<leader>pl", "<cmd>Lazy log<cr>", desc = "Log", mode = "n", icon = "󱂅" },
-    { "<leader>pd", "<cmd>Lazy debug<cr>", desc = "Debug", mode = "n", icon = "" },
-  },
-
   {
     { "<leader>d", group = "debug", icon = "" },
     {
@@ -398,6 +364,41 @@ wk.add {
       desc = "Show LSP type definitions",
       mode = "n",
       icon = "󰙳",
+    },
+  },
+  {
+    { "<leader>t", group = "terminal" },
+
+    {
+      "<leader>tt",
+      function()
+        require("FTerm").toggle()
+      end,
+      desc = "Toggle Terminal (FTerm)",
+      mode = { "n", "t" },
+    },
+
+    -- {
+    --   "<leader>tf",
+    --   function()
+    --     require("FTerm").scratch()
+    --   end,
+    --   desc = "Scratch Terminal (FTerm)",
+    --   mode = "n",
+    -- },
+
+    {
+      "<leader>tv",
+      function()
+        require("FTerm").scratch({
+          dimensions = {
+            height = 1.0,
+            width = 0.4,
+          },
+        })
+      end,
+      desc = "Side Terminal (FTerm)",
+      mode = "n",
     },
   },
   {

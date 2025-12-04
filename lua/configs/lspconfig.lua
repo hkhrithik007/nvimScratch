@@ -3,7 +3,7 @@
 
 -- Capabilities (if using completion plugin)
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-
+local util = require("lspconfig.util")
 -- On attach function (keybindings and settings per buffer)
 local function on_attach(client, bufnr)
   local opts = { buffer = bufnr, silent = true }
@@ -76,7 +76,9 @@ vim.lsp.config("pyright", {
     },
   },
 })
-
+vim.lsp.config("denols", {
+  root_dir = util.root_pattern("deno.json", "deno.jsonc"),
+})
 -- HTML
 vim.lsp.config("html", {
   init_options = {
@@ -102,14 +104,14 @@ vim.lsp.config("cssls", {
 })
 
 -- TypeScript/JavaScript
-vim.lsp.config("ts_ls", {
-  init_options = {
-    preferences = {
-      disableSuggestions = false,
-    },
-  },
-})
-
+-- vim.lsp.config("ts_ls", {
+--   init_options = {
+--     preferences = {
+--       disableSuggestions = false,
+--     },
+--   },
+-- })
+--
 -- JSON
 vim.lsp.config("jsonls", {
   init_options = {
@@ -129,8 +131,9 @@ vim.lsp.enable {
   "jdtls",
   "html",
   "cssls",
-  "ts_ls",
+  -- "ts_ls",
   "jsonls",
+  "denols",
 }
 
 -- ============================================================================
